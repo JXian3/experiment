@@ -8,62 +8,7 @@
   <script src="./jsPsych/plugin-html-button-response.js"></script>
   <link href="./jsPsych/jspsych.css" rel="stylesheet" />
   <script src="./jsPsych/plugin-survey-text.js"></script>
-  <style>
-    /* ===== Global layout ===== */
-    body{font-family:sans-serif;}
-    .jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
-    .jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
-
-    /* ===== Feeling scale ===== */
-    .feeling-scale{
-      max-width: 600px;
-      width: 120%;
-      height: auto;
-      margin: 0 auto 5px;
-      display: block;
-    }
-
-    /* ===== Slider labels ===== */
-    .slider-labels-custom{display:flex;justify-content:space-between;width:100%;font-weight:bold;margin-top:8px;}
-
-    /* ===== Visual wrapper ===== */
-    .visual-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 420px;
-      min-height: 100px;
-      margin: 20px auto;
-      transform: translateX(-50px);
-    }
-    .girl-emoji{font-size:64px;line-height:1;}
-    .grid-image{height:70px;margin-top:8px;}
-    .emoji-track {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      gap: 9px;
-      pointer-events: none;
-      margin-top: -60px;
-      padding-left: 80px;
-      width: 100%;
-    }
-    .emoji-track span{font-size:40px;line-height:1;}
-
-    .child-image {
-      display: block;
-      margin: 10px auto;
-      height: 100px;
-    }
-
-    .intro-screen {
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <script>
@@ -77,7 +22,7 @@ const categories = {
   food:{stimuli:[
     {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats",emoji:"🍪", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has eaten ${amt}.`},
-    {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks",emoji:"🥤", followUp: amt => `Now she has eaten ${amt}.`},
+    {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks",emoji:"🥤", followUp: amt => `Now she has drank ${amt}.`},
     {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has eaten ${amt}.`},]},

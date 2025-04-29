@@ -4,7 +4,7 @@
     .jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
     .jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
 
-    /* =====  ===== */
+    /* ===== Feeling scale ===== */
     .feeling-scale{
       max-width: 600px;
       width: 120%;
@@ -30,7 +30,6 @@
     }
     .girl-emoji{font-size:64px;line-height:1;}
     .grid-image{height:70px;margin-top:8px;}
-    
     .emoji-track {
       display: flex;
       flex-wrap: nowrap;
@@ -38,8 +37,8 @@
       gap: 9px;
       pointer-events: none;
       margin-top: -60px;
+      padding-left: 80px;
       width: 100%;
-      padding-left: 0px;
     }
     .emoji-track span{font-size:40px;line-height:1;}
 
