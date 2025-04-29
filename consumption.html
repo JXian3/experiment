@@ -79,6 +79,26 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName){
     </div>`;
 }
 
+// --- helper to map slider positions to tutorial images ---
+function positionToImage(pos){
+  const map = {
+    0:  'muchworse.png',
+    25: 'littleworse.png',
+    50: 'nochange.png',
+    75: 'littlebetter.png',
+    100:'muchbetter.png'
+  };
+  return map[pos];
+}
+
+// --- helper to verbal‑describe slider positions for feedback ---
+function sliderPosDesc(value){
+  if(value === 0)   return 'on the far left';
+  if(value === 100) return 'on the far right';
+  if(value === 50)  return 'in the middle';
+  return value < 50 ? 'somewhat to the left' : 'somewhat to the right';
+}
+
 function sliderTrial({ visual, need, msg, cat, label, amt, n }) {
   return {
     type: jsPsychHtmlSliderResponse,
@@ -151,16 +171,9 @@ const tutorial = tutorialItems.map((item, idx) => {
   }
   // Show static image for instructional tutorial items (those with item.html)
   if (item.html) {
-    const imageMap = {
-      0: 'muchworse.png',
-      25: 'littleworse.png',
-      50: 'nochange.png',
-      75: 'littlebetter.png',
-      100: 'muchbetter.png'
-    };
     return {
       type: jsPsychHtmlButtonResponse,
-      stimulus: item.html + `<img src="img/${imageMap[item.pos]}" class="feeling-scale" alt="scale image">`,
+      stimulus: item.html + `<img src="img/${positionToImage(item.pos)}" class="feeling-scale" alt="scale image">`,
       choices: ['Continue'],
       data: { tutorial_page: idx + 1 }
     };
@@ -188,13 +201,7 @@ const feedbacks = tutorialItems.map((item, idx) => ({
   timeline: [{
     type: jsPsychHtmlSliderResponse,
     stimulus: `<p style="color:red;"><b>Wrong.</b></p>
-               <p>If someone feels <b>${item.text}</b> than before, the slider should be <b>${
-                 item.value === 0 ? 'on the far left'
-                 : item.value === 100 ? 'on the far right'
-                 : item.value === 50 ? 'in the middle'
-                 : item.value < 50 ? 'somewhat to the left'
-                 : 'somewhat to the right'
-               }</b>.</p>` +
+               <p>If someone feels <b>${item.text}</b> than before, the slider should be <b>${sliderPosDesc(item.value)}</b>.</p>` +
              `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
     labels: ["Much worse","A little worse","No change","A little better","Much better"],
     min: 0,
@@ -376,4 +383,3 @@ Object.entries(categories).forEach(([cat, grp]) => {
 </script>
 </body>
 </html>
-  
