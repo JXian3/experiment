@@ -14,7 +14,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const jsPsych = initJsPsych({
-      });
+  });
 
 /* ================= STIMULI ================= */
 const categories = {
@@ -49,7 +49,7 @@ const categories = {
     { label: "Time alone 🧘", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now she has spent ${amt}.` }
   ]
 }
-  };
+};
 
 /* ================= HELPERS ================= */
 function dynamicFollowupPrompt() {
@@ -363,17 +363,11 @@ Object.entries(categories).forEach(([cat, grp]) => {
 });
 
   // ===== Thank-you and data submission =====
+  // No data saved yet... after we host it I can add it?
   const thankYou = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="intro-screen"><h2>Thank you for participating!</h2></div>`,
     choices: ['Finish'],
-    on_finish: () => {
-      fetch('/save_data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: jsPsych.data.get().json()
-      });
-    }
   };
   timeline.push(thankYou);
 
