@@ -8,7 +8,8 @@
   <script src="./jsPsych/plugin-html-button-response.js"></script>
   <link href="./jsPsych/jspsych.css" rel="stylesheet" />
   <script src="./jsPsych/plugin-survey-text.js"></script>
-  <link rel="stylesheet" href="style.css">
+</head>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <script>
@@ -71,6 +72,7 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName){
   const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
   return `
     <div class="visual-wrapper">
+      <div class="emoji-bubble">${emoji}</div>
       <img src="img/${childImg}.png" alt="${childName}" class="child-image">
       <img src="${gridSrc}" class="grid-image" alt="grid">
       <div class="emoji-track"${extraPad}>
@@ -259,10 +261,10 @@ const timeline = [transition_expt1]
 
 let attentionIndex = 0;
 const childMap = {
-  food: { name: 'Akira', img: 'Akira' },
-  sensory: { name: 'Olivia', img: 'Olivia' },
-  entertainment: { name: 'Jack', img: 'Jack' },
-  social: { name: 'Jaden', img: 'Jaden' }
+  food: { name: 'Akira', img: 'AkiraBubble' },
+  sensory: { name: 'Olivia', img: 'OliviaBubble' },
+  entertainment: { name: 'Jack', img: 'JackBubble' },
+  social: { name: 'Jaden', img: 'JadenBubble' }
 };
 
 Object.entries(categories).forEach(([cat, grp]) => {
@@ -277,7 +279,10 @@ Object.entries(categories).forEach(([cat, grp]) => {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="visual-wrapper">
                  <p>${need}</p>
+                 <div class="child-wrapper">
+                 <div class="emoji-bubble need-page ">${stim.emoji}</div>
                  <img src="img/${img}.png" alt="${name}" class="child-image">
+                 <div>
                  <img src="${(cat === 'food' || cat === 'social') ? 'img/grid8.png' : 'img/grid4.png'}" class="grid-image" alt="empty grid">
                </div>`,
     choices: ['Continue'],
@@ -294,7 +299,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
     const amountBase = `<b>${amount}</b> ${stim.base_action}`;
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
     const msg = (trial === 1)
-      ? `${name} ${stim.verb} <b>${amount}</b> ${stim.base_action}. How do you think their feeling would change, compared to before?`
+      ? `${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. How do you think their feeling would change, compared to before?`
       : `${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} How do you think their feeling would change, compared to before?`;
     const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
