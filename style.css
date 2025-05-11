@@ -39,14 +39,15 @@ body{font-family:sans-serif;}
   justify-content: flex-start;
   gap: 6px;
   pointer-events: none;
-  margin-top: -40px;
-  padding-left: 40px;
+  margin-top: -50px;
+  padding-left: 50px;
   width: 100%;
 }
 
 .visual-wrapper.entertainment .emoji-track,
 .visual-wrapper.sensory .emoji-track {
-  padding-left: 160px !important;
+  padding-left: 180px !important;
+  gap: 18px;
 }
 
 .emoji-track span{font-size:32px;line-height:1;}
