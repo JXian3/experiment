@@ -24,32 +24,32 @@ body{font-family:sans-serif;}
   justify-content: flex-start;
   width: 420px;
   min-height: 100px;
-  margin: 20px auto;
+  margin: 10px auto;
   transform: translateX(-50px);
 }
 
 .grid-image {
   height: 70px;
-  margin-top: 8px;
+  margin-top: 2px;
   margin-left: -100px;
 }
 .emoji-track {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  gap: 9px;
+  gap: 6px;
   pointer-events: none;
-  margin-top: -60px;
-  padding-left: 50px;
+  margin-top: -40px;
+  padding-left: 40px;
   width: 100%;
 }
 
 .visual-wrapper.entertainment .emoji-track,
 .visual-wrapper.sensory .emoji-track {
-  padding-left: 180px !important;
+  padding-left: 160px !important;
 }
 
-    .emoji-track span{font-size:40px;line-height:1;}
+.emoji-track span{font-size:32px;line-height:1;}
 
 .child-image {
   display: block;
