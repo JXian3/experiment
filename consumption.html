@@ -27,7 +27,7 @@ const categories = {
     {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has eaten ${amt}.`},]},
-
+  
   sensory:{stimuli:[
     {label:"Light 💡",need:"X thinks it's too dark and wants to have <b>4</b> lights turned on in her room.",base_action:"light",unit:"lights",verb:"turns on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
     {label:"Sound 🎧",need:"X wants to listen to some music at volume <b>4</b>.",base_action:"volume level",unit:"levels of volume",verb:"turns up",emoji:"🎧", followUp: amt => `Now she has turned music up by ${amt}.`},
@@ -68,16 +68,28 @@ function dynamicFollowupPrompt() {
   }
 }
 function buildVisual(nEmoji, emoji, cat, childImg, childName){
-  const gridSrc = (cat === 'food' || cat === 'social') ? 'img/grid8.png' : 'img/grid4.png';
+  const gridSrc = 'img/grid4.png';
   const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
   return `
-    <div class="visual-wrapper">
+    <div class="visual-wrapper ${cat}">
       <div class="emoji-bubble">${emoji}</div>
       <img src="img/${childImg}.png" alt="${childName}" class="child-image">
-      <img src="${gridSrc}" class="grid-image" alt="grid">
-      <div class="emoji-track"${extraPad}>
-        ${Array(nEmoji).fill(`<span>${emoji}</span>`).join('')}
-      </div>
+
+      ${
+        (cat === 'food' || cat === 'social')
+          ? `<div class="grid-wrapper">
+               <img src="${gridSrc}" class="grid-image" alt="grid">
+               ${Array.from({ length: nEmoji }).map((_, idx) => {
+                 const pairIndex = Math.floor(idx / 2);
+                 const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
+                 return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${emoji}</span>`;
+               }).join('')}
+             </div>`
+          : `<img src="${gridSrc}" class="grid-image" alt="grid">
+             <div class="emoji-track"${extraPad}>
+               ${Array(nEmoji).fill(`<span>${emoji}</span>`).join('')}
+             </div>`
+      }
     </div>`;
 }
 
@@ -283,7 +295,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
                  <div class="emoji-bubble need-page ">${stim.emoji}</div>
                  <img src="img/${img}.png" alt="${name}" class="child-image">
                  <div>
-                 <img src="${(cat === 'food' || cat === 'social') ? 'img/grid8.png' : 'img/grid4.png'}" class="grid-image" alt="empty grid">
+                 <img src="img/grid4.png" class="grid-image" alt="empty grid">
                </div>`,
     choices: ['Continue'],
     data: { type: 'need_page', category: cat, stimulus_label: stim.label }

@@ -1,51 +1,60 @@
-    /* ===== Global layout ===== */
-    body{font-family:sans-serif;}
-    .jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
-    .jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
+/* ===== Global layout ===== */
+body{font-family:sans-serif;}
+.jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
+.jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
 
-    /* ===== Feeling scale ===== */
-    .feeling-scale{
-      max-width: 600px;
-      width: 120%;
-      height: auto;
-      margin: 0 auto 5px;
-      display: block;
-    }
+/* ===== Feeling scale ===== */
+.feeling-scale{
+  max-width: 600px;
+  width: 120%;
+  height: auto;
+  margin: 0 auto 5px;
+  display: block;
+  }
 
-    /* ===== Slider labels ===== */
-    .slider-labels-custom{display:flex;justify-content:space-between;width:100%;font-weight:bold;margin-top:8px;}
+/* ===== Slider labels ===== */
+.slider-labels-custom{display:flex;justify-content:space-between;width:100%;font-weight:bold;margin-top:8px;}
 
-    /* ===== Visual wrapper ===== */
-    .visual-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 420px;
-      min-height: 100px;
-      margin: 20px auto;
-      transform: translateX(-50px);
-    }
-    .girl-emoji{font-size:64px;line-height:1;}
-    .grid-image{height:70px;margin-top:8px;}
-    .emoji-track {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      gap: 9px;
-      pointer-events: none;
-      margin-top: -60px;
-      padding-left: 80px;
-      width: 100%;
-    }
+/* ===== Visual wrapper ===== */
+.visual-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 420px;
+  min-height: 100px;
+  margin: 20px auto;
+  transform: translateX(-50px);
+}
+
+.grid-image {
+  height: 70px;
+  margin-top: 8px;
+  margin-left: -100px;
+}
+.emoji-track {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 9px;
+  pointer-events: none;
+  margin-top: -60px;
+  padding-left: 50px;
+  width: 100%;
+}
+
+.visual-wrapper.entertainment .emoji-track,
+.visual-wrapper.sensory .emoji-track {
+  padding-left: 180px !important;
+}
+
     .emoji-track span{font-size:40px;line-height:1;}
 
 .child-image {
   display: block;
   margin: 10px auto;
   height: 250px;
-  /* Ensure space for overlay emoji bubble */
   position: relative;
   z-index: 1;
 }
@@ -65,10 +74,31 @@
 
 .emoji-bubble.need-page {
   top: 45px;
-  right: 190px;
+  right: 80px;
 }
 
 .intro-screen {
   max-width: 520px;
   margin: 0 auto;
+}
+
+/* Two-emojis for food and social categories */
+.grid-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.grid-emoji {
+  position: absolute;
+  font-size: 20px; 
+  transform: translateX(-100px);
+}
+
+.grid-emoji.top-left {
+  top: 15px;
+  left: -30px;
+}
+.grid-emoji.bottom-right {
+  bottom: 15px;
+  right: 165px;
 }
