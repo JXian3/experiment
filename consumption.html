@@ -20,6 +20,7 @@
 
 /* ================= STIMULI ================= */
 const categories = {
+  /*
 food:{stimuli:[
     {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats",emoji:"🍪", followUp: amt => `Now she has had ${amt}.`},
     {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has had ${amt}.`},
@@ -27,10 +28,10 @@ food:{stimuli:[
     {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has had ${amt}.`},
     {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has had ${amt}.`},
     {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`},]},
-
+*/
   sensory:{stimuli:[
     {label:"Light 💡",need:"X thinks it's too dark in the room and wants to have <b>4</b> lights turned on.",base_action:"light",unit:"lights",verb:"turns on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
-    {label:"Sound 🎧",need:"X wants to listen to music at volume <b>4</b>.",base_action:"volume level",unit:"levels of volume",verb:"turns up",emoji:"🎧", followUp: amt => `Now she has turned volumn up by ${amt}.`},
+    {label:"Sound 🔊",need:"X wants to listen to music played from <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"turns on",emoji:"🔊", followUp: amt => `Now she has turned on ${amt}.`},
     {label:"Temperature ♨️",need:"X is feeling cold and wants to turn on <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"turns on",emoji:"♨️", followUp: amt => `Now she has turned on ${amt}.`},
     {label:"Scent 💨",need:"X wants to apply <b>4</b> sprays of perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"sprays",emoji:"💨", followUp: amt => `Now she had applied ${amt}.`},
     {label:"Taste 🧂",need:"X is preparing dinner and seasoning food. They want to add <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}.`}]},
@@ -370,7 +371,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-
+/*
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -414,26 +415,19 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-
-  // ---- bonus trial 100 + n ----
+  */
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
   const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
   const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} How do you think their feeling would change?`;
-  const gridSrc    = 'img/grid4.png';
-  const emojiCount = (cat === 'food' || cat === 'social') ? 8 : 4;
-  const bonusGrid = `
-    <div class="grid-wrapper">
-      <img src="${gridSrc}" class="grid-image" alt="grid">
-      ${Array.from({ length: emojiCount }).map((_, idx) => {
-        const pairIndex = Math.floor(idx / 2);
-        const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
-        return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${stim.emoji}</span>`;
-      }).join('')}
-    </div>`;
-  // Use the label to load the corresponding pile image (smaller)
-  const bonusVis   = `<p>${bonusNeed}</p>${bonusGrid}<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" style="width:150px; height:auto;">`;
+  const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
+  const bonusVis = `<p>${bonusNeed}</p>` +
+                   `<div style="display:inline-block; position:relative;">` +
+                     buildVisual(bonusCount, stim.emoji, cat, img, name) +
+                     `<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" ` +
+                         `style="position:absolute; top:200px; left:250px; width:150px; height:auto;">` +
+                   `</div>`;
 
   timeline.push(
     sliderTrial({
@@ -446,6 +440,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       n: 11
     })
   );
+
 
   // Insert follow-up question if bonus trial is the selected follow-up
   if (11 === selectedFollowupTrial) {
