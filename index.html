@@ -2,14 +2,474 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MUExperiment</title>
-  <link rel="stylesheet" href="web.css">
+  <title>Consumption Experiment</title>
+  <script src="./jsPsych/jspsych.js"></script>
+  <script src="./jsPsych/plugin-html-slider-response.js"></script>
+  <script src="./jsPsych/plugin-html-button-response.js"></script>
+  <script src="./jsPsych/plugin-survey-html-form.js"></script>
+  <link href="./jsPsych/jspsych.css" rel="stylesheet" />
+  <script src="./jsPsych/plugin-survey-text.js"></script>
+</head>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to the MU Experiment</h1>
-  <div class="button-row">
-    <a href="acquisition.html"><button>Run Acquisition Experiment</button></a>
-    <a href="consumption.html"><button>Run Consumption Experiment</button></a>
-  </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const jsPsych = initJsPsych({
+  });
+
+/* ================= STIMULI ================= */
+const categories = {
+
+food:{stimuli:[
+    {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats",emoji:"🍪", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks",emoji:"🥤", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`},]},
+
+  sensory:{stimuli:[
+    {label:"Light 💡",need:"X thinks it's too dark in the room and wants to have <b>4</b> lights turned on.",base_action:"light",unit:"lights",verb:"turns on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Sound 🔊",need:"X wants to listen to music played from <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"turns on",emoji:"🔊", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Temperature 🌡️",need:"X is feeling cold and wants to turn on <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"turns on",emoji:"🌡️", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Scent 💨",need:"X wants to apply <b>4</b> sprays of perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"sprays",emoji:"💨", followUp: amt => `Now she had applied ${amt}.`},
+    {label:"Taste 🧂",need:"X is preparing dinner and seasoning food. They want to add <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}.`}]},
+
+  entertainment:{stimuli:[
+    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"plays games for",emoji:"🎮", followUp: amt => `Now she has gamed for ${amt} hours.`},
+    {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"watches TV for",emoji:"📺", followUp: amt => `Now she has watched TV for ${amt}.`},
+    {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hour",verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now she has scrolled social media for  ${amt}.`},
+    {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"reads books for",emoji:"📖", followUp: amt => `Now she has read for ${amt}.`},
+    {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"draws for",emoji:"🎨", followUp: amt => `Now she has been drawing for ${amt}.`},]},
+
+  social: {
+  stimuli: [
+    { label: "Inviting friends 👩", need: "X wants to invite <b>8</b> friends over to her house.", base_action: "friends to her house", verb: "invites", unit: "friends to her house", emoji: "👩", followUp: amt => `Now she has invited ${amt}.` },
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X wants to spend <b>8</b> hours with acquaintances.", base_action: "hours with acquintances", verb: "spends", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now she has spent ${amt}.` },
+    { label: "Meeting new people 🧑🏼", need: "X wants to meet <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets", emoji: "🧑🏼", followUp: amt => `Now she has met ${amt}.` },
+    { label: "Time alone 👤", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now she has spent ${amt}.` }
+  ]
+}
+};
+
+/* ================= HELPERS ================= */
+function dynamicFollowupPrompt() {
+  const last_response = jsPsych.data.get().last(1).values()[0].response;
+  if (last_response >= 75) {
+    return "Why did you think her feeling would become much better after this?";
+  } else if (last_response >= 55) {
+    return "Why did you think her feeling would become a bit better after this?";
+  } else if (last_response >= 45) {
+    return "Why did you think her feeling would not change much after this?";
+  } else if (last_response >= 25) {
+    return "Why did you think her feeling would become a bit worse after this?";
+  } else {
+    return "Why did you think her feeling would become much worse after this?";
+  }
+}
+function buildVisual(nEmoji, emoji, cat, childImg, childName){
+  const gridSrc = 'img/grid4.png';
+  const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
+  return `
+    <div class="visual-wrapper ${cat}">
+      <div class="emoji-bubble">${emoji}</div>
+      <img src="img/${childImg}.png" alt="${childName}" class="child-image">
+      ${
+        (cat === 'food' || cat === 'social')
+          ? `<div class="grid-wrapper">
+               <img src="${gridSrc}" class="grid-image" alt="grid">
+               ${Array.from({ length: nEmoji }).map((_, idx) => {
+                 const pairIndex = Math.floor(idx / 2);
+                 const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
+                 return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${emoji}</span>`;
+               }).join('')}
+             </div>`
+          : `<img src="${gridSrc}" class="grid-image" alt="grid">
+             <div class="emoji-track"${extraPad}>
+               ${Array(nEmoji).fill(`<span>${emoji}</span>`).join('')}
+             </div>`
+      }
+    </div>`;
+}
+
+// --- helper to map slider positions to tutorial images ---
+function positionToImage(pos){
+  const map = {
+    0:  'muchworse.png',
+    25: 'littleworse.png',
+    50: 'nochange.png',
+    75: 'littlebetter.png',
+    100:'muchbetter.png'
+  };
+  return map[pos];
+}
+
+// --- helper to verbal‑describe slider positions for feedback ---
+function sliderPosDesc(value){
+  if(value === 0)   return 'on the far left';
+  if(value === 100) return 'on the far right';
+  if(value === 50)  return 'in the middle';
+  return value < 50 ? 'somewhat to the left' : 'somewhat to the right';
+}
+
+function sliderTrial({ visual, need, msg, cat, label, amt, n }) {
+  return {
+    type: jsPsychHtmlSliderResponse,
+    stimulus: visual + `<p>${msg}</p>` +
+              `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
+    labels: ["Much worse","A little worse","No change","A little better","Much better"],
+    min: 0, max: 100, slider_start: 50, require_movement: true,
+    prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+    data: { category: cat, stimulus_label: label, trial_number: n, amount: amt }
+  };
+}
+
+function attentionCheck(direction) {
+  const txt = direction === 'right'
+    ? "Please drag the slider all the way to the right, and click continue."
+    : "Please drag the slider all the way to the left, and click continue.";
+  return {
+    type: jsPsychHtmlSliderResponse,
+    stimulus: `<p>${txt}</p>` +
+              `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
+    labels: ["Much worse","A little worse","No change","A little better","Much better"],
+    min: 0, max: 100, slider_start: 50, require_movement: true,
+    prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+    data: { attention_check: true, correct_direction: direction },
+    on_finish: d => { d.correct = (direction === 'right' ? d.response === 100 : d.response === 0); }
+  };
+}
+
+/* ================= INTRO ================= */
+const intro = {
+  type: jsPsychHtmlButtonResponse,    
+  stimulus: `
+    <div class="intro-screen">
+      <h2>Welcome to the study!</h2>
+      <p>In this study, you will read short descriptions about a character who receives something they want — like food, light, and so on.</p>
+      <p>You will use sliders to indicate your answers.</p>
+      <p>The study will start with short tutorials on the sliders, followed by the tasks. </p>
+      <p>Click “Continue” to begin a short tutorial.</p>
+    </div>`,
+  choices: ['Continue']            
+};
+
+/* ================= TUTORIAL ================= */
+const tutorialItems = [
+  // tutorial pages
+  { html: `<p>People do a variety of activities, and their feelings can change after each activity.<br>Your job is to use the slider below to rate how a person's feeling would change after the activity.</p>`, pos: 50 },
+  { html: `<p>If someone feels <b>much worse</b> than before, the slider should look like this.</p>`, pos: 0 },
+  { html: `<p>If someone feels <b>a little worse</b> than before, the slider should look like this.</b>.</p>`, pos: 25 },
+  { html: `<p>If someone's feeling <b>does not change</b>, the slider should look like this.</p>`, pos: 50 },
+  { html: `<p>If someone feels <b>a little better</b> than before, the slider should look like this.</b>.</p>`, pos: 75 },
+  { html: `<p>If someone feels <b>much better</b> than before, the slider should look like this.</p>`, pos: 100 },
+  // comprehension check items
+  { text: 'much worse',      value: 0,   feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far left.' },
+  { text: 'a little worse',  value: 25,  feedback: 'Wrong. If someone is feeling a little worse, the slider should be just left of center.' },
+  { text: 'no change',       value: 50,  feedback: 'Wrong. If someone\'s feeling doesn\'t change, the slider should be just at the center.' },
+  { text: 'a little better', value: 75,  feedback: 'Wrong. f someone is feeling a little better, the slider should be just right of center.' },
+  { text: 'much better',     value: 100, feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far right.' }
+];
+
+const tutorial = tutorialItems.map((item, idx) => {
+  if (idx === 0 && item.html) {
+    return {
+      type: jsPsychHtmlSliderResponse,
+      stimulus: item.html + `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
+      labels: ["Much worse","A little worse","No change","A little better","Much better"],
+      min: 0, max: 100, slider_start: item.pos, require_movement: false,
+      prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+      data: { tutorial_page: idx + 1 }
+    };
+  }
+  // Show static image for instructional tutorial items (those with item.html)
+  if (item.html) {
+    return {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: item.html + `<img src="img/${positionToImage(item.pos)}" class="feeling-scale" alt="scale image">`,
+      choices: ['Continue'],
+      data: { tutorial_page: idx + 1 }
+    };
+  }
+  // comprehension check (remains interactive)
+  return {
+    type: jsPsychHtmlSliderResponse,
+    stimulus: (idx === 6 ? `<p><b>Now let's check if you understand how the slider works!</b></p>` : '') + `<p>If someone feels <b>${item.text}</b> than before, where should the slider go?</p>` +
+              `<img src="img/feelingScale.png" class="feeling-scale">`,
+    labels: ["Much worse","A little worse","No change","A little better","Much better"],
+    min: 0, max: 100,
+    slider_start: 50,
+    require_movement: true,
+    prompt: `<p style="text-align:center; margin-top:20px;">Please drag the slider to indicate your answer.</p>`,
+    data: { tutorial_page: idx + 1 },
+    on_finish: function(data) {
+      const correct = Math.abs(data.response - item.value) <= 20;
+      data.correct = correct;
+    }
+  };
+});
+
+// feedback pages for wrong responses
+const feedbacks = tutorialItems.map((item, idx) => ({
+  timeline: [{
+    type: jsPsychHtmlSliderResponse,
+    stimulus: `<p style="color:red;"><b>Wrong.</b></p>
+               <p>If someone feels <b>${item.text}</b> than before, the slider should be <b>${sliderPosDesc(item.value)}</b>.</p>` +
+             `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
+    labels: ["Much worse","A little worse","No change","A little better","Much better"],
+    min: 0,
+    max: 100,
+    slider_start: item.value,
+    require_movement: false,
+  }],
+  conditional_function: function() {
+    const last = jsPsych.data.get().last(1).values()[0];
+    return !last.correct;
+  }
+}));
+
+// feedback for correct responses (confirmation page)
+const correctFeedback = {
+  timeline: [{
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p style="color:green; font-weight:bold;">✅ Correct!</p>`,
+    choices: ['Continue']
+  }],
+  conditional_function: function() {
+    const last = jsPsych.data.get().last(1).values()[0];
+    return last.correct;
+  }
+};
+
+// merge tutorial and feedbacks into one sequence
+const tutorialSequence = [];
+tutorial.forEach((trial, i) => {
+  tutorialSequence.push(trial);
+  if (!tutorialItems[i].noSlider && !tutorialItems[i].html) {
+    tutorialSequence.push(feedbacks[i]);
+    tutorialSequence.push(correctFeedback);
+  }
+});
+
+/* ================= TRANSITION ================= */
+var transition_expt1 = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus:
+    `<div class="intro-screen">
+      <p><b>You are all set to go!</b></p>
+      <p>In the upcoming task, you will read short scenarios about a character who receives something they want.</p>
+      <p>After each change, you’ll rate how you think the character's feeling changes using the slider.</p>
+      <p>You are not evaluating the character’s feeling overall but how their feelings might have changed in each scenario.</p>
+      <p><br>When you're ready to begin, please click "Continue".</p>
+    </div>`,
+  choices: ['Continue']
+};
+
+const feedback_demographics = {
+  type: jsPsychSurveyHtmlForm,
+  html: '<div style="max-width:700px; text-align:center;"> <p>' +
+                'What factors influenced how you decided to respond? Do you' +
+                ' have any questions or comments regarding the experiment?' +
+                '</p> <textarea name="feedback" cols="40" rows="6"' +
+                ' "autofocus"></textarea> <p> Please provide the following' +
+                ' information to complete the study. </p> <div style="text-' +
+                'align:center;"> <div style="text-align:left; display:' +
+                'inline-block; margin-right:20px; line-height:1.8em;"> <ol>' +
+                    '<li>Age:</li> <br>' +
+                    '<li>Gender:</li> <br><br>' +
+                    '<li>Race:</li> <br><br><br><br><br><br>' +
+                    '<li>Ethnicity:</li>' +
+                '</ol> </div>' +
+                '<div style="text-align:left; display: inline-block;' +
+                ' line-height:1.8em;">' +
+                    // age text box
+                    '<input name="age" type="number"  min="18" max="100" /> <br> <br>' +
+                    // gender options
+                    '<input name="gender" type="radio" id="female" value=' +
+                        '"Female" /> <label for="female"> Female </label>' +
+                    '<input name="gender" type="radio" id="male" value=' +
+                        '"Male" /> <label for="male"> Male </label>' +
+                    '<input name="gender" type="radio" id="nonbinary" value=' +
+                        '"Non-binary" /> <label for="nonbinary"> Non-binary </label> <br>' +
+                    '<input name="gender" type="radio" id="other_gender" value=' +
+                        '"other_gender" /> <label for="other_gender"> Other: <input' +
+                        ' type="text" name="other_gender" /> </label> <br><br>' +
+                    // race options
+                    '<input name="race" type="radio" id="white" value=' +
+                        '"White" /> <label for="white"> White </label> <br>' +
+                    '<input name="race" type="radio" id="black" value=' +
+                        '"Black/African American" /> <label for="black">' +
+                        ' Black/African American </label> <br>' +
+                    '<input name="race" type="radio" id="am_ind" value=' +
+                        '"American Indian/Alaska Native" /> <label for="am_ind">' +
+                        ' American Indian/Alaska Native </label> <br>' +
+                    '<input name="race" type="radio" id="asian" value=' +
+                        '"Asian" /> <label for="asian"> Asian </label> <br>' +
+                    '<input name="race" type="radio" id="pac_isl" value=' +
+                        '"Native Hawaiian/Pacific Islander" /> <label for="pac_isl">' +
+                        ' Native Hawaiian/Pacific Islander </label> <br>' +
+                    '<input name="race" type="radio" id="other_race" value="other_race" />' +
+                        '<label for="other_race"> Other: <input type="text"' +
+                        'name="other_race" /> </label> <br><br>' +
+                    // ethnicity options
+                    '<input name="ethnicity" type="radio" id="hisp" value=' +
+                        '"Hispanic" /> <label for="hisp"> Hispanic </label>' +
+                    '<input name="ethnicity" type="radio" id="nonhisp" value=' +
+                        '"Non-Hispanic" /> <label for="nonhisp"> Non-Hispanic' +
+                        ' </label>' +
+                '</div> </div>' +
+                '<p> Please press the finish button to complete the experiment. </p> </div>',
+  button_label: 'Submit',
+  data: { trial_id: 'demographics_survey' },
+  on_finish: function(data) {
+    const r = data.response;
+    if (r.gender === "Other" && r.gender_other) r.gender = r.gender_other;
+    if (r.race === "Other" && r.race_other) r.race = r.race_other;
+    data.feedback = r.feedback;
+    data.age = r.age;
+    data.gender = r.gender;
+    data.race = r.race;
+    data.ethnicity = r.ethnicity;
+  }
+};
+
+/* ================= TIMELINE ================= */
+const timeline = [intro, ...tutorialSequence, transition_expt1];
+//const timeline = [transition_expt1];
+
+let attentionIndex = 0;
+const childMap = {
+  food: { name: 'Akira', img: 'AkiraBubble' },
+  sensory: { name: 'Olivia', img: 'OliviaBubble' },
+  entertainment: { name: 'Jack', img: 'JackBubble' },
+  social: { name: 'Jaden', img: 'JadenBubble' }
+};
+
+Object.entries(categories).forEach(([cat, grp]) => {
+  const stim = jsPsych.randomization.sampleWithoutReplacement(grp.stimuli, 1)[0];
+  const { name, img } = childMap[cat];
+  const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
+  const attentionPos = Math.floor(Math.random() * 10) + 1;
+
+  // Need only empty grid page
+  const need = stim.need.replace(/X/g, name);
+  timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="visual-wrapper">
+                 <p>${need}</p>
+                 <div class="child-wrapper">
+                 <div class="emoji-bubble need-page ">${stim.emoji}</div>
+                 <img src="img/${img}.png" alt="${name}" class="child-image">
+                 <div>
+                 <img src="img/grid4.png" class="grid-image" alt="empty grid">
+               </div>`,
+    choices: ['Continue'],
+    data: { type: 'need_page', category: cat, stimulus_label: stim.label }
+  });
+
+  // Follow Up Question!!!
+  const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
+  const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
+
+  for (let trial = 1; trial <= 10; trial++) {
+    const amount   = inc * trial;
+    const need     = stim.need.replace(/X/g, name);
+    const amountBase = `<b>${amount}</b> ${stim.base_action}`;
+    const amountStr = `<b>${amount}</b> ${stim.unit}`;
+    const msg = (trial === 1)
+      ? `${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. How do you think their feeling would change, compared to before?`
+      : `${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} How do you think their feeling would change, compared to before?`;
+    const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
+    timeline.push(
+      sliderTrial({
+        visual,
+        need,
+        msg,
+        cat,
+        label: stim.label,
+        amt: amount,
+        n: trial
+      })
+    );
+
+    if (trial === selectedFollowupTrial) {
+      timeline.push({
+        type: jsPsychSurveyText,
+        questions: [{
+          prompt: dynamicFollowupPrompt,
+          rows: 3,
+          columns: 50
+        }],
+        data: {
+          followup_for: `${cat}_${stim.label}`,
+          trial_type: 'followup'
+        }
+      });
+    }
+    if (trial === attentionPos) {
+      const direction = (attentionIndex % 2 === 0) ? 'left' : 'right';
+      attentionIndex++;
+      timeline.push(
+        attentionCheck(direction)
+      );
+    }
+  }
+  
+  const lastAmount = inc * 10;
+  const bonusAmt   = 100 + lastAmount;
+  const bonusNeed  = stim.need.replace(/X/g, name);
+  const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
+  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} How do you think their feeling would change?`;
+  const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
+  const bonusVis = `<p>${bonusNeed}</p>` +
+                   `<div style="display:inline-block; position:relative;">` +
+                     buildVisual(bonusCount, stim.emoji, cat, img, name) +
+                     `<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" ` +
+                         `style="position:absolute; top:200px; left:250px; width:150px; height:auto;">` +
+                   `</div>`;
+
+  timeline.push(
+    sliderTrial({
+      visual: bonusVis,
+      need: bonusNeed,
+      msg: bonusMsg,
+      cat,
+      label: stim.label,
+      amt: bonusAmt,
+      n: 11
+    })
+  );
+
+
+  // Insert follow-up question if bonus trial is the selected follow-up
+  if (11 === selectedFollowupTrial) {
+    timeline.push({
+      type: jsPsychSurveyText,
+      questions: [{
+        prompt: dynamicFollowupPrompt,
+        rows: 3,
+        columns: 50
+      }],
+      data: {
+        followup_for: `${cat}_${stim.label}`,
+        trial_type: 'followup'
+      }
+    });
+  }
+});
+
+  // ===== Thank-you and data submission =====
+  const thankYou = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="intro-screen"><h2>Thank you for participating!</h2></div>`,
+    choices: ['Finish'],
+  };
+  // Insert feedback_demographics just before thankYou
+  timeline.push(feedback_demographics);
+  timeline.push(thankYou);
+  jsPsych.run(timeline);
+  })
+</script>
 </body>
 </html>

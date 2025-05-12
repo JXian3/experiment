@@ -1,32 +1,105 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f8fa;
-  color: #333;
-  text-align: center;
-  padding: 50px;
+/* ===== Global layout ===== */
+body{font-family:sans-serif;}
+.jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
+.jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
+
+/* ===== Feeling scale ===== */
+.feeling-scale{
+  max-width: 600px;
+  width: 120%;
+  height: auto;
+  margin: 0 auto 5px;
+  display: block;
+  }
+
+/* ===== Slider labels ===== */
+.slider-labels-custom{display:flex;justify-content:space-between;width:100%;font-weight:bold;margin-top:8px;}
+
+/* ===== Visual wrapper ===== */
+.visual-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 420px;
+  min-height: 100px;
+  margin: 10px auto;
+  transform: translateX(-50px);
 }
 
-.container {
-  max-width: 600px;
+.grid-image {
+  height: 70px;
+  margin-top: 2px;
+  margin-left: -100px;
+}
+.emoji-track {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 6px;
+  pointer-events: none;
+  margin-top: -50px;
+  padding-left: 50px;
+  width: 100%;
+}
+
+.visual-wrapper.entertainment .emoji-track,
+.visual-wrapper.sensory .emoji-track {
+  padding-left: 180px !important;
+  gap: 18px;
+}
+
+.emoji-track span{font-size:32px;line-height:1;}
+
+.child-image {
+  display: block;
+  margin: 10px auto;
+  height: 250px;
+  position: relative;
+  z-index: 1;
+}
+
+.emoji-bubble {
+  position: absolute;
+  top: 45px;    
+  right: 170px;  
+  font-size: 32px;
+  z-index: 3;
+}
+
+.child-wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.emoji-bubble.need-page {
+  top: 45px;
+  right: 80px;
+}
+
+.intro-screen {
+  max-width: 520px;
   margin: 0 auto;
 }
 
-.button-group {
-  margin-top: 30px;
-}
-
-.button {
+/* Two-emojis for food and social categories */
+.grid-wrapper {
+  position: relative;
   display: inline-block;
-  padding: 12px 24px;
-  margin: 10px;
-  font-size: 16px;
-  background-color: #0077cc;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  background-color: #005fa3;
+.grid-emoji {
+  position: absolute;
+  font-size: 20px; 
+  transform: translateX(-100px);
+}
+
+.grid-emoji.top-left {
+  top: 15px;
+  left: -30px;
+}
+.grid-emoji.bottom-right {
+  bottom: 15px;
+  right: 165px;
 }
