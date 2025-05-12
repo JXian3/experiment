@@ -20,7 +20,7 @@
 
 /* ================= STIMULI ================= */
 const categories = {
-  
+  /*
   food:{stimuli:[
     {label:"Cookie 🍪",need:"X wants to acquire <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
     {label:"Ice cream 🍦",need:"X wants to acquire <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
@@ -28,29 +28,20 @@ const categories = {
     {label:"Candy 🍬",need:"X wants to acquire <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
     {label:"Hot chicken legs 🍗",need:"X wants to acquire <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
     {label:"Healthy fruits 🍊",need:"X wants to acquire <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
-  
+ */ 
   sensory:{stimuli:[
-    {label:"Light 💡",need:"X wants to acquire <b>4</b> light bulbs.",base_action:"light",unit:"lights",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Sound 🎧",need:"X wants to acquire <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"acquires",emoji:"🎧", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Light 💡",need:"X wants to acquire <b>4</b> light bulbs.",base_action:"light bulb",unit:"light bulbs",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Sound 🎧",need:"X wants to acquire <b>4</b> headphones.",base_action:"headphone",unit:"headphones",verb:"acquires",emoji:"🎧", followUp: amt => `Now she has acquired ${amt}.`},
     {label:"Temperature ♨️",need:"X wants to acquire <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"acquires",emoji:"♨️", followUp: amt => `Now she has acquired ${amt}.`},
     {label:"Scent 🧴",need:"X wants to acquire <b>4</b> bottles of perfume.",base_action:"bottle of perfume",unit:"bottles of perfume",verb:"acquires",emoji:"🧴", followUp: amt => `Now she had acquired ${amt}.`},
     {label:"Taste 🧂",need:"X wants to acquire <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"acquires",emoji:"🧂", followUp: amt => `Now she has acquired ${amt}.`}]},
 
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"plays games for",emoji:"🎮", followUp: amt => `Now he has gamed for ${amt} hours.`},
-    {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"watches TV for",emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`},
-    {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hour",verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now he has scrolled social media for  ${amt}.`},
-    {label:"Reading 📖",need:"X is bored and wants to read for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"reads books for",emoji:"📖", followUp: amt => `Now he has read for ${amt}.`},
-    {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"draws for",emoji:"🎨", followUp: amt => `Now he has been drawing for ${amt}.`},]},
-  
-  social: {
-  stimuli: [
-    { label: "Inviting friends 👩", need: "X wants to invite <b>8</b> friends to his house.", base_action: "friends to his house", verb: "invites", unit: "friends to his house", emoji: "👩", followUp: amt => `Now he has invited ${amt}.` },
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X wants to spend <b>8</b> hours with acquaintances.", base_action: "hours with acquintances", verb: "spends", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now he has spent ${amt}.` },
-    { label: "Meeting new people 🧑🏼", need: "X wants to meet <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets", emoji: "🧑🏼", followUp: amt => `Now he has met ${amt}.` },
-    { label: "Time alone 🧘", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now he has spent ${amt}.` }
-  ]
-}
+    {label:"Gaming 🎮",need:"X wants to add <b>4</b> new games to his game library.",base_action:"game",unit:"games",verb:"added",emoji:"🎮", followUp: amt => `Now he has added ${amt}.`},
+    {label:"Watching TV 📺",need:"X wants to download <b>4</b> TV episodes.",base_action:"TV episode",unit:"TV episodes",verb:"downloads",emoji:"📺", followUp: amt => `Now he has downloaded ${amt}.`},
+    {label:"Scrolling Social Media 📱",need:"X wants to subscribe to <b>4</b> new Instagram content creaters.",base_action:"content creator",unit:"content creators",verb:"subscribes to",emoji:"📱", followUp: amt => `Now he has subscribed to ${amt}.`},
+    {label:"Reading 📖",need:"X wants to acquire <b>4</b> books.",base_action:"book",unit:"books",verb:"acquires",emoji:"📖", followUp: amt => `Now he has acquired ${amt}.`},
+    {label:"Drawing 🎨",need:"X wants to acquire <b>4</b> paint tubes.",base_action:"paint tube",unit:"paint tubes",verb:"acquires",emoji:"🎨", followUp: amt => `Now he has acquired ${amt}.`},]},
 };
 
 /* ================= HELPERS ================= */
@@ -371,7 +362,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-
+/*
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -415,7 +406,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-
+*/
   // ---- bonus trial 100 + n ----
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
@@ -425,13 +416,25 @@ Object.entries(categories).forEach(([cat, grp]) => {
   const gridSrc    = 'img/grid4.png';
   const emojiCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusGrid = `
-    <div class="grid-wrapper">
-      <img src="${gridSrc}" class="grid-image" alt="grid">
-      ${Array.from({ length: emojiCount }).map((_, idx) => {
-        const pairIndex = Math.floor(idx / 2);
-        const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
-        return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${stim.emoji}</span>`;
-      }).join('')}
+    <div class="grid-wrapper" style="position: relative; left: 0px;">
+      ${
+        (cat === 'food' || cat === 'social')
+          ? `<img src="${gridSrc}" class="grid-image" alt="grid">
+             ${
+               Array.from({ length: emojiCount }).map((_, idx) => {
+                 const pairIndex = Math.floor(idx / 2);
+                 const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
+                 return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${stim.emoji}</span>`;
+               }).join('')
+             }`
+          : (() => {
+               const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
+               return `<img src="${gridSrc}" class="grid-image" alt="grid">
+                       <div class="emoji-track"${extraPad}>
+                         ${Array(4).fill(`<span>${stim.emoji}</span>`).join('')}
+                       </div>`;
+             })()
+      }
     </div>`;
   // Use the label to load the corresponding pile image (smaller)
   const bonusVis   = `<p>${bonusNeed}</p>${bonusGrid}<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" style="width:150px; height:auto;">`;
