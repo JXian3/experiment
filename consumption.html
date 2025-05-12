@@ -375,7 +375,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-/*
+
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -419,7 +419,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-  */
+  
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
