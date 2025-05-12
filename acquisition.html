@@ -20,7 +20,7 @@
 
 /* ================= STIMULI ================= */
 const categories = {
-  
+ 
   food:{stimuli:[
     {label:"Cookie 🍪",need:"X wants to acquire <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
     {label:"Ice cream 🍦",need:"X wants to acquire <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
@@ -362,7 +362,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-/*
+
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -406,7 +406,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-*/
+
   // ---- bonus trial 100 + n ----
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
@@ -451,7 +451,6 @@ Object.entries(categories).forEach(([cat, grp]) => {
 });
 
   // ===== Thank-you and data submission =====
-  // No data saved yet... after we host it I can add it?
   const thankYou = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="intro-screen"><h2>Thank you for participating!</h2></div>`,
