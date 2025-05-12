@@ -419,10 +419,22 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // ---- bonus trial 100 + n ----
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
-  const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
   const bonusNeed  = stim.need.replace(/X/g, name);
-  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} How does her feeling change?`;
-  const bonusVis   = `<p>${bonusNeed}</p>` + buildVisual(bonusAmt, stim.emoji, cat, img, name);
+  const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
+  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} How do you think their feeling would change?`;
+  const gridSrc    = 'img/grid4.png';
+  const emojiCount = (cat === 'food' || cat === 'social') ? 8 : 4;
+  const bonusGrid = `
+    <div class="grid-wrapper">
+      <img src="${gridSrc}" class="grid-image" alt="grid">
+      ${Array.from({ length: emojiCount }).map((_, idx) => {
+        const pairIndex = Math.floor(idx / 2);
+        const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
+        return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${stim.emoji}</span>`;
+      }).join('')}
+    </div>`;
+  // Use the label to load the corresponding pile image (smaller)
+  const bonusVis   = `<p>${bonusNeed}</p>${bonusGrid}<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" style="width:150px; height:auto;">`;
 
   timeline.push(
     sliderTrial({
