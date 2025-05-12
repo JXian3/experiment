@@ -20,7 +20,7 @@
 
 /* ================= STIMULI ================= */
 const categories = {
-  /*
+
 food:{stimuli:[
     {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats",emoji:"🍪", followUp: amt => `Now she has had ${amt}.`},
     {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has had ${amt}.`},
@@ -28,7 +28,7 @@ food:{stimuli:[
     {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has had ${amt}.`},
     {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has had ${amt}.`},
     {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`},]},
-*/
+
   sensory:{stimuli:[
     {label:"Light 💡",need:"X thinks it's too dark in the room and wants to have <b>4</b> lights turned on.",base_action:"light",unit:"lights",verb:"turns on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
     {label:"Sound 🔊",need:"X wants to listen to music played from <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"turns on",emoji:"🔊", followUp: amt => `Now she has turned on ${amt}.`},
@@ -42,13 +42,13 @@ food:{stimuli:[
     {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hour",verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now she has scrolled social media for  ${amt}.`},
     {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"reads books for",emoji:"📖", followUp: amt => `Now she has read for ${amt}.`},
     {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"draws for",emoji:"🎨", followUp: amt => `Now she has been drawing for ${amt}.`},]},
-  
+
   social: {
   stimuli: [
     { label: "Inviting friends 👩", need: "X wants to invite <b>8</b> friends over to her house.", base_action: "friends to her house", verb: "invites", unit: "friends to her house", emoji: "👩", followUp: amt => `Now she has invited ${amt}.` },
     { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X wants to spend <b>8</b> hours with acquaintances.", base_action: "hours with acquintances", verb: "spends", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now she has spent ${amt}.` },
     { label: "Meeting new people 🧑🏼", need: "X wants to meet <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets", emoji: "🧑🏼", followUp: amt => `Now she has met ${amt}.` },
-    { label: "Time alone 🧘", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now she has spent ${amt}.` }
+    { label: "Time alone 👤", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now she has spent ${amt}.` }
   ]
 }
 };
@@ -371,7 +371,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-/*
+
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -415,7 +415,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-  */
+  
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
