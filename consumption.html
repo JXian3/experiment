@@ -71,6 +71,8 @@ function dynamicFollowupPrompt() {
 function buildVisual(nEmoji, emoji, cat, childImg, childName){
   const gridSrc = 'img/grid4.png';
   const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
+  const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
+  const oldCount = nEmoji - inc;
   return `
     <div class="visual-wrapper ${cat}">
       <div class="emoji-bubble">${emoji}</div>
@@ -82,7 +84,7 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName){
                ${Array.from({ length: nEmoji }).map((_, idx) => {
                  const pairIndex = Math.floor(idx / 2);
                  const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
-                 return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${emoji}</span>`;
+                 return `<span class="grid-emoji ${posClass}${idx < oldCount ? ' old-emoji' : ''}" style="transform: translateX(${pairIndex * 50}px)${idx < oldCount ? '; filter: grayscale(100%); opacity: 0.5;' : ''}">${emoji}</span>`;
                }).join('')}
              </div>`
           : `<img src="${gridSrc}" class="grid-image" alt="grid">
