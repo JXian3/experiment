@@ -23,11 +23,11 @@ const categories = {
  
   food:{stimuli:[
     {label:"Cookie 🍪",need:"X wants to acquire <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Ice cream 🍦",need:"X wants to acquire <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Soda 🥤",need:"X wants to acquire <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks",emoji:"🥤", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Candy 🍬",need:"X wants to acquire <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
-    {label:"Hot chicken legs 🍗",need:"X wants to acquire <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Healthy fruits 🍊",need:"X wants to acquire <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
+    {label:"Ice cream 🍦",need:"X wants to acquire <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"acquires",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Soda 🥤",need:"X wants to acquire <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"acquires",emoji:"🥤", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Candy 🍬",need:"X wants to acquire <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"acquires",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
+    {label:"Hot chicken legs 🍗",need:"X wants to acquire <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"acquires",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Healthy fruits 🍊",need:"X wants to acquire <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"acquires",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
  
   sensory:{stimuli:[
     {label:"Light 💡",need:"X wants to acquire <b>4</b> light bulbs.",base_action:"light bulb",unit:"light bulbs",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
@@ -59,9 +59,14 @@ function dynamicFollowupPrompt() {
     return "Why did you think her feeling would become much worse after this?";
   }
 }
-function buildVisual(nEmoji, emoji, cat, childImg, childName){
+
+
+function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
   const gridSrc = 'img/grid4.png';
   const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
+  const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
+  const oldCount = isBonus ? nEmoji : nEmoji - inc;
+  console.log(oldCount)
   return `
     <div class="visual-wrapper ${cat}">
       <div class="emoji-bubble">${emoji}</div>
@@ -73,7 +78,9 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName){
                ${Array.from({ length: nEmoji }).map((_, idx) => {
                  const pairIndex = Math.floor(idx / 2);
                  const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
-                 return `<span class="grid-emoji ${posClass}" style="transform: translateX(${pairIndex * 50}px)">${emoji}</span>`;
+                 // grayscale if old emoji or if bonus trial
+                 const shouldGray = isBonus || idx < oldCount;
+                 return `<span class="grid-emoji ${posClass}${shouldGray ? ' old-emoji' : ''}" style="transform: translateX(${pairIndex * 50}px)${shouldGray ? '; filter: grayscale(100%); opacity: 0.5;' : ''}">${emoji}</span>`;
                }).join('')}
              </div>`
           : `<img src="${gridSrc}" class="grid-image" alt="grid">
@@ -415,7 +422,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
-                     buildVisual(bonusCount, stim.emoji, cat, img, name) +
+                     buildVisual(bonusCount, stim.emoji, cat, img, name, true) +
                      `<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" ` +
                          `style="position:absolute; top:200px; left:250px; width:150px; height:auto;">` +
                    `</div>`;

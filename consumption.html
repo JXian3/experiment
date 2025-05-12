@@ -68,11 +68,13 @@ function dynamicFollowupPrompt() {
     return "Why did you think her feeling would become much worse after this?";
   }
 }
-function buildVisual(nEmoji, emoji, cat, childImg, childName){
+
+function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
   const gridSrc = 'img/grid4.png';
   const extraPad = (cat === 'entertainment' || cat === 'sensory') ? ' style="padding-left:280px;"' : '';
   const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
-  const oldCount = nEmoji - inc;
+  const oldCount = isBonus ? nEmoji : nEmoji - inc;
+  console.log(oldCount)
   return `
     <div class="visual-wrapper ${cat}">
       <div class="emoji-bubble">${emoji}</div>
@@ -84,7 +86,9 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName){
                ${Array.from({ length: nEmoji }).map((_, idx) => {
                  const pairIndex = Math.floor(idx / 2);
                  const posClass = idx % 2 === 0 ? 'top-left' : 'bottom-right';
-                 return `<span class="grid-emoji ${posClass}${idx < oldCount ? ' old-emoji' : ''}" style="transform: translateX(${pairIndex * 50}px)${idx < oldCount ? '; filter: grayscale(100%); opacity: 0.5;' : ''}">${emoji}</span>`;
+                 // grayscale if old emoji or if bonus trial
+                 const shouldGray = isBonus || idx < oldCount;
+                 return `<span class="grid-emoji ${posClass}${shouldGray ? ' old-emoji' : ''}" style="transform: translateX(${pairIndex * 50}px)${shouldGray ? '; filter: grayscale(100%); opacity: 0.5;' : ''}">${emoji}</span>`;
                }).join('')}
              </div>`
           : `<img src="${gridSrc}" class="grid-image" alt="grid">
@@ -338,14 +342,13 @@ const feedback_demographics = {
 
 /* ================= TIMELINE ================= */
 const timeline = [intro, ...tutorialSequence, transition_expt1];
-
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
   sensory: { name: 'Olivia', img: 'OliviaBubble' },
   entertainment: { name: 'Jack', img: 'JackBubble' },
   social: { name: 'Jaden', img: 'JadenBubble' }
-};
+};g
 
 Object.entries(categories).forEach(([cat, grp]) => {
   const stim = jsPsych.randomization.sampleWithoutReplacement(grp.stimuli, 1)[0];
@@ -372,7 +375,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
-
+/*
   for (let trial = 1; trial <= 10; trial++) {
     const amount   = inc * trial;
     const need     = stim.need.replace(/X/g, name);
@@ -416,7 +419,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
       );
     }
   }
-  
+  */
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
@@ -425,7 +428,7 @@ Object.entries(categories).forEach(([cat, grp]) => {
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
-                     buildVisual(bonusCount, stim.emoji, cat, img, name) +
+                     buildVisual(bonusCount, stim.emoji, cat, img, name, true) +
                      `<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" ` +
                          `style="position:absolute; top:200px; left:250px; width:150px; height:auto;">` +
                    `</div>`;
