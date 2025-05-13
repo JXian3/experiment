@@ -343,7 +343,10 @@ const childMap = {
   social: { name: 'Jaden', img: 'JadenBubble' }
 };
 
-Object.entries(categories).forEach(([cat, grp]) => {
+  // Randomize the order of conditions
+  const categoryOrder = jsPsych.randomization.shuffle(Object.keys(categories));
+  categoryOrder.forEach(cat => {
+    const grp = categories[cat];
   const stim = jsPsych.randomization.sampleWithoutReplacement(grp.stimuli, 1)[0];
   const { name, img } = childMap[cat];
   const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
