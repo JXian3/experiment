@@ -22,33 +22,33 @@
 const categories = {
 
 food:{stimuli:[
-    {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats",emoji:"🍪", followUp: amt => `Now she has had ${amt}.`},
-    {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats",emoji:"🍦", followUp: amt => `Now she has had ${amt}.`},
-    {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks",emoji:"🥤", followUp: amt => `Now she has had ${amt}.`},
-    {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats",emoji:"🍬", followUp: amt => `Now she has had ${amt}.`},
-    {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats",emoji:"🍗", followUp: amt => `Now she has had ${amt}.`},
-    {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`},]},
+    {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats", past: "eaten", emoji:"🍪", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "eaten", emoji:"🍦", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks", past: "drunk", emoji:"🥤", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "eaten", emoji:"🍬", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"eats", past: "eaten", emoji:"🍗", followUp: amt => `Now she has had ${amt}.`},
+    {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats", past: "eaten",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`},]},
 
   sensory:{stimuli:[
-    {label:"Light 💡",need:"X thinks it's too dark in the room and wants to have <b>4</b> lights turned on.",base_action:"light",unit:"lights",verb:"turns on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
-    {label:"Sound 🔊",need:"X wants to listen to music played from <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"turns on",emoji:"🔊", followUp: amt => `Now she has turned on ${amt}.`},
-    {label:"Temperature 🌡️",need:"X is feeling cold and wants to turn on <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"turns on",emoji:"🌡️", followUp: amt => `Now she has turned on ${amt}.`},
-    {label:"Scent 💨",need:"X wants to apply <b>4</b> sprays of perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"sprays",emoji:"💨", followUp: amt => `Now she had applied ${amt}.`},
-    {label:"Taste 🧂",need:"X is preparing dinner and seasoning food. They want to add <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}.`}]},
+    {label:"Light 💡",need:"X thinks it's too dark in the room and wants to have <b>4</b> lights turned on.",base_action:"light",unit:"lights",verb:"turns on", past: "turned on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Sound 🔊",need:"X wants to listen to music played from <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"turns on", past: "turned on", emoji:"🔊", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Temperature 🌡️",need:"X is feeling cold and wants to turn on <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"turns on", past: "turned on", emoji:"🌡️", followUp: amt => `Now she has turned on ${amt}.`},
+    {label:"Scent 💨",need:"X wants to apply <b>4</b> sprays of perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"sprays", past: "sprayed", emoji:"💨", followUp: amt => `Now she had applied ${amt}.`},
+    {label:"Taste 🧂",need:"X is preparing dinner and seasoning food. They want to add <b>4</b> pinches of salt.",base_action:"pinch of salt", past: "added", unit:"pinches of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}.`}]},
 
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"plays games for",emoji:"🎮", followUp: amt => `Now he has gamed for ${amt} hours.`},
-    {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"watches TV for",emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`},
-    {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hour",verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now he has scrolled social media for  ${amt}.`},
-    {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"reads books for",emoji:"📖", followUp: amt => `Now he has read for ${amt}.`},
-    {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"draws for",emoji:"🎨", followUp: amt => `Now he has been drawing for ${amt}.`},]},
+    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"plays games for", past: "played for", emoji:"🎮", followUp: amt => `Now he has gamed for ${amt} hours.`},
+    {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"watches TV for", past: "watched for", emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`},
+    {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hour", past: "scrolled for", verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now he has scrolled social media for  ${amt}.`},
+    {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", followUp: amt => `Now he has read for ${amt}.`},
+    {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hours",unit:"hours",verb:"draws for", past: "drawn for", emoji:"🎨", followUp: amt => `Now he has been drawing for ${amt}.`},]},
 
   social: {
   stimuli: [
-    { label: "Inviting friends 👩", need: "X wants to invite <b>8</b> friends over to his house.", base_action: "friends to her house", verb: "invites", unit: "friends to his house", emoji: "👩", followUp: amt => `Now he has invited ${amt}.` },
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X wants to spend <b>8</b> hours with acquaintances.", base_action: "hours with acquintances", verb: "spends", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now he has spent ${amt}.` },
-    { label: "Meeting new people 🧑🏼", need: "X wants to meet <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets", emoji: "🧑🏼", followUp: amt => `Now he has met ${amt}.` },
-    { label: "Time alone 👤", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", emoji: "👤", followUp: amt => `Now he has spent ${amt}.` }
+    { label: "Inviting friends 👩", need: "X wants to invite <b>8</b> friends over to his house.", base_action: "friends to her house", verb: "invites", past: "invited", unit: "friends to his house", emoji: "👩", followUp: amt => `Now he has invited ${amt}.` },
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X wants to spend <b>8</b> hours with acquaintances.", base_action: "hours with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now he has spent ${amt}.` },
+    { label: "Meeting new people 🧑🏼", need: "X wants to meet <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼", followUp: amt => `Now he has met ${amt}.` },
+    { label: "Time alone 👤", need: "X wants to spend <b>8</b> hours alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤", followUp: amt => `Now he has spent ${amt}.` }
   ]
 }
 };
@@ -67,6 +67,12 @@ function dynamicFollowupPrompt() {
   } else {
     return "Why did you think her feeling would become much worse after this?";
   }
+}
+
+function getEmojiExplanation(stim) {
+  const unit = stim.unit.charAt(0).toUpperCase() + stim.unit.slice(1);
+  const baseUnit = unit.replace(/s$/, ''); 
+  return `<p><i>${stim.emoji} = 1 ${baseUnit} ${stim.past} by X</i></p>`;
 }
 
 function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
@@ -341,7 +347,8 @@ const feedback_demographics = {
 };
 
 /* ================= TIMELINE ================= */
-const timeline = [intro, ...tutorialSequence, transition_expt1];
+//const timeline = [intro, ...tutorialSequence, transition_expt1];
+const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
@@ -384,9 +391,10 @@ categoryOrder.forEach(cat => {
     const need     = stim.need.replace(/X/g, name);
     const amountBase = `<b>${amount}</b> ${stim.base_action}`;
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
+    const explanation = getEmojiExplanation(stim);
     const msg = (trial === 1)
-      ? `${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. How do you think their feeling would change, compared to before?`
-      : `${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} How do you think their feeling would change, compared to before?`;
+      ? `${explanation}<br>${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. How do you think their feeling would change,<br> compared to before they had ${stim.past} these ${amount} extra ${stim.base_action}?`
+      : `${explanation}<br>${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} How do you think their feeling would change,<br> compared to before they had ${stim.past} these ${amount} extra ${stim.base_action}?`;
     const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
       sliderTrial({
