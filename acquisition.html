@@ -22,19 +22,19 @@
 const categories = {
  
   food:{stimuli:[
-    {label:"Cookie 🍪",need:"X wants to acquire <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Ice cream 🍦",need:"X wants to acquire <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"acquires",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Soda 🥤",need:"X wants to acquire <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"acquires",emoji:"🥤", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Candy 🍬",need:"X wants to acquire <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"acquires",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
-    {label:"Hot chicken legs 🍗",need:"X wants to acquire <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"acquires",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Healthy fruits 🍊",need:"X wants to acquire <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"acquires",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
+    {label:"Cookie 🍪",need:"X wants to have <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Ice cream 🍦",need:"X wants to have <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"acquires",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Soda 🥤",need:"X wants to have <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"acquires",emoji:"🥤", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Candy 🍬",need:"X wants to have <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"acquires",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
+    {label:"Hot chicken legs 🍗",need:"X wants to have <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"acquires",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Healthy fruits 🍊",need:"X wants to have <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"acquires",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
  
   sensory:{stimuli:[
-    {label:"Light 💡",need:"X wants to acquire <b>4</b> light bulbs.",base_action:"light bulb",unit:"light bulbs",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Sound 🔊",need:"X wants to acquire <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"acquires",emoji:"🔊", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Temperature 🌡️",need:"X wants to acquire <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"acquires",emoji:"🌡️", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Scent 🧴",need:"X wants to acquire <b>4</b> bottles of perfume.",base_action:"bottle of perfume",unit:"bottles of perfume",verb:"acquires",emoji:"🧴", followUp: amt => `Now she had acquired ${amt}.`},
-    {label:"Taste 🧂",need:"X wants to acquire <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"acquires",emoji:"🧂", followUp: amt => `Now she has acquired ${amt}.`}]},
+    {label:"Light 💡",need:"X wants to have <b>4</b> light bulbs.",base_action:"light bulb",unit:"light bulbs",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Sound 🔊",need:"X wants to have <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"acquires",emoji:"🔊", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Temperature 🌡️",need:"X wants to have <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"acquires",emoji:"🌡️", followUp: amt => `Now she has acquired ${amt}.`},
+    {label:"Scent 🧴",need:"X wants to have <b>4</b> bottles of perfume.",base_action:"bottle of perfume",unit:"bottles of perfume",verb:"acquires",emoji:"🧴", followUp: amt => `Now she had acquired ${amt}.`},
+    {label:"Taste 🧂",need:"X wants to have <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"acquires",emoji:"🧂", followUp: amt => `Now she has acquired ${amt}.`}]},
 
   entertainment:{stimuli:[
     {label:"Gaming 🎮",need:"X wants to add <b>4</b> new games to his game library.",base_action:"game",unit:"games",verb:"added",emoji:"🎮", followUp: amt => `Now he has added ${amt}.`},
