@@ -18,30 +18,247 @@
       const jsPsych = initJsPsych({
   });
 
+/* ================= DATA ================= */
+
+const subject_id = jsPsych.randomization.randomID(10);
+//const filename = `${subject_id}.csv`;
+        
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['conditionA', 'conditionB'], 1)[0];
+
+// record the condition assignment in the jsPsych data
+
+jsPsych.data.addProperties({
+  condition: condition_assignment
+});
+
+/*experiment variables*/
+const mturk_pilot_mode = false
+
+/*capture info from mturk/connect, except in test mode*/
+if(mturk_pilot_mode) { 
+    var study_id = 'test';
+    var session_id = 'test';
+    participant_id = 'test_' + String(jsPsych.randomization.randomID(10)) //overwrite the participant id
+} else {
+    participant_id = jsPsych.data.getURLVariable('participantId'); 
+    var assignment_id = jsPsych.data.getURLVariable('assignmentId');
+    var project_id = jsPsych.data.getURLVariable('projectId');
+}
+
+jsPsych.data.addProperties({
+  mturk_participant_id: "participant_id",
+  mturk_assignment_id: "assignment_id",
+  mturk_project_id: "project_id"
+})
+
+const filename = `${participant_id}.csv`;
+
 /* ================= STIMULI ================= */
 const categories = {
- 
-  food:{stimuli:[
-    {label:"Cookie 🍪",need:"X wants to have <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"acquires",emoji:"🍪", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Ice cream 🍦",need:"X wants to have <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"acquires",emoji:"🍦", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Soda 🥤",need:"X wants to have <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"acquires",emoji:"🥤", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Candy 🍬",need:"X wants to have <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"acquires",emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`},
-    {label:"Hot chicken legs 🍗",need:"X wants to have <b>8</b> hot chicken legs.",base_action:"hot chicken legs",unit:"hot chicken legs",verb:"acquires",emoji:"🍗", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Healthy fruits 🍊",need:"X wants to have <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"acquires",emoji:"🍊", followUp: amt => `Now she has acquired ${amt}.`},]},
- 
-  sensory:{stimuli:[
-    {label:"Light 💡",need:"X wants to have <b>4</b> light bulbs.",base_action:"light bulb",unit:"light bulbs",verb:"acquires",emoji:"💡", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Sound 🔊",need:"X wants to have <b>4</b> speakers.",base_action:"speaker",unit:"speakers",verb:"acquires",emoji:"🔊", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Temperature 🌡️",need:"X wants to have <b>4</b> heaters.",base_action:"heater",unit:"heaters",verb:"acquires",emoji:"🌡️", followUp: amt => `Now she has acquired ${amt}.`},
-    {label:"Scent 🧴",need:"X wants to have <b>4</b> bottles of perfume.",base_action:"bottle of perfume",unit:"bottles of perfume",verb:"acquires",emoji:"🧴", followUp: amt => `Now she had acquired ${amt}.`},
-    {label:"Taste 🧂",need:"X wants to have <b>4</b> pinches of salt.",base_action:"pinch of salt",unit:"pinches of salt",verb:"acquires",emoji:"🧂", followUp: amt => `Now she has acquired ${amt}.`}]},
-
-  entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X wants to add <b>4</b> new games to his game library.",base_action:"game",unit:"games",verb:"added",emoji:"🎮", followUp: amt => `Now he has added ${amt}.`},
-    {label:"Watching TV 📺",need:"X wants to download <b>4</b> TV episodes.",base_action:"TV episode",unit:"TV episodes",verb:"downloads",emoji:"📺", followUp: amt => `Now he has downloaded ${amt}.`},
-    {label:"Scrolling Social Media 📱",need:"X wants to subscribe to <b>4</b> new Instagram content creaters.",base_action:"content creator",unit:"content creators",verb:"subscribes to",emoji:"📱", followUp: amt => `Now he has subscribed to ${amt}.`},
-    {label:"Reading 📖",need:"X wants to acquire <b>4</b> books.",base_action:"book",unit:"books",verb:"acquires",emoji:"📖", followUp: amt => `Now he has acquired ${amt}.`},
-    {label:"Drawing 🎨",need:"X wants to acquire <b>4</b> paint tubes.",base_action:"paint tube",unit:"paint tubes",verb:"acquires",emoji:"🎨", followUp: amt => `Now he has acquired ${amt}.`},]},
+  food: {
+    stimuli: [
+      {
+        label: "Cookie 🍪",
+        need: "X wants to grab <b>8</b> cookies from the kitchen.",
+        base_action: "cookies",
+        unit: "cookies",
+        verb: "grabs",
+        emoji: "🍪",
+        followUp: amt => `Now she has grabbed ${amt}.`,
+        past: "grabbed",
+        before: "she had grabbed any cookies",
+        explanation: "grabbed 1 cookie"
+      },
+      {
+        label: "Ice cream 🍦",
+        need: "X wants to scoop <b>8</b> scoops of ice cream into her bowl.",
+        base_action: "scoops of ice cream",
+        unit: "scoops of ice cream",
+        verb: "scoops",
+        emoji: "🍦",
+        followUp: amt => `Now she has scooped ${amt}.`,
+        past: "scooped",
+        before: "she had scooped any ice cream",
+        explanation: "scooped 1 scoop of ice cream"
+      },
+      {
+        label: "Soda 🥤",
+        need: "X wants to take <b>8</b> cans of soda from the fridge.",
+        base_action: "cans of soda",
+        unit: "cans of soda",
+        verb: "takes",
+        emoji: "🥤",
+        followUp: amt => `Now she has taken ${amt}.`,
+        past: "took",
+        before: "she had taken any soda",
+        explanation: "took 1 can of soda"
+      },
+      {
+        label: "Candy 🍬",
+        need: "X wants to grab <b>8</b> candies from the drawer.",
+        base_action: "candy",
+        unit: "candies",
+        verb: "grabs",
+        emoji: "🍬",
+        followUp: amt => `Now she has grabbed ${amt}.`,
+        past: "grabbed",
+        before: "she had grabbed any candy",
+        explanation: "grabbed 1 candy"
+      },
+      {
+        label: "Hot chicken legs 🍗",
+        need: "X wants to put <b>8</b> hot chicken legs onto her plate.",
+        base_action: "hot chicken legs onto her plate",
+        unit: "hot chicken legs onto her plate",
+        verb: "puts",
+        emoji: "🍗",
+        followUp: amt => `Now she has placed ${amt}.`,
+        past: "placed",
+        before: "she had placed any chicken legs",
+        explanation: "placed 1 chicken leg on her plate"
+      },
+      {
+        label: "Healthy fruits 🍊",
+        need: "X wants to pick <b>8</b> healthy fruits from the basket.",
+        base_action: "healthy fruits",
+        unit: "healthy fruits",
+        verb: "picks",
+        emoji: "🍊",
+        followUp: amt => `Now she has picked ${amt}.`,
+        past: "picked",
+        before: "she had picked any fruits",
+        explanation: "picked 1 healthy fruit"
+      }
+    ]
+  },
+  sensory: {
+    stimuli: [
+      {
+        label: "Light 💡",
+        need: "X is renovating her house and wants to stock <b>4</b> light bulbs.",
+        base_action: "light bulb",
+        unit: "light bulbs",
+        verb: "stocks",
+        emoji: "💡",
+        followUp: amt => `Now she has stocked ${amt}.`,
+        past: "stocked",
+        before: "she had stocked any light bulbs",
+        explanation: "stocked 1 light bulb"
+      },
+      {
+        label: "Sound 🔊",
+        need: "X is upgrading her home studio and wants to stock <b>4</b> new speakers.",
+        base_action: "speaker",
+        unit: "speakers",
+        verb: "stocks",
+        emoji: "🔊",
+        followUp: amt => `Now she has stocked ${amt}.`,
+        past: "stocked",
+        before: "she had stocked any speakers",
+        explanation: "stocked 1 speaker"
+      },
+      {
+        label: "Temperature 🌡️",
+        need: "X is preparing for winter and wants to stock <b>4</b> heaters.",
+        base_action: "heater",
+        unit: "heaters",
+        verb: "stocks",
+        emoji: "🌡️",
+        followUp: amt => `Now she has stocked ${amt}.`,
+        past: "stocked",
+        before: "she had stocked any heaters",
+        explanation: "stocked 1 heater"
+      },
+      {
+        label: "Scent 🧴",
+        need: "X is organizing her perfume cabinet and wants to stock <b>4</b> bottles of perfume.",
+        base_action: "bottle of perfume",
+        unit: "bottles of perfume",
+        verb: "stocks",
+        emoji: "🧴",
+        followUp: amt => `Now she had stocked ${amt}.`,
+        past: "stocked",
+        before: "she had stocked any perfume bottles",
+        explanation: "stocked 1 bottle of perfume"
+      },
+      {
+        label: "Taste 🧂",
+        need: "X is preparing a spice cabinet and wants to stock <b>4</b> bottles of salt.",
+        base_action: "bottle of salt",
+        unit: "bottles of salt",
+        verb: "stocks",
+        emoji: "🧂",
+        followUp: amt => `Now she has stocked ${amt}.`,
+        past: "stocked",
+        before: "she had stocked any salt bottles",
+        explanation: "stocked 1 bottle of salt"
+      }
+    ]
+  },
+  entertainment: {
+    stimuli: [
+      {
+        label: "Gaming 🎮",
+        need: "X wants to add <b>4</b> new games to his game library.",
+        base_action: "game",
+        unit: "games",
+        verb: "added",
+        emoji: "🎮",
+        followUp: amt => `Now he has added ${amt}.`,
+        past: "added",
+        before: "he had added any games",
+        explanation: "added 1 game"
+      },
+      {
+        label: "Watching TV 📺",
+        need: "X wants to download <b>4</b> TV episodes for his flight.",
+        base_action: "TV episode",
+        unit: "TV episodes",
+        verb: "downloads",
+        emoji: "📺",
+        followUp: amt => `Now he has downloaded ${amt}.`,
+        past: "downloaded",
+        before: "he had downloaded any episodes",
+        explanation: "downloaded 1 TV episode"
+      },
+      {
+        label: "Scrolling Social Media 📱",
+        need: "X wants to subscribe to <b>4</b> new Instagram content creaters.",
+        base_action: "content creator",
+        unit: "content creators",
+        verb: "subscribes to",
+        emoji: "📱",
+        followUp: amt => `Now he has subscribed to ${amt}.`,
+        past: "subscribed to",
+        before: "he had subscribed to any creators",
+        explanation: "subscribed to 1 content creator"
+      },
+      {
+        label: "Reading 📖",
+        need: "X wants to stock <b>4</b> books on his bookshelf.",
+        base_action: "book",
+        unit: "books",
+        verb: "stocks",
+        emoji: "📖",
+        followUp: amt => `Now he has stocked ${amt}.`,
+        past: "stocked",
+        before: "he had stocked any books",
+        explanation: "stocked 1 book"
+      },
+      {
+        label: "Drawing 🎨",
+        need: "X ran out of painting supplies wants to stock <b>4</b> new paint tubes.",
+        base_action: "paint tube",
+        unit: "paint tubes",
+        verb: "stocks",
+        emoji: "🎨",
+        followUp: amt => `Now he has stocked ${amt}.`,
+        past: "stocked",
+        before: "he had stocked any paint tubes",
+        explanation: "stocked 1 paint tube"
+      }
+    ]
+  }
 };
 
 /* ================= HELPERS ================= */
@@ -59,7 +276,6 @@ function dynamicFollowupPrompt() {
     return "Why did you think her feeling would become much worse after this?";
   }
 }
-
 
 function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
   const gridSrc = 'img/grid4.png';
@@ -84,9 +300,12 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
                }).join('')}
              </div>`
           : `<img src="${gridSrc}" class="grid-image" alt="grid">
-             <div class="emoji-track"${extraPad}>
-               ${Array(nEmoji).fill(`<span>${emoji}</span>`).join('')}
-             </div>`
+   <div class="emoji-track"${extraPad}>
+     ${Array.from({ length: nEmoji }).map((_, idx) => {
+       const shouldGray = isBonus || idx < oldCount;
+       return `<span style="${shouldGray ? 'filter: grayscale(100%); opacity: 0.5;' : ''}">${emoji}</span>`;
+     }).join('')}
+   </div>`
       }
     </div>`;
 }
@@ -264,6 +483,7 @@ var transition_expt1 = {
   choices: ['Continue']
 };
 
+/* ================= DEMOGRAPHICS ================= */
 const feedback_demographics = {
   type: jsPsychSurveyHtmlForm,
   html: '<div style="max-width:700px; text-align:center;"> <p>' +
@@ -332,8 +552,37 @@ const feedback_demographics = {
   }
 };
 
+const save_data = {
+                type: jsPsychPipe,
+                action: "save",
+                experiment_id: "r24Qgl3gQfsM",
+                filename: filename,
+                data_string: ()=>jsPsych.data.get().csv()
+              };
+
+var urlvar = jsPsych.data.urlVariables();
+jsPsych.data.addProperties({
+  url: urlvar
+});
+
+
+/* ================= DEBRIEF ================= */
+var debrief = {
+        type: jsPsychInstructions,
+        pages: [
+            '<p style="font-size: 20px;"><strong>Debrief</strong></p>' +
+            '<p><br>Thank you so much for helping us with this study!</p>' +
+            '<br><p style = "max-width:800px;">In this study, we asked you questions about how characters\' feelings would change as they receive more of a desirable item. ' +
+            'The goal is to test the hypothesis that people intuitively think that the additional satisfaction gained from each extra unit decreases over time, and may ultimately become negative. ' +
+            '</p><br><p style = "max-width:800px;">Next up, we have a few final questions about yourself and your experience today.</p>'
+        ],
+        show_clickable_nav: true,
+        button_label_next: 'Next'
+        };
+
 /* ================= TIMELINE ================= */
-const timeline = [intro, ...tutorialSequence, transition_expt1];
+//const timeline = [intro, ...tutorialSequence, transition_expt1];
+const timeline = [transition_expt1];
 
 let attentionIndex = 0;
 const childMap = {
@@ -351,6 +600,8 @@ const childMap = {
   const { name, img } = childMap[cat];
   const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
   const attentionPos = Math.floor(Math.random() * 10) + 1;
+  const pronoun = (cat === 'food' || cat === 'sensory') ? 'she' : 'he';
+  const pronoun2 = (cat === 'food' || cat === 'sensory') ? 'her' : 'his';
 
   // Need only empty grid page
   const need = stim.need.replace(/X/g, name);
@@ -377,9 +628,14 @@ const childMap = {
     const need     = stim.need.replace(/X/g, name);
     const amountBase = `<b>${amount}</b> ${stim.base_action}`;
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
+    // Insert explanation definition here
+    const explanation = `<p><i>${stim.emoji} = ${stim.explanation.replace(/X/g, name)}</i></p>`;
     const msg = (trial === 1)
-      ? `${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. How do you think their feeling would change, compared to before?`
-      : `${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} How do you think their feeling would change, compared to before?`;
+      ? `${explanation}<br>${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. <br> How do you think ${pronoun2} feeling would change, compared to before ${stim.before}</b>?`
+      : (() => {
+          const previousAmount = amount - inc;
+          return `${explanation}<br>${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+        })();
     const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
       sliderTrial({
@@ -466,7 +722,9 @@ const childMap = {
     choices: ['Finish'],
   };
   // Insert feedback_demographics just before thankYou
+  timeline.push(debrief);
   timeline.push(feedback_demographics);
+  timeline.push(save_data)
   timeline.push(thankYou);
   jsPsych.run(timeline);
   })
