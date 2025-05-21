@@ -624,15 +624,14 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
-//const timeline = [transition_expt1];
+//const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
+const timeline = [transition_expt1];
 
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
   sensory: { name: 'Olivia', img: 'OliviaBubble' },
   entertainment: { name: 'Jack', img: 'JackBubble' },
-  social: { name: 'Jaden', img: 'JadenBubble' }
 };
 
   // Randomize the order of conditions
