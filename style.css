@@ -28,6 +28,12 @@ body{font-family:sans-serif;}
   transform: translateX(-50px);
 }
 
+.msg-container {
+  margin-top: -20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 .grid-image {
   height: 70px;
   margin-top: 2px;
@@ -83,6 +89,28 @@ body{font-family:sans-serif;}
   margin: 0 auto;
 }
 
+/*
+.jspsych-html-slider-response .jspsych-html-slider-response-prompt {
+  margin-top: 5px !important;  
+  margin-bottom: 5px !important;
+}*/
+
+.jspsych-content-wrapper {
+  padding-bottom: 10px !important;
+}
+
+.jspsych-html-slider-response-container {
+  margin-bottom: 5px !important;
+}
+
+.jspsych-html-slider-response-label {
+  margin-top: 2px !important;
+}
+
+.jspsych-display-element {
+  padding-bottom: 10px !important;
+}
+
 /* Two-emojis for food and social categories */
 .grid-wrapper {
   position: relative;
@@ -102,4 +130,11 @@ body{font-family:sans-serif;}
 .grid-emoji.bottom-right {
   bottom: 15px;
   right: 165px;
+}
+/* Custom class to move slider prompt upward and adjust appearance */
+.jspsych-html-slider-response .jspsych-html-slider-response-prompt {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+  font-size: 16px;
+  text-align: center;
 }

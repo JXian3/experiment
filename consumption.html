@@ -29,10 +29,15 @@
 
 /* ================= DATA ================= */
 
+
 const subject_id = jsPsych.randomization.randomID(10);
 //const filename = `${subject_id}.csv`;
+ 
+// record the condition assignment in the jsPsych data
+
 /*experiment variables*/
-const mturk_pilot_mode = false
+const mturk_pilot_mode = true
+
 /*capture info from mturk/connect, except in test mode*/
 if(mturk_pilot_mode) { 
     var study_id = 'test';
@@ -43,12 +48,19 @@ if(mturk_pilot_mode) {
     var assignment_id = jsPsych.data.getURLVariable('assignmentId');
     var project_id = jsPsych.data.getURLVariable('projectId');
 }
+
 jsPsych.data.addProperties({
   mturk_participant_id: "participant_id",
   mturk_assignment_id: "assignment_id",
   mturk_project_id: "project_id"
 })
+
 const filename = `${participant_id}.csv`;
+
+var preload = {
+      type: jsPsychPreload,
+      auto_preload:true
+    };
 
 /* ================= STIMULI ================= */
 const categories = {
@@ -171,7 +183,7 @@ function sliderTrial({ visual, need, msg, cat, label, amt, n }) {
               `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
     labels: ["Much worse","A little worse","No change","A little better","Much better"],
     min: 0, max: 100, slider_start: 50, require_movement: true,
-    prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+    prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:5px;">Drag the slider to indicate your answer.</p>`,
     data: { category: cat, stimulus_label: label, trial_number: n, amount: amt }
   };
 }
@@ -461,8 +473,8 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-//const timeline = [intro, ...tutorialSequence, transition_expt1, debrief, feedback_demographics];
-const timeline = [transition_expt1];
+const timeline = [intro, ...tutorialSequence, transition_expt1, debrief, feedback_demographics];
+//const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
