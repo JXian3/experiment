@@ -551,7 +551,7 @@ const feedback_demographics = {
 const save_data = {
                 type: jsPsychPipe,
                 action: "save",
-                experiment_id: "r24Qgl3gQfsM",
+                experiment_id: "KOYuJppiQBb9",
                 filename: filename,
                 data_string: ()=>jsPsych.data.get().csv()
               };
@@ -560,7 +560,6 @@ var urlvar = jsPsych.data.urlVariables();
 jsPsych.data.addProperties({
   url: urlvar
 });
-
 
 /* ================= DEBRIEF ================= */
 var debrief = {
@@ -577,8 +576,8 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-//const timeline = [intro, ...tutorialSequence, transition_expt1];
-const timeline = [transition_expt1];
+const timeline = [intro, ...tutorialSequence, transition_expt1];
+//const timeline = [transition_expt1];
 
 let attentionIndex = 0;
 const childMap = {
