@@ -554,7 +554,7 @@ categoryOrder.forEach(cat => {
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
   const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
-  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}?`;
+  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
