@@ -544,7 +544,8 @@ categoryOrder.forEach(cat => {
         questions: [{
           prompt: dynamicFollowupPrompt,
           rows: 3,
-          columns: 50
+          columns: 50,
+          required: true
         }],
         data: {
           followup_for: `${cat}_${stim.label}`,

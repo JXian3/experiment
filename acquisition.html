@@ -521,7 +521,7 @@ var transition_expt1 = {
       <p><b>You are all set to go!</b></p>
       <p>In the upcoming task, you will read short scenarios about a character who receives something they want.</p>
       <p>After each change, you’ll rate how you think the character's feeling changes using the slider.</p>
-      <p>You are not evaluating the character’s feeling overall but how their feelings might have changed in each scenario.</p>
+      <p><b>You are not evaluating the character’s feeling overall but how their feelings might have changed in each scenario.</b></p>
       <p><br>When you're ready to begin, please click "Continue".</p>
     </div>`,
   choices: ['Continue']
@@ -698,7 +698,8 @@ const childMap = {
         questions: [{
           prompt: dynamicFollowupPrompt,
           rows: 3,
-          columns: 50
+          columns: 50,
+          required: true
         }],
         data: {
           followup_for: `${cat}_${stim.label}`,
