@@ -83,7 +83,7 @@ food:{stimuli:[
     {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played for", emoji:"🎮", followUp: amt => `Now he has gamed for ${amt}.`, before: "he played games", explanation: "gamed for 1 hour"},
     {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched TV for", emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`, before: "he watched any TV", explanation: "watched TV for 1 hour"},
     {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now he has scrolled social media for  ${amt}.`, before: "he scrolled any social media", explanation: "scrolled social media for 1 hour"},
-    {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hours",unit:"hour",verb:"reads books for", past: "read for", emoji:"📖", followUp: amt => `Now he has read for ${amt}.`, before: "he read any books", explanation: "read books for 1 hour"},
+    {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", followUp: amt => `Now he has read for ${amt}.`, before: "he read any books", explanation: "read books for 1 hour"},
     {label:"Drawing 🎨",need:"X is bored and wants to draw for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨", followUp: amt => `Now he has been drawing for ${amt}.`, before: "he started drawing", explanation: "drew for 1 hour"},]},
 
   social: {
@@ -472,8 +472,8 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
-//const timeline = [transition_expt1];
+//const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
+const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
