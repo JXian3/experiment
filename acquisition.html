@@ -44,6 +44,11 @@ jsPsych.data.addProperties({
 })
 const filename = `${participant_id}.csv`;
 
+var preload = {
+      type: jsPsychPreload,
+      auto_preload:true
+    };
+
 /* ================= STIMULI ================= */
 const categories = {
   food: {
