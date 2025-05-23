@@ -24,6 +24,15 @@
 </head>
 <body>
 <script>
+  var jsPsych = initJsPsych({
+    override_safe_mode: true,
+    show_progress_bar: true,
+    on_finish: function() {
+              window.location = "https://connect.cloudresearch.com/participant/project/2CED66B84E/complete";
+              //jsPsych.data.displayData();
+            },
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
       const jsPsych = initJsPsych({
   });
@@ -35,7 +44,7 @@ const subject_id = jsPsych.randomization.randomID(10);
 // record the condition assignment in the jsPsych data
 
 /*experiment variables*/
-const mturk_pilot_mode = true
+const mturk_pilot_mode = false
 
 /*capture info from mturk/connect, except in test mode*/
 if(mturk_pilot_mode) { 
@@ -80,7 +89,7 @@ food:{stimuli:[
     {label:"Taste 🧂",need:"X is preparing dinner and seasoning food. She wants to add <b>4</b> pinches of salt.",base_action:"pinch of salt", past: "added", unit:"pinches of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}.`, before: "she had added any pinches of salt"}]},
 
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played for", emoji:"🎮", followUp: amt => `Now he has gamed for ${amt}.`, before: "he played games", explanation: "gamed for 1 hour"},
+    {label:"Gaming 🎮",need:"X is bored and wants to play games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮", followUp: amt => `Now he has gamed for ${amt}.`, before: "he played games", explanation: "gamed for 1 hour"},
     {label:"Watching TV 📺",need:"X is bored and wants to watch TV for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched TV for", emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`, before: "he watched any TV", explanation: "watched TV for 1 hour"},
     {label:"Scrolling Social Media 📱",need:"X is bored and wants to scroll social media for <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls social media for",emoji:"📱", followUp: amt => `Now he has scrolled social media for  ${amt}.`, before: "he scrolled any social media", explanation: "scrolled social media for 1 hour"},
     {label:"Reading 📖",need:"X is bored and wants to read books for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", followUp: amt => `Now he has read for ${amt}.`, before: "he read any books", explanation: "read books for 1 hour"},
@@ -472,8 +481,8 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-//const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
-const timeline = [transition_expt1];
+const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
+//const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },

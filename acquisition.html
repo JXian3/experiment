@@ -18,6 +18,15 @@
 </head>
 <body>
 <script>
+  var jsPsych = initJsPsych({
+    override_safe_mode: true,
+    show_progress_bar: true,
+    on_finish: function() {
+              window.location = "https://connect.cloudresearch.com/participant/project/2CED66B84E/complete";
+              //jsPsych.data.displayData();
+            },
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
       const jsPsych = initJsPsych({
   });
