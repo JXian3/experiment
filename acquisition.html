@@ -673,10 +673,10 @@ const childMap = {
     // Insert explanation definition here
     const explanation = `<p><i>${stim.emoji} = ${stim.explanation.replace(/X/g, name)}</i></p>`;
     const msg = (trial === 1)
-      ? `${explanation}<br>${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. <br> How do you think ${pronoun2} feeling would change, compared to before ${stim.before}</b>?`
+      ? `${explanation}<br>${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How do you think ${pronoun2} feeling would change, compared to before ${stim.before}</b>?`
       : (() => {
           const previousAmount = amount - inc;
-          return `${explanation}<br>${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+          return `${explanation}<br>${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
         })();
     const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
@@ -720,7 +720,7 @@ const childMap = {
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
   const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
-  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
+  const bonusMsg   = `${name} ${stim.past} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
