@@ -191,7 +191,7 @@ function sliderTrial({ visual, need, msg, cat, label, amt, n }) {
               `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
     labels: ["Much worse","A little worse","No change","A little better","Much better"],
     min: 0, max: 100, slider_start: 50, require_movement: true,
-    prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:5px;">Drag the slider to indicate your answer.</p>`,
+    prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:15px;">Drag the slider to indicate your answer.</p>`,
     data: { category: cat, stimulus_label: label, trial_number: n, amount: amt }
   };
 }
@@ -297,7 +297,6 @@ const tutorial = tutorialItems.map((item, idx) => {
       stimulus: item.html + `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
       labels: ["Much worse","A little worse","No change","A little better","Much better"],
       min: 0, max: 100, slider_start: item.pos, require_movement: false,
-      //prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
       data: { tutorial_page: idx + 1 }
     };
   }
@@ -481,8 +480,8 @@ var debrief = {
         };
 
 /* ================= TIMELINE ================= */
-const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
-//const timeline = [transition_expt1];
+//const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
+const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
@@ -529,12 +528,13 @@ categoryOrder.forEach(cat => {
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
     const explanation = getEmojiExplanation(stim, cat);
     const msg = (trial === 1)
-      ? `${explanation}<br>${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun} feel, relative to before ${stim.before}</b>?`
+      ? `${explanation}${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun} feel, relative to before ${stim.before}</b>?`
       : (() => {
           const previousAmount = amount - inc;
-          return `${explanation}<br>${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+          return `${explanation}${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
         })();
-    const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
+    const visual = `<p class="need-text">${need}</p>` + 
+               buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
       sliderTrial({
         visual,

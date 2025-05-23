@@ -1,7 +1,11 @@
 /* ===== Global layout ===== */
 body{font-family:sans-serif;}
 .jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
-.jspsych-html-slider-response-stimulus{text-align:center;max-width:520px;margin:0 auto 15px;}
+.jspsych-html-slider-response-stimulus {
+  text-align: center;
+  max-width: 520px;
+  margin: -25px auto 8px;   /* raise 25 px and tighten bottom gap */
+}
 
 /* ===== Feeling scale ===== */
 .feeling-scale{
@@ -26,10 +30,11 @@ body{font-family:sans-serif;}
   min-height: 100px;
   margin: 10px auto;
   transform: translateX(-50px);
+  margin-top: -20px;      /* drop images 10 px to avoid overlap */
 }
 
 .msg-container {
-  margin-top: -20px;
+  margin-top: -30px;
   margin-bottom: 10px;
   text-align: center;
 }
@@ -60,16 +65,16 @@ body{font-family:sans-serif;}
 
 .child-image {
   display: block;
-  margin: 10px auto;
-  height: 250px;
+  margin: 0 auto 6px;
+  height: 150px;          /* reduced from 250px */
   position: relative;
   z-index: 1;
 }
 
 .emoji-bubble {
   position: absolute;
-  top: 45px;    
-  right: 170px;  
+  top: 14px;            
+  right: 180px;  
   font-size: 32px;
   z-index: 3;
 }
@@ -80,8 +85,8 @@ body{font-family:sans-serif;}
 }
 
 .emoji-bubble.need-page {
-  top: 45px;
-  right: 80px;
+  top: 13px;
+  right: 55px;
 }
 
 .intro-screen {
@@ -89,26 +94,26 @@ body{font-family:sans-serif;}
   margin: 0 auto;
 }
 
-/*
-.jspsych-html-slider-response .jspsych-html-slider-response-prompt {
-  margin-top: 5px !important;  
-  margin-bottom: 5px !important;
-}*/
-
 .jspsych-content-wrapper {
-  padding-bottom: 10px !important;
+  padding-bottom: 0px !important;
 }
 
 .jspsych-html-slider-response-container {
-  margin-bottom: 5px !important;
+  margin-bottom: 2px !important;
 }
 
 .jspsych-html-slider-response-label {
-  margin-top: 2px !important;
+  margin-top: -4px !important;   /* nudge up toward the slider */
 }
 
 .jspsych-display-element {
-  padding-bottom: 10px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* align to top */
+  align-items: center;
+  height: 100vh;                 /* fill but not exceed the viewport */
+  padding: 0 !important;
+  overflow: hidden;              /* prevent internal scrolling */
 }
 
 /* Two-emojis for food and social categories */
@@ -131,10 +136,22 @@ body{font-family:sans-serif;}
   bottom: 15px;
   right: 165px;
 }
-/* Custom class to move slider prompt upward and adjust appearance */
-.jspsych-html-slider-response .jspsych-html-slider-response-prompt {
-  margin-top: 0 !important;
-  margin-bottom: 4px !important;
+
+
+/* Slider‑instruction prompt */
+.jspsych-html-slider-response-prompt {
+  margin-top: -30px !important;  
+  margin-bottom: 2px !important;
   font-size: 16px;
+  text-align: center;
+}
+
+.jspsych-display-element .jspsych-btn {
+  margin-top: -10px !important;     
+}
+
+.need-text {
+  margin-top: -80px;
+  margin-bottom: 40px;
   text-align: center;
 }
