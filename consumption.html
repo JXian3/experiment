@@ -68,7 +68,7 @@ food:{stimuli:[
     {label:"Cookie 🍪",need:"X is hungry and wants to eat <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any cookies"},
     {label:"Ice cream 🍦",need:"X is hungry and wants to eat <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any ice cream"},
     {label:"Soda 🥤",need:"X is thirsty and wants to drink <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks", past: "drank", emoji:"🥤", followUp: amt => `Now she has had ${amt}.`, before: "she  any soda"},
-    {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any candies"},
+    {label:"Candy 🍬",need:"X is hungry and wants to eat <b>8</b> candies.",base_action:"candies",unit:"candies",verb:"eats", past: "ate", emoji:"🍬", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any candies"},
     {label:"Hot chicken legs 🍗",need:"X is hungry and wants to eat <b>8</b> hot chicken legs.",base_action:"hot chicken leg",unit:"hot chicken legs",verb:"eats", past: "ate", emoji:"🍗", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any hot chicken legs"},
     {label:"Healthy fruits 🍊",need:"X is hungry and wants to eat <b>8</b> healthy fruits.",base_action:"healthy fruits",unit:"healthy fruits",verb:"eats", past: "ate",emoji:"🍊", followUp: amt => `Now she has had ${amt}.`, before: "she had eaten any healthy fruits"},]},
 
@@ -520,10 +520,10 @@ categoryOrder.forEach(cat => {
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
     const explanation = getEmojiExplanation(stim, cat);
     const msg = (trial === 1)
-      ? `${explanation}<br>${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. <br> How do you think ${pronoun2} feeling would change, compared to before ${stim.before}</b>?`
+      ? `${explanation}<br>${name} ${stim.verb} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun1} feel, relative to before ${stim.before}</b>?`
       : (() => {
           const previousAmount = amount - inc;
-          return `${explanation}<br>${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+          return `${explanation}<br>${name} ${stim.verb} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun1} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
         })();
     const visual = `<p>${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
@@ -566,7 +566,7 @@ categoryOrder.forEach(cat => {
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
   const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
-  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
+  const bonusMsg   = `${name} ${stim.verb} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How does ${pronoun1} feel, relative to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
