@@ -290,7 +290,7 @@ const tutorial = tutorialItems.map((item, idx) => {
       data: { tutorial_page: idx + 1 }
     };
   }
-  // Show static image for instructional tutorial items (those with item.html)
+
   if (item.html) {
     return {
       type: jsPsychHtmlButtonResponse,
@@ -299,7 +299,7 @@ const tutorial = tutorialItems.map((item, idx) => {
       data: { tutorial_page: idx + 1 }
     };
   }
-  // comprehension check (remains interactive)
+  // comprehension check
   return {
     type: jsPsychHtmlSliderResponse,
     stimulus: (idx === 6 ? `<p><b>Now let's check if you understand how the slider works!</b></p>` : '') + `<p>If someone feels <b>${item.text}</b> than before, where should the slider go?</p>` +
