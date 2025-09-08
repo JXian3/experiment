@@ -4,7 +4,7 @@ body{font-family:sans-serif;}
 .jspsych-html-slider-response-stimulus {
   text-align: center;
   max-width: 520px;
-  margin: -25px auto 8px;   /* raise 25 px and tighten bottom gap */
+  margin: -25px auto 8px;   
 }
 
 /* ===== Feeling scale ===== */
@@ -29,8 +29,7 @@ body{font-family:sans-serif;}
   width: 420px;
   min-height: 100px;
   margin: 10px auto;
-  transform: translateX(-50px);
-  margin-top: -20px;      /* drop images 10 px to avoid overlap */
+  margin-top: -20px;
 }
 
 .msg-container {
@@ -41,24 +40,18 @@ body{font-family:sans-serif;}
 
 .grid-image {
   height: 70px;
-  margin-top: 2px;
-  margin-left: -100px;
+  margin: 2px auto 0;
+  margin-right: 110px
 }
 .emoji-track {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  gap: 6px;
+  gap: 18px;
   pointer-events: none;
   margin-top: -50px;
-  padding-left: 50px;
+  padding-left: 200px;
   width: 100%;
-}
-
-.visual-wrapper.entertainment .emoji-track,
-.visual-wrapper.sensory .emoji-track {
-  padding-left: 180px !important;
-  gap: 18px;
 }
 
 .emoji-track span{font-size:32px;line-height:1;}
@@ -66,14 +59,14 @@ body{font-family:sans-serif;}
 .child-image {
   display: block;
   margin: 0 auto 6px;
-  height: 150px;          /* reduced from 250px */
+  height: 200px;          
   position: relative;
   z-index: 1;
 }
 
 .emoji-bubble {
   position: absolute;
-  top: 14px;            
+  top: 22px;            
   right: 180px;  
   font-size: 32px;
   z-index: 3;
@@ -85,8 +78,8 @@ body{font-family:sans-serif;}
 }
 
 .emoji-bubble.need-page {
-  top: 13px;
-  right: 55px;
+  top: 23px;
+  left: 195px;
 }
 
 .intro-screen {
@@ -115,28 +108,6 @@ body{font-family:sans-serif;}
   padding: 0 !important;
   overflow: hidden;              /* prevent internal scrolling */
 }
-
-/* Two-emojis for food and social categories */
-.grid-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.grid-emoji {
-  position: absolute;
-  font-size: 20px; 
-  transform: translateX(-100px);
-}
-
-.grid-emoji.top-left {
-  top: 15px;
-  left: -30px;
-}
-.grid-emoji.bottom-right {
-  bottom: 15px;
-  right: 165px;
-}
-
 
 /* Slider‑instruction prompt */
 .jspsych-html-slider-response-prompt {

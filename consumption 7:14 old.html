@@ -12,10 +12,10 @@
   <script src="jspsych/plugin-instructions.js"></script>
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
   <script src="./jspsych/plugin-preload.js"></script>
-  <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
-</head>
-<link rel="stylesheet" href="style.css">
-<style>
+   <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <link rel="stylesheet" href="style.css">
+  <style>
     /* Move slider-response trial content up to eliminate scrolling */
     .jspsych-html-slider-response {
       margin-top: -100px !important;
@@ -40,8 +40,11 @@
 /* ================= DATA ================= */
 const subject_id = jsPsych.randomization.randomID(10);
 //const filename = `${subject_id}.csv`;
+// record the condition assignment in the jsPsych data
+
 /*experiment variables*/
 const mturk_pilot_mode = false
+
 /*capture info from mturk/connect, except in test mode*/
 if(mturk_pilot_mode) { 
     var study_id = 'test';
@@ -52,11 +55,13 @@ if(mturk_pilot_mode) {
     var assignment_id = jsPsych.data.getURLVariable('assignmentId');
     var project_id = jsPsych.data.getURLVariable('projectId');
 }
+
 jsPsych.data.addProperties({
   mturk_participant_id: "participant_id",
   mturk_assignment_id: "assignment_id",
   mturk_project_id: "project_id"
 })
+
 const filename = `${participant_id}.csv`;
 
 var preload = {
@@ -66,211 +71,39 @@ var preload = {
 
 /* ================= STIMULI ================= */
 const categories = {
-  food: {
-    stimuli: [
-      {
-        label: "Cookie 🍪",
-        need: "X wants to grab <b>8</b> cookies from the kitchen to fill up her snack stash.",
-        base_action: "cookies",
-        unit: "cookies",
-        verb: "grabs",
-        emoji: "🍪",
-        followUp: amt => `Now she has grabbed ${amt}.`,
-        past: "grabbed",
-        before: "she had grabbed any cookies",
-        explanation: "grabbed 1 cookie"
-      },
-      {
-        label: "Ice cream 🍦",
-        need: "X is organizing her fridge and wants to stock <b>8</b> boxes of ice cream in it.",
-        base_action: "boxes of ice cream",
-        unit: "boxes of ice cream",
-        verb: "stocks",
-        emoji: "🍦",
-        followUp: amt => `Now she has stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any ice cream",
-        explanation: "stocked 1 boxes of ice cream"
-      },
-      
-      {
-        label: "Soda 🥤",
-        need: "X wants to take <b>8</b> cans of soda from the box to fill up her snack stash.",
-        base_action: "cans of soda",
-        unit: "cans of soda",
-        verb: "takes",
-        emoji: "🥤",
-        followUp: amt => `Now she has taken ${amt}.`,
-        past: "took",
-        before: "she had taken any soda",
-        explanation: "took 1 can of soda"
-      },
-      {
-        label: "Candy 🍬",
-        need: "X wants to grab <b>8</b> candies from the drawer to fill up her snack stash.",
-        base_action: "candy",
-        unit: "candies",
-        verb: "grabs",
-        emoji: "🍬",
-        followUp: amt => `Now she has grabbed ${amt}.`,
-        past: "grabbed",
-        before: "she had grabbed any candy",
-        explanation: "grabbed 1 candy"
-      },
-      {
-        label: "Hot chicken legs 🍗",
-        need: "X has a busy schedule this week wants to store <b>8</b> hot chicken legs in the refrigerator for future meal prep.",
-        base_action: "hot chicken legs",
-        unit: "hot chicken legs",
-        verb: "stores",
-        emoji: "🍗",
-        followUp: amt => `Now she has stored ${amt}.`,
-        past: "stored",
-        before: "she had stored any chicken legs",
-        explanation: "stored 1 chicken leg"
-      },
-      {
-        label: "Healthy fruits 🍊",
-        need: "X wants to pick <b>8</b> healthy fruits from the basket to fill up her snack stash.",
-        base_action: "healthy fruits",
-        unit: "healthy fruits",
-        verb: "picks",
-        emoji: "🍊",
-        followUp: amt => `Now she has picked ${amt}.`,
-        past: "picked",
-        before: "she had picked any fruits",
-        explanation: "picked 1 healthy fruit"
-      }
-    ]
-  },
-  sensory: {
-    stimuli: [
-      {
-        label: "Light 💡",
-        need: "X is renovating her house and wants to stock <b>4</b> light bulbs.",
-        base_action: "light bulb",
-        unit: "light bulbs",
-        verb: "stocks",
-        emoji: "💡",
-        followUp: amt => `Now she has stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any light bulbs",
-        explanation: "stocked 1 light bulb"
-      },
-      {
-        label: "Sound 🔊",
-        need: "X is upgrading her home studio and wants to stock <b>4</b> new speakers.",
-        base_action: "speaker",
-        unit: "speakers",
-        verb: "stocks",
-        emoji: "🔊",
-        followUp: amt => `Now she has stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any speakers",
-        explanation: "stocked 1 speaker"
-      },
-      {
-        label: "Temperature 🌡️",
-        need: "X is preparing for winter and wants to stock <b>4</b> heaters.",
-        base_action: "heater",
-        unit: "heaters",
-        verb: "stocks",
-        emoji: "🌡️",
-        followUp: amt => `Now she has stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any heaters",
-        explanation: "stocked 1 heater"
-      },
-      {
-        label: "Scent 🧴",
-        need: "X is organizing her perfume cabinet and wants to stock <b>4</b> bottles of perfume.",
-        base_action: "bottle of perfume",
-        unit: "bottles of perfume",
-        verb: "stocks",
-        emoji: "🧴",
-        followUp: amt => `Now she had stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any perfume",
-        explanation: "stocked 1 bottle of perfume"
-      },
-      {
-        label: "Taste 🧂",
-        need: "X is restocking her restaurant kitchen after a busy weekend, and wants to stock <b>4</b> bottles of salt.",
-        base_action: "bottle of salt",
-        unit: "bottles of salt",
-        verb: "stocks",
-        emoji: "🧂",
-        followUp: amt => `Now she has stocked ${amt}.`,
-        past: "stocked",
-        before: "she had stocked any salt",
-        explanation: "stocked 1 bottle of salt"
-      }
-    ]
-  },
-  entertainment: {
-    stimuli: [
-      {
-        label: "Gaming 🎮",
-        need: "X heard of some new releases and wants to add <b>4</b> new games to his game library for later.",
-        base_action: "game",
-        unit: "games",
-        verb: "added",
-        emoji: "🎮",
-        followUp: amt => `Now he has added ${amt}.`,
-        past: "added",
-        before: "he had added any games",
-        explanation: "added 1 game"
-      },
-      {
-        label: "Watching TV 📺",
-        need: "X is going on a trip and wants to download <b>4</b> TV episodes for his flight.",
-        base_action: "TV episode",
-        unit: "TV episodes",
-        verb: "downloads",
-        emoji: "📺",
-        followUp: amt => `Now he has downloaded ${amt}.`,
-        past: "downloaded",
-        before: "he had downloaded any episodes",
-        explanation: "downloaded 1 TV episode"
-      },
-      {
-        label: "Scrolling Social Media 📱",
-        need: "X is building his feed with fresh content and wants to subscribe to <b>4</b> new Instagram content creaters.",
-        base_action: "content creator",
-        unit: "content creators",
-        verb: "subscribes to",
-        emoji: "📱",
-        followUp: amt => `Now he has subscribed to ${amt}.`,
-        past: "subscribed to",
-        before: "he had subscribed to any creators",
-        explanation: "subscribed to 1 content creator"
-      },
-      {
-        label: "Reading 📖",
-        need: "X saw some book recommendations and wants to stock <b>4</b> new books on his bookshelf.",
-        base_action: "book",
-        unit: "books",
-        verb: "stocks",
-        emoji: "📖",
-        followUp: amt => `Now he has stocked ${amt}.`,
-        past: "stocked",
-        before: "he had stocked any books",
-        explanation: "stocked 1 book"
-      },
-      {
-        label: "Drawing 🎨",
-        need: "X is organizing his art studio and wants to stock <b>4</b> new paint tubes.",
-        base_action: "paint tube",
-        unit: "paint tubes",
-        verb: "stocks",
-        emoji: "🎨",
-        followUp: amt => `Now he has stocked ${amt}.`,
-        past: "stocked",
-        before: "he had stocked any paint tubes",
-        explanation: "stocked 1 paint tube"
-      }
-    ]
-  }
+/*
+food:{stimuli:[
+    {label:"Cookie 🍪",need:"X feels hungry and wants to eat exactly <b>8</b> cookies.",base_action:"cookies",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪", followUp: amt => `Now she has eaten ${amt}.`, before: "she had eaten any cookies"},
+    {label:"Ice cream 🍦",need:"X feels hungry and wants to eat exactly <b>8</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦", followUp: amt => `Now she has eaten ${amt}.`, before: "she had eaten any ice cream"},
+    {label:"Soda 🥤",need:"X feels thirsty and wants to drink exactly <b>8</b> cans of soda.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks", past: "drank", emoji:"🥤", followUp: amt => `Now she has drank ${amt}.`, before: "she  any soda"},
+    {label:"Candy 🍬",need:"X feels hungry and wants to eat exactly <b>8</b> candies.",base_action:"candies",unit:"candies",verb:"eats", past: "ate", emoji:"🍬", followUp: amt => `Now she has eaten ${amt}.`, before: "she had eaten any candies"},
+    {label:"Hot chicken legs 🍗",need:"X feels hungry and wants to eat exactly <b>8</b> hot chicken legs.",base_action:"hot chicken leg",unit:"hot chicken legs",verb:"eats", past: "ate", emoji:"🍗", followUp: amt => `Now she has eaten ${amt}.`, before: "she had eaten any hot chicken legs"},
+    {label:"Healthy fruits 🍊",need:"X feels hungry and wants to eat exactly <b>8</b> oranges.",base_action:"oranges",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊", followUp: amt => `Now she has eaten ${amt}.`, before: "she had eaten any oranges"},]},
+*/
+  sensory:{stimuli:[
+    {label:"Light 💡",need:"X thinks it's too dark in her room, and she wants to use the light switch to turn up the light exactly <b>4</b> times.",base_action:"light",unit:"lights",verb:"turns on", past: "turned on",emoji:"💡", followUp: amt => `Now she has turned on ${amt}.`, before: "she had turned on any lights"},
+    {label:"Sound 🔊",need:"The music is too soft at Olivia's party and she wants to use the volume knob to turn up the sound by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns up the sound", past: "turned up the sound", emoji:"🔊", followUp: amt => `Now she has turned up the sound by ${amt}.`, before: "she had turned up the volume"},
+    {label:"Sound 🔊",need:"The music is too loud at Olivia's party and she wants to use the volume knob to turn down the sound by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound", emoji:"🔊", followUp: amt => `Now she has turned down the sound by ${amt}.`, before: "she had turned down the volume"},
+    {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to use the thermostat button to turn up the heat exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns up the heat", past: "turned up the heat", emoji:"🌡️", followUp: amt => `Now she has turned up the heat ${amt}.`, before: "she had turned up the heat"},
+    {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to use the thermostat button to turn down the heat exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns down the heat", past: "turned down the heat", emoji:"🌡️", followUp: amt => `Now she has turned down the heat ${amt}.`, before: "she had turned down the heat"},
+    {label:"Scent 💨",need:"X is getting dressed and wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨", followUp: amt => `Now she had put on ${amt}.`, before: "she had put on any perfume"},
+    {label:"Taste 🧂",need:"X is cooking dinner, and the recipe says to add exactly <b>4</b> teaspoons of salt.",base_action:"teaspoon of salt", past: "added", unit:"teaspoons of salt",verb:"adds",emoji:"🧂", followUp: amt => `Now she has added ${amt}. She takes a small taste of the food to check the seasoning.`, before: "she had added any teaspoons of salt"}]},
+ /*
+  entertainment:{stimuli:[
+    {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play a new video game, Baldurs Gate 3, for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays the game for", past: "played the game for", emoji:"🎮", followUp: amt => `Now he has played Baldurs Gate 3 for ${amt}.`, before: "he started gaming", explanation: "gamed for 1 hour"},
+    {label:"Watching TV 📺",need:"X is bored over the weekend and wants to watch a TV show, Game of Thrones, for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched Game of Thrones for", emoji:"📺", followUp: amt => `Now he has watched TV for ${amt}.`, before: "he started watching TV", explanation: "watched TV for 1 hour"},
+    {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll his Instagram feed for exactly <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱", followUp: amt => `Now he has scrolled Instagram for  ${amt}.`, before: "he started scrolling Instagram", explanation: "scrolled Instagram for 1 hour"},
+    {label:"Reading 📖",need:"X is bored over the weekend and wants to read The Lord of the Rings for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", followUp: amt => `Now he has read for ${amt}.`, before: "he started reading", explanation: "read books for 1 hour"},
+    {label:"Drawing 🎨",need:"X is bored over the weekend and decides to draw for exactly <b>4</b> hours, as a relaxing, creative break.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨", followUp: amt => `Now he has been drawing for ${amt}.`, before: "he started drawing", explanation: "drew for 1 hour"},]},
+  
+  social: {
+  stimuli: [
+    { label: "Inviting friends 👩", need: "X's birthday party is today and he exactly <b>8</b> friends to show up at his house.", base_action: "friends showing up at his house", verb: "shows", past: "now has", unit: "friends", emoji: "👩", followUp: amt => `Now ${amt} friends has showed up at his house.`, before: "any friends showed up at his party", explanation: "1 friend showed up at his party", whymore: "It turns out that more friends showed up at the party than Jaden had expected.<br>"},
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X is new in the town and met a few new people through a meet and greet party. He was feeling excited to spend exactly <b>8</b> hours with them again.", base_action: "hours with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", followUp: amt => `Now he has spent ${amt}.`, before: "he spent any time with acquaintances", explanation: "spent 1 hour with acquintances", whymore: "His friend suggested having dinner and watching movie together, and Jaden didn't want to seem rude by leaving early, so he continued to spend time with acquintances.<br>"},
+    { label: "Meeting new people 🧑🏼", need: "X is attending a networking event in which he aims to meet exactly <b>8</b> new people.", base_action: "new people", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼", followUp: amt => `Now he has met ${amt}.`, before: "he met any new people", explanation: "met 1 new person", whymore: "The networking event turned out to be much bigger than expected, and Jaden got introduced to more and more people.<br>"},
+    { label: "Time alone 👤", need: "X had a long, tiring week and wants to spend exactly <b>8</b> hours of his Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤", followUp: amt => `Now he has spent ${amt}.`, before: "he spent any time alone", explanation: "spent 1 hour alone", whymore: "It started raining heavily outside, so Jaden decided to stay inside and spend more time alone at home.<br>"}
+  ]
+}*/
 };
 
 /* ================= HELPERS ================= */
@@ -281,7 +114,7 @@ function dynamicFollowupPrompt() {
   } else if (last_response >= 55) {
     return "Why did you think her feeling would become a bit better after this?";
   } else if (last_response >= 45) {
-    return "Why did you think her feeling would not change after this?";
+    return "Why did you think her feeling would not change much after this?";
   } else if (last_response >= 25) {
     return "Why did you think her feeling would become a bit worse after this?";
   } else {
@@ -289,7 +122,15 @@ function dynamicFollowupPrompt() {
   }
 }
 
-
+function getEmojiExplanation(stim, cat) {
+  if (cat === 'food' || cat === 'sensory') {
+    const baseUnit = stim.base_action;
+    const postfix = stim.label.includes("perfume") ? '' : ` ${stim.past}`;
+    return `<p><i>${stim.emoji} = ${postfix} 1 ${baseUnit}</i></p>`;
+  } else {
+    return `<p><i>${stim.emoji} = ${stim.explanation}</i></p>`;
+  }
+}
 
 function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
   const gridSrc = 'img/grid4.png';
@@ -323,7 +164,6 @@ function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
       }
     </div>`;
 }
-
 
 // --- helper to map slider positions to tutorial images ---
 function positionToImage(pos){
@@ -372,7 +212,6 @@ function attentionCheck(direction) {
     on_finish: d => { d.correct = (direction === 'right' ? d.response === 100 : d.response === 0); }
   };
 }
-
 
 /* ================= START ================= */
 var duration = '10 minutes';
@@ -427,8 +266,8 @@ const intro = {
   stimulus: `
     <div class="intro-screen">
       <h2>Welcome to the study!</h2>
-      <p>In this study, you will read short descriptions about a character who receives something they want — like food, light, and so on.</p>
-      <p>You will use sliders to indicate your answers to questions.</p>
+      <p>In this study, you will read short descriptions about a character who receives something they want (E.g., Food).</p>
+      <p>You will use sliders to indicate your answers.</p>
       <p>The study will start with short tutorials on the sliders, followed by the tasks. </p>
       <p>Click “Continue” to begin a short tutorial.</p>
     </div>`,
@@ -438,18 +277,18 @@ const intro = {
 /* ================= TUTORIAL ================= */
 const tutorialItems = [
   // tutorial pages
-  { html: `<p>People perform various activities, and their feelings may change after each one.<br>Your job is to use the slider below to rate how her feelings change after the activity.</p>`, pos: 50 },
+  { html: `<p>People do a variety of activities, and their feelings can change after each activity.<br>Your job is to use the slider below to rate how a person's feeling would change after the activity.</p>`, pos: 50 },
   { html: `<p>If someone feels <b>much worse</b> than before, the slider should look like this.</p>`, pos: 0 },
   { html: `<p>If someone feels <b>a little worse</b> than before, the slider should look like this.</b>.</p>`, pos: 25 },
   { html: `<p>If someone's feeling <b>does not change</b>, the slider should look like this.</p>`, pos: 50 },
   { html: `<p>If someone feels <b>a little better</b> than before, the slider should look like this.</b>.</p>`, pos: 75 },
   { html: `<p>If someone feels <b>much better</b> than before, the slider should look like this.</p>`, pos: 100 },
   // comprehension check items
-  { text: 'much worse',      value: 0,   feedback: 'Wrong. “Much worse” goes on the far left.' },
-  { text: 'a little worse',  value: 25,  feedback: 'Wrong. “A little worse” is somewhat left of center.' },
-  { text: 'no change',       value: 50,  feedback: 'Wrong. “No change” is in the center.' },
-  { text: 'a little better', value: 75,  feedback: 'Wrong. “A little better” is somewhat right of center.' },
-  { text: 'much better',     value: 100, feedback: 'Wrong. “Much better” goes on the far right.' }
+  { text: 'much worse',      value: 0,   feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far left.' },
+  { text: 'a little worse',  value: 25,  feedback: 'Wrong. If someone is feeling a little worse, the slider should be just left of center.' },
+  { text: 'no change',       value: 50,  feedback: 'Wrong. If someone\'s feeling doesn\'t change, the slider should be just at the center.' },
+  { text: 'a little better', value: 75,  feedback: 'Wrong. f someone is feeling a little better, the slider should be just right of center.' },
+  { text: 'much better',     value: 100, feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far right.' }
 ];
 
 const tutorial = tutorialItems.map((item, idx) => {
@@ -459,7 +298,6 @@ const tutorial = tutorialItems.map((item, idx) => {
       stimulus: item.html + `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
       labels: ["Much worse","A little worse","No change","A little better","Much better"],
       min: 0, max: 100, slider_start: item.pos, require_movement: false,
-      prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
       data: { tutorial_page: idx + 1 }
     };
   }
@@ -475,13 +313,13 @@ const tutorial = tutorialItems.map((item, idx) => {
   // comprehension check (remains interactive)
   return {
     type: jsPsychHtmlSliderResponse,
-    stimulus: (idx === 6 ? `<p><b>Now let's check if you understand how this works!</b></p>` : '') + `<p>If someone feels <b>${item.text}</b> than before, where should the slider go?</p>` +
+    stimulus: (idx === 6 ? `<p><b>Now let's check if you understand how the slider works!</b></p>` : '') + `<p>If someone feels <b>${item.text}</b> than before, where should the slider go?</p>` +
               `<img src="img/feelingScale.png" class="feeling-scale">`,
     labels: ["Much worse","A little worse","No change","A little better","Much better"],
     min: 0, max: 100,
     slider_start: 50,
     require_movement: true,
-    prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+    prompt: `<p style="text-align:center; margin-top:20px;">Please drag the slider to indicate your answer.</p>`,
     data: { tutorial_page: idx + 1 },
     on_finish: function(data) {
       const correct = Math.abs(data.response - item.value) <= 20;
@@ -489,16 +327,6 @@ const tutorial = tutorialItems.map((item, idx) => {
     }
   };
 });
-
-function getEmojiExplanation(stim, cat) {
-  if (cat === 'food' || cat === 'sensory') {
-    const baseUnit = stim.base_action;
-    const postfix = stim.label.includes("perfume") ? '' : ` ${stim.past}`;
-    return `<p><i>${stim.emoji} = ${postfix} 1 ${baseUnit}</i></p>`;
-  } else {
-    return `<p><i>${stim.emoji} = ${stim.explanation}</i></p>`;
-  }
-}
 
 // feedback pages for wrong responses
 const feedbacks = tutorialItems.map((item, idx) => ({
@@ -655,24 +483,24 @@ var debrief = {
 /* ================= TIMELINE ================= */
 //const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
 const timeline = [transition_expt1];
-
 let attentionIndex = 0;
 const childMap = {
   food: { name: 'Akira', img: 'AkiraBubble' },
   sensory: { name: 'Olivia', img: 'OliviaBubble' },
   entertainment: { name: 'Jack', img: 'JackBubble' },
+  social: { name: 'Jaden', img: 'JadenBubble' }
 };
 
-  // Randomize the order of conditions
-  const categoryOrder = jsPsych.randomization.shuffle(Object.keys(categories));
-  categoryOrder.forEach(cat => {
-    const grp = categories[cat];
+// Randomize the order of conditions
+const categoryOrder = jsPsych.randomization.shuffle(Object.keys(categories));
+categoryOrder.forEach(cat => {
+  const grp = categories[cat];
   const stim = jsPsych.randomization.sampleWithoutReplacement(grp.stimuli, 1)[0];
   const { name, img } = childMap[cat];
-  const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
-  const attentionPos = Math.floor(Math.random() * 10) + 1;
   const pronoun = (cat === 'food' || cat === 'sensory') ? 'she' : 'he';
   const pronoun2 = (cat === 'food' || cat === 'sensory') ? 'her' : 'his';
+  const inc = (cat === 'food' || cat === 'social') ? 2 : 1;
+  const attentionPos = Math.floor(Math.random() * 10) + 1;
 
   // Need only empty grid page
   const need = stim.need.replace(/X/g, name);
@@ -690,6 +518,7 @@ const childMap = {
     data: { type: 'need_page', category: cat, stimulus_label: stim.label }
   });
 
+  
   // Follow Up Question!!!
   const followupCandidates = Array.from({ length: 11 }, (_, i) => i + 1); 
   const selectedFollowupTrial = jsPsych.randomization.sampleWithoutReplacement(followupCandidates, 1)[0];
@@ -700,14 +529,36 @@ const childMap = {
     const amountBase = `<b>${amount}</b> ${stim.base_action}`;
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
     const explanation = getEmojiExplanation(stim, cat);
-    const msg = (trial === 1)
-      ? `${explanation}${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun} feel, relative to before ${stim.before}?`
-      : (() => {
+    let msg;
+    if (cat === 'social') {
+      const isBirthday = stim.label === "Inviting friends 👩";
+      if (isBirthday) {
+        if (trial === 1) {
+          msg = `${explanation}${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun} feel, relative to before ${stim.before}</b>?`;
+        } else {
           const previousAmount = amount - inc;
-          const whymoreText = (cat === 'social' && trial > 4 && stim.whymore) ? ` ${stim.whymore}` : '';
-          return `${explanation} ${whymoreText} ${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
-        })();
-    const visual = `<p class="need-text">${need}</p>` + 
+          const haveOrHas = amount === 1 ? 'has' : 'have';
+          const whymoreText = (amount > 8 && stim.whymore) ? stim.whymore : '';
+          msg = `${whymoreText}${inc} more ${inc === 1 ? 'friend' : 'friends'} showed up at ${name}'s party. Now, <b>${amount}</b> ${stim.unit} ${haveOrHas} shown up at his party. <br>How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? 'friend' : 'friends'} showed up at his party?`;
+        }
+      } else {
+        if (trial === 1) {
+          msg = `${explanation}${name} ${stim.past} <b>${amount} ${stim.base_action}</b>. <br> How does ${pronoun} feel, relative to before ${stim.before}</b>?`;
+        } else {
+          const previousAmount = amount - inc;
+          msg = `${explanation} ${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+        }
+      }
+    } else {
+      // Non-social categories: original logic
+      if (trial === 1) {
+        msg = `${explanation}${name} ${stim.past} <b>${amount} ${stim.base_action}</b>.${(cat === "sensory" && stim.label === "Taste 🧂") ? " She takes a small taste of the food to check the seasoning." : ""} <br> How does ${pronoun} feel, relative to before ${stim.before}</b>?`;
+      } else {
+        const previousAmount = amount - inc;
+        msg = `${explanation} ${name} ${stim.past} <b>${inc} more ${inc === 1 ? stim.base_action : stim.unit}</b>. ${stim.followUp(`<b>${amount} ${stim.unit}</b>`).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${previousAmount} ${previousAmount === 1 ? stim.base_action : stim.unit}?</b>`;
+      }
+    }
+    const visual = `<p class="need-text">${need}</p>` +
                buildVisual(amount, stim.emoji, cat, img, name);
     timeline.push(
       sliderTrial({
@@ -744,13 +595,12 @@ const childMap = {
       );
     }
   }
-
-  // ---- bonus trial 100 + n ----
+  
   const lastAmount = inc * 10;
   const bonusAmt   = 100 + lastAmount;
   const bonusNeed  = stim.need.replace(/X/g, name);
   const bonusStr   = `<b>${bonusAmt}</b> ${stim.unit}`;
-  const bonusMsg   = `${name} ${stim.past} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How do you think ${pronoun2} feeling would change, <b>compared to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
+  const bonusMsg   = `${name} ${stim.past} <b>100 more ${stim.unit}</b>. ${stim.followUp(bonusStr).replace(/X/g, name)} <br> How does ${pronoun} feel, relative to when ${pronoun} ${stim.past} ${lastAmount} ${stim.unit}</b>?`;
   const bonusCount = (cat === 'food' || cat === 'social') ? 8 : 4;
   const bonusVis = `<p>${bonusNeed}</p>` +
                    `<div style="display:inline-block; position:relative;">` +
@@ -758,7 +608,7 @@ const childMap = {
                      `<img src="img/piles/${stim.emoji}.png" class="pile-image" alt="${stim.label}" ` +
                          `style="position:absolute; top:200px; left:250px; width:150px; height:auto;">` +
                    `</div>`;
-
+  /*
   timeline.push(
     sliderTrial({
       visual: bonusVis,
@@ -770,7 +620,7 @@ const childMap = {
       n: 11
     })
   );
-
+  
   // Insert follow-up question if bonus trial is the selected follow-up
   if (11 === selectedFollowupTrial) {
     timeline.push({
@@ -785,9 +635,9 @@ const childMap = {
         trial_type: 'followup'
       }
     });
-  }
+  }*/
 });
-
+  
   // ===== Thank-you and data submission =====
   const thankYou = {
     type: jsPsychHtmlButtonResponse,
