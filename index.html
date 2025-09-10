@@ -86,7 +86,7 @@ food:{stimuli:[
     {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
     {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
     {label:"Scent 💨",need:"X is getting dressed and wants to put on <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
-    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. She wants to add <b>4</b> dashes of spices to it",base_action:"add", past: "added", unit:"dashes of spices",verb:"adds",emoji:"🧂"}]},
+    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. He wants to add <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂"}]},
  
   entertainment:{stimuli:[
     {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮"},
@@ -533,16 +533,6 @@ categoryOrder.forEach(cat => {
     const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
     let child = childMap[key];
 
-    if (!child && cat === 'sensory'){
-      if (/^Sound/.test(stim.label)) {
-        child = childMap[`${cat}::Sound 🔊 (up)`] || childMap[`${cat}::Sound 🔊 (down)`] || childMap[`${cat}::Sound 🔊`];
-      } else if (/^Temperature/.test(stim.label)) {
-        child = childMap[`${cat}::Temperature 🌡️ (up)`] || childMap[`${cat}::Temperature 🌡️ (down)`] || childMap[`${cat}::Temperature 🌡️`];
-      } else if (/^Light/.test(stim.label)) {
-        child = childMap[`${cat}::Light 💡 (up)`] || childMap[`${cat}::Light 💡 (down)`] || childMap[`${cat}::Light 💡`];
-      }
-    }
-
     const { name, img } = child;
 
     const needText = stim.need.replace(/X/g, name).replace(/\n/g, '<br>');
@@ -558,7 +548,9 @@ categoryOrder.forEach(cat => {
 
     // Build standardized prompt text
     let msg;
-    const amountStr = `<b>${amount}</b> ${stim.unit}`;
+    const amountStr = (amount === 1)
+      ? `<b>${amount}</b> ${stim.base_action}`
+      : `<b>${amount}</b> ${stim.unit}`;
     let visualNeed = `<p class="need-text">${need}</p>`;
 
     const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
