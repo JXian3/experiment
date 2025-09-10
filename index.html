@@ -69,12 +69,12 @@ var preload = {
 
 /* ================= STIMULI ================= */
 const categories = {
-
+/*
 food:{stimuli:[
     {label:"Cookie 🍪",need:"X feels hungry and wants to eat <b>4</b> cookies.", base_action:"cookie",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪"},
     {label:"Ice cream 🍦",need:"X feels hungry and wants to eat <b>4</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦"},
-    {label:"Soda 🥤",need:"X feels thirsty and wants to drink <b>4</b> cups of water.",base_action:"cans of soda",unit:"cans of soda",verb:"drinks", past: "drank", emoji:"🥤"},
-    {label:"Candy 🍬",need:"X feels hungry and wants to eat <b>4</b> candies.",base_action:"candies",unit:"candies",verb:"eats", past: "ate", emoji:"🍬"},
+    {label:"Soda 🥤",need:"X feels thirsty and wants to drink <b>4</b> cups of water.",base_action:"cup of water",unit:"cups of water",verb:"drinks", past: "drank", emoji:"🥤"},
+    {label:"Candy 🍬",need:"X feels hungry and wants to eat <b>4</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬"},
     {label:"Healthy fruits 🍊",need:"X feels hungry and wants to eat <b>4</b> oranges.",base_action:"oranges",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊"},
     ]},
 
@@ -86,20 +86,20 @@ food:{stimuli:[
     {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
     {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
     {label:"Scent 💨",need:"X is getting dressed and wants to put on <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
-    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. She wants to add <b>4</b> dashes of spices to it",base_action:"dashes of spices", past: "added", unit:"dashes of spices",verb:"adds",emoji:"🧂"}]},
+    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. She wants to add <b>4</b> dashes of spices to it",base_action:"add", past: "added", unit:"dashes of spices",verb:"adds",emoji:"🧂"}]},
  
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays the game for", past: "played the game for", emoji:"🎮"},
+    {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮"},
     {label:"Watching TV 📺",need:"X is bored over the weekend and wants to watch a TV show for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched the TV show for", emoji:"📺"},
     {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll his Instagram feed for <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱"},
     {label:"Reading 📖",need:"X is bored over the weekend and wants to read a book for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖"},
     {label:"Drawing 🎨",need:"X is bored over the weekend and decides to work on a new painting for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨"},]},
-  
+  */
   social: {
   stimuli: [
-    { label: "Inviting friends 👩", need: "X's throwing a party and sent out invitations to his friends. <br> His apartment can comfortably host 4 people.", base_action: "friends showing up at his house", verb: "shows", past: "now has", unit: "friends", emoji: "👩"},
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X is new in the town and met a few new people through a meet and greet party. <br> She was feeling excited to spend <b>4</b> hours with them again.", base_action: "hours with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
-    { label: "Meeting new people 🧑🏼", need: "X is new in town and went to a meet and greet event. <br> The event offers the opportunity to meet with <b>4</b> new people, whom he wants to introduce himself to and talk to. ", base_action: "new people", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
+    { label: "Inviting friends 👩", need: "X's throwing a party and sent out invitations to his friends. <br> His apartment can comfortably host 4 people.", base_action: "friend showed up at Jack's house", verb: "has", past: "had", unit: "friends showed up at Jack's house", emoji: "👩"},
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X is new in the town and met a few new people through a meet and greet party. <br> She was feeling excited to spend <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
+    { label: "Meeting new people 🧑🏼", need: "X is new in town and went to a meet and greet event. <br> The event offers the opportunity to meet with <b>4</b> new people, whom he wants to introduce himself to and talk to. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
     { label: "Time alone 👤", need: "X had a long, tiring week and wants to spend <b>4</b> hours of his Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤"},
     { label: "Facetiming 📞", need: "X wants to facetime his friends for 4 hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "facetimed his friends for", emoji: "📞"},]}
 };
@@ -177,7 +177,7 @@ function sliderTrial({ visual, need, msg, cat, label, amt, n, poss, childName })
   return {
     type: jsPsychHtmlSliderResponse,
     stimulus: visual + `<p>${msg}</p>` +
-              `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
+              `<img src=\"img/feelingScale2.png\" class=\"feeling-scale\" alt=\"scale\">`,
     labels: ["Very Bad","Bad","Neutral","Good","Very Good"],
     min: 0, max: 100, slider_start: 50, require_movement: true,
     prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:15px;">Drag the slider to indicate your answer.</p>`,
@@ -473,14 +473,12 @@ var debrief = {
 const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
-  // FOOD
   'food::Cookie 🍪':              { name: 'Adam', img: 'AdamBubble' },
   'food::Ice cream 🍦':           { name: 'Akira', img: 'AkiraBubble' },
   'food::Soda 🥤':                { name: 'Alice', img: 'AliceBubble' },
   'food::Candy 🍬':               { name: 'Chen', img: 'ChenBubble' },
   'food::Hot chicken legs 🍗':    { name: 'Emma', img: 'EmmaBubble' },
   'food::Healthy fruits 🍊':      { name: 'Eric', img: 'EricBubble' },
-  // SENSORY
   'sensory::Light 💡':            { name: 'Ethan', img: 'EthanBubble' },
   'sensory::Sound 🔊':       { name: 'Han', img: 'HanBubble' },
   'sensory::Sound 🔊':     { name: 'Han', img: 'HanBubble' },
@@ -488,31 +486,16 @@ const childMap = {
   'sensory::Temperature 🌡️)': { name: 'Jasmine', img: 'JasmineBubble' },
   'sensory::Scent 💨':            { name: 'Lucy', img: 'LucyBubble' },
   'sensory::Taste 🧂':            { name: 'Leo', img: 'LeoBubble' },
-  // ENTERTAINMENT
   'entertainment::Gaming 🎮':     { name: 'Hiro', img: 'HiroBubble' },
   'entertainment::Watching TV 📺':{ name: 'Malik', img: 'MalikBubble' },
   'entertainment::Scrolling Social Media 📱': { name: 'Max', img: 'MaxBubble' },
   'entertainment::Reading 📖':    { name: 'Maya', img: 'MayaBubble' },
   'entertainment::Drawing 🎨':    { name: 'Jaden', img: 'JadenBubble' },
-  // SOCIAL
   'social::Inviting friends 👩':  { name: 'Jack', img: 'JackBubble' },
   'social::Time with acquaintance 🧑‍🤝‍🧑': { name: 'Mei', img: 'MeiBubble' },
   'social::Meeting new people 🧑🏼': { name: 'Michelle', img: 'MichelleBubble' },
   'social::Time alone 👤':        { name: 'Olivia', img: 'OliviaBubble' },
   'social::Facetiming 📞': { name: 'Grace', img: 'GraceBubble' },
-};
-
-// Helper to normalize keys like "social:: Facetiming 📞" vs "social::Facetiming 📞"
-function stimKey(cat, label){
-  return `${cat}::${String(label || '').replace(/\s+/g,' ').trim()}`;
-}
-
-// Fallback category defaults
-const defaultChildByCategory = {
-  food: { name: 'Akira', img: 'AkiraBubble.png' },
-  sensory: { name: 'Olivia', img: 'OliviaBubble.png' },
-  entertainment: { name: 'Jack', img: 'JackBubble.png' },
-  social: { name: 'Jaden', img: 'JadenBubble.png' }
 };
 
 // Randomize the order of conditions
@@ -521,7 +504,6 @@ categoryOrder.forEach(cat => {
   const grp = categories[cat];
   const pronoun = (cat === 'food' || cat === 'sensory') ? 'she' : 'he';
 
-  // Build the list of stimuli to present. For the sensory category,
   let stimuliList = grp.stimuli;
   if (cat === 'sensory') {
     const labelStartsWith = (s, head) => (s.label || '').trim().startsWith(head);
@@ -547,24 +529,20 @@ categoryOrder.forEach(cat => {
     ];
   }
 
-  // iterate over the (possibly filtered) stimuli for this category
   stimuliList.forEach(stim => {
-    // Choose child per stimulus (fallback to category default if missing)
-    const key = stimKey(cat, stim.label);
+    const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
     let child = childMap[key];
 
-    // Handle common label mismatches gracefully
     if (!child && cat === 'sensory'){
       if (/^Sound/.test(stim.label)) {
-        child = childMap[stimKey(cat, 'Sound 🔊 (up)')] || childMap[stimKey(cat, 'Sound 🔊 (down)')] || childMap[stimKey(cat, 'Sound 🔊')];
+        child = childMap[`${cat}::Sound 🔊 (up)`] || childMap[`${cat}::Sound 🔊 (down)`] || childMap[`${cat}::Sound 🔊`];
       } else if (/^Temperature/.test(stim.label)) {
-        child = childMap[stimKey(cat, 'Temperature 🌡️ (up)')] || childMap[stimKey(cat, 'Temperature 🌡️ (down)')] || childMap[stimKey(cat, 'Temperature 🌡️')];
+        child = childMap[`${cat}::Temperature 🌡️ (up)`] || childMap[`${cat}::Temperature 🌡️ (down)`] || childMap[`${cat}::Temperature 🌡️`];
       } else if (/^Light/.test(stim.label)) {
-        child = childMap[stimKey(cat, 'Light 💡 (up)')] || childMap[stimKey(cat, 'Light 💡 (down)')] || childMap[stimKey(cat, 'Light 💡')];
+        child = childMap[`${cat}::Light 💡 (up)`] || childMap[`${cat}::Light 💡 (down)`] || childMap[`${cat}::Light 💡`];
       }
     }
 
-    if (!child) child = defaultChildByCategory[cat];
     const { name, img } = child;
 
     const needText = stim.need.replace(/X/g, name).replace(/\n/g, '<br>');
@@ -575,7 +553,6 @@ categoryOrder.forEach(cat => {
       data: { type: 'need_page', category: cat, stimulus_label: stim.label }
     });
 
-    // ONE randomized question per stimulus: amount 0..8 inclusive
     const amount = Math.floor(Math.random() * 9); 
     const need = needText; 
 
@@ -583,12 +560,20 @@ categoryOrder.forEach(cat => {
     let msg;
     const amountStr = `<b>${amount}</b> ${stim.unit}`;
     let visualNeed = `<p class="need-text">${need}</p>`;
-    if (amount === 0) {
-      const inlineMsg = `How would ${name} feel?`;
-      visualNeed = `<p class="need-text">${need}<br><span class="need-followup">${inlineMsg}</span></p>`;
-      msg = '';
+
+    const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
+
+    if (isParty) {
+      const qtyPhrase = (amount === 1)
+        ? `1 ${stim.base_action}`
+        : `${amount} ${stim.unit}`;
+      msg = `Suppose that ${qtyPhrase}. How would they feel?`;
+    } else if (amount === 0) {
+      // Default behavior for non-party stimuli when amount is 0
+      msg = `<br> <br> How does ${name} feel now?`;
     } else {
-      msg = `Suppose that ${name} ${amount === 0 ? '' : `${stim.past} ${amountStr}. `}How would ${name} feel?`;
+      // Default behavior for non-party stimuli when amount > 0
+      msg = `Suppose that ${name} ${stim.past} ${amountStr}. How would ${name} feel?`;
     }
 
     const visual = visualNeed + buildVisual(amount, stim.emoji, cat, img, name);
