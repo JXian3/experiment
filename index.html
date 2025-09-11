@@ -509,7 +509,8 @@ categoryOrder.forEach(cat => {
       ...[pickOne(tempItems)].filter(Boolean)
     ];
   }
-
+  stimuliList = jsPsych.randomization.shuffle(stimuliList);
+  
   stimuliList.forEach(stim => {
     const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
     let child = childMap[key];
