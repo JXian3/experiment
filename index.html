@@ -181,7 +181,7 @@ var duration = '10 minutes';
     var amount = '$2.50';
 var consent = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: '<p><b>Consent Form</b></p> <div style="text-align:left; background-color:lightblue; padding:2vw; max-width:80vw; max-height:70vh; overflow-y:auto;">' +
+    stimulus: '<p><b>Consent Form</b></p> <div style="text-align:left; background-color:lightblue; padding:2vw; max-width:80vw; max-height:60vh; overflow-y:auto;">' +
         '<p style="text-align:left;"><b>Purpose:</b> The purpose of this study is to understand ' +
         'how people think about actions of others.</p>' +
         '<p style="text-align:left;"><b>Procedures:</b> In this study, you will read sentences, ' +
@@ -217,7 +217,7 @@ var consent = {
     choices: ['Yes', 'No'],
     data: {trial_id: 'consent'},
     on_finish: function(data) {
-    if (data.response === 1) {  // If 'No' is chosen 
+    if (data.response === 1) { 
     jsPsych.abortExperiment('You did not consent to participate. The study will now end. Thank you for your time.');  
     }
     }
