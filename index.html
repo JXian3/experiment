@@ -70,7 +70,7 @@ food:{stimuli:[
     {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊"},
     {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
     {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
-    {label:"Scent 💨",need:"X is preparing for a date and she's worried that she doesn't smell good enough. She wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
+    {label:"Scent 💨",need:"X is preparing for a date and she's worried that she doesn't smell good enough. <br> She wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
     {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. He wants to add exactly <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂"}]},
  
   entertainment:{stimuli:[
@@ -522,7 +522,6 @@ categoryOrder.forEach(cat => {
       choices: ['Continue'],
       data: { type: 'need_page', category: cat, stimulus_label: stim.label }
     });
-
     const amount = Math.floor(Math.random() * 9);
     const need = needText;
     const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
