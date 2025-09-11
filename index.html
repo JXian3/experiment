@@ -71,7 +71,7 @@ food:{stimuli:[
     {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊"},
     {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
     {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
-    {label:"Scent 💨",need:"X is preparing for a date and she's worried that she doesn't smell good enough. Thus, she wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
+    {label:"Scent 💨",need:"X is preparing for a date and she's worried that she doesn't smell good enough. She wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
     {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. He wants to add exactly <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂"}]},
  
   entertainment:{stimuli:[
@@ -84,8 +84,8 @@ food:{stimuli:[
   social: {
   stimuli: [
     { label: "Inviting friends 👩", need: "X feels lonely, so he throws a party and sends invitations to friends. <br> His apartment can comfortably host exactly <b>4</b> people.", base_action: "friend showed up at Jack's apartment", verb: "has", past: "had", unit: "friends showed up at Jack's apartment", emoji: "👩"},
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X feels lonely and wants to hang out with acquaintances. Mei is new in the town and met a few new people through a meet and greet party. <br> She was feeling excited to spend exactly <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
-    { label: "Meeting new people 🧑🏼", need: "X is new in town and wants to expand her social circle. She went to a meet and greet event. <br> The event offers the opportunity to meet with exactly <b>4</b> new people, whom she wants to introduce herself to and talk to. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X feels lonely and wants to hang out with acquaintances. She met a few people through a meet-and-greet and is feeling excited to spend exactly <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
+    { label: "Meeting new people 🧑🏼", need: "X is new in town and wants to expand her social circle. She is at a meet-and-greet with the goal of meeting exactly <b>4</b> new people, whom she wants to introduce herself to and talk with. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
     { label: "Time alone 👤", need: "X had a long, tiring week and wants to spend exactly <b>4</b> hours of his Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤"},
     { label: "Facetiming 📞", need: "X feels lonely, and wants to facetime his friends for exactly <b>4</b> hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "facetimed his friends for", emoji: "📞"},]}
 };
@@ -338,7 +338,7 @@ var transition_expt1 = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
     `<div class="intro-screen">
-      <p><b>You are all set to go!</b></p>
+      <p><b>Welcome to the study!</b></p>
       <p>In the upcoming task, you will read short scenarios in which a character wants a specific amount or change.</p>
       <p>After you see what happens, You will use a slider to rate how the character feels in each scenario.</p>
       <p><br>When you're ready to begin, please click "Continue".</p>
@@ -444,7 +444,7 @@ var debrief = {
 
 /* ================= TIMELINE ================= */
 //const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
-const timeline = [transition_expt1];
+const timeline = [consent,transition_expt1];
 const childMap = {
   'food::Cookie 🍪':              { name: 'Adam', img: 'AdamBubble' },
   'food::Ice cream 🍦':           { name: 'Nia', img: 'NiaBubble' },
