@@ -71,41 +71,41 @@ var preload = {
 const categories = {
 
 food:{stimuli:[
-    {label:"Cookie 🍪",need:"X feels hungry and wants to eat <b>4</b> cookies.", base_action:"cookie",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪"},
-    {label:"Ice cream 🍦",need:"X feels hungry and wants to eat <b>4</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦"},
-    {label:"Soda 🥤",need:"X feels thirsty and wants to drink <b>4</b> cups of water.",base_action:"cup of water",unit:"cups of water",verb:"drinks", past: "drank", emoji:"🥤"},
-    {label:"Candy 🍬",need:"X feels hungry and wants to eat <b>4</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬"},
-    {label:"Healthy fruits 🍊",need:"X feels hungry and wants to eat <b>4</b> oranges.",base_action:"oranges",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊"},
+    {label:"Cookie 🍪",need:"X feels hungry and wants to eat exactly <b>4</b> cookies.", base_action:"cookie",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪"},
+    {label:"Ice cream 🍦",need:"X feels hungry and wants to eat exactly <b>4</b> scoops of ice cream.",base_action:"scoops of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦"},
+    {label:"Soda 🥤",need:"X feels thirsty and wants to drink exactly <b>4</b> cups of water.",base_action:"cup of water",unit:"cups of water",verb:"drinks", past: "drank", emoji:"🥤"},
+    {label:"Candy 🍬",need:"X feels hungry and wants to eat exactly <b>4</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬"},
+    {label:"Healthy fruits 🍊",need:"X feels hungry and wants to eat exactly <b>4</b> oranges.",base_action:"oranges",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊"},
     ]},
 
   sensory:{stimuli:[
-    {label:"Light 💡",need:"X thinks it's too dark in his room, and he wants to make the light brighter by turning it up <b>4</b> times.",base_action:"time",unit:"times",verb:"turns up", past: "turned the light up by",emoji:"💡"},
-    {label:"Light 💡",need:"X thinks it's too bright in his room, and he wants to make the light dimmer by turning it down <b>4</b> times.",base_action:"time",unit:"times",verb:"turns down", past: "turned the light down by",emoji:"💡"},
-    {label:"Sound 🔊",need:"The music is too soft at Han's party and he wants to turn up the volume by <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns up the volume", past: "turned up the volume by", emoji:"🔊"},
-    {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊"},
-    {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
-    {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
-    {label:"Scent 💨",need:"X is getting dressed and wants to put on <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
-    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. He wants to add <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂"}]},
+    {label:"Light 💡",need:"X thinks it's too dark in his room, and he wants to make the light brighter by turning it up exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns up", past: "turned the light up by",emoji:"💡"},
+    {label:"Light 💡",need:"X thinks it's too bright in his room, and he wants to make the light dimmer by turning it down exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns down", past: "turned the light down by",emoji:"💡"},
+    {label:"Sound 🔊",need:"The music is too soft at Han's party and he wants to turn up the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns up the volume", past: "turned up the volume by", emoji:"🔊"},
+    {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊"},
+    {label:"Temperature 🌡️",need:"X's apartment is too cold, and she wants to turn up the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️"},
+    {label:"Temperature 🌡️",need:"X's apartment is too hot, and she wants to turn down the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️"},
+    {label:"Scent 💨",need:"X is getting dressed and wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨"},
+    {label:"Taste 🧂",need:"X is eating dinner and thinks her food tastes bland. He wants to add exactly <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂"}]},
  
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮"},
-    {label:"Watching TV 📺",need:"X is bored over the weekend and wants to watch a TV show for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched the TV show for", emoji:"📺"},
-    {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll his Instagram feed for <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱"},
-    {label:"Reading 📖",need:"X is bored over the weekend and wants to read a book for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖"},
-    {label:"Drawing 🎨",need:"X is bored over the weekend and decides to work on a new painting for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨"},]},
+    {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for exactly<b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮"},
+    {label:"Watching TV 📺",need:"X is bored over the weekend and wants to watch a TV show for exactly<b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched the TV show for", emoji:"📺"},
+    {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll his Instagram feed for exactly <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱"},
+    {label:"Reading 📖",need:"X is bored over the weekend and wants to read a book for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖"},
+    {label:"Drawing 🎨",need:"X is bored over the weekend and decides to work on a new painting for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨"},]},
   
   social: {
   stimuli: [
-    { label: "Inviting friends 👩", need: "X's throwing a party and sent out invitations to his friends. <br> His apartment can comfortably host 4 people.", base_action: "friend showed up at Jack's house", verb: "has", past: "had", unit: "friends showed up at Jack's house", emoji: "👩"},
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X is new in the town and met a few new people through a meet and greet party. <br> She was feeling excited to spend <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
-    { label: "Meeting new people 🧑🏼", need: "X is new in town and went to a meet and greet event. <br> The event offers the opportunity to meet with <b>4</b> new people, whom he wants to introduce himself to and talk to. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
-    { label: "Time alone 👤", need: "X had a long, tiring week and wants to spend <b>4</b> hours of his Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤"},
-    { label: "Facetiming 📞", need: "X wants to facetime his friends for 4 hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "facetimed his friends for", emoji: "📞"},]}
+    { label: "Inviting friends 👩", need: "X's throwing a party and sent out invitations to his friends. <br> His apartment can comfortably host exactly <b>4</b> people.", base_action: "friend showed up at Jack's house", verb: "has", past: "had", unit: "friends showed up at Jack's house", emoji: "👩"},
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "X is new in the town and met a few new people through a meet and greet party. <br> She was feeling excited to spend exactly <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑"},
+    { label: "Meeting new people 🧑🏼", need: "X is new in town and went to a meet and greet event. <br> The event offers the opportunity to meet with exactly <b>4</b> new people, whom he wants to introduce himself to and talk to. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼"},
+    { label: "Time alone 👤", need: "X had a long, tiring week and wants to spend exactly <b>4</b> hours of his Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤"},
+    { label: "Facetiming 📞", need: "X wants to facetime his friends for exactly <b>4</b> hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "facetimed his friends for", emoji: "📞"},]}
 };
 
 function possessiveFor(name){
-  const female = new Set(['Akira','Alice','Emma','Jasmine','Lucy','Maya','Mei','Michelle','Olivia','Grace']);
+  const female = new Set(['Akira','Alice','Emma','Jasmine','Lucy','Maya','Mei','Hua','Olivia','Grace']);
   const male   = new Set(['Adam','Chen','Eric','Ethan','Han','Hiro','Jack','Jaden','Leo','Malik','Max']);
   if (female.has(name)) return 'her';
   if (male.has(name)) return 'his';
@@ -474,26 +474,23 @@ const timeline = [transition_expt1];
 let attentionIndex = 0;
 const childMap = {
   'food::Cookie 🍪':              { name: 'Adam', img: 'AdamBubble' },
-  'food::Ice cream 🍦':           { name: 'Akira', img: 'AkiraBubble' },
-  'food::Soda 🥤':                { name: 'Alice', img: 'AliceBubble' },
+  'food::Ice cream 🍦':           { name: 'Nia', img: 'NiaBubble' },
+  'food::Soda 🥤':                { name: 'Zuri', img: 'ZuriBubble' },
   'food::Candy 🍬':               { name: 'Chen', img: 'ChenBubble' },
-  'food::Hot chicken legs 🍗':    { name: 'Emma', img: 'EmmaBubble' },
   'food::Healthy fruits 🍊':      { name: 'Eric', img: 'EricBubble' },
   'sensory::Light 💡':            { name: 'Ethan', img: 'EthanBubble' },
   'sensory::Sound 🔊':       { name: 'Han', img: 'HanBubble' },
-  'sensory::Sound 🔊':     { name: 'Han', img: 'HanBubble' },
   'sensory::Temperature 🌡️': { name: 'Jasmine', img: 'JasmineBubble' },
-  'sensory::Temperature 🌡️)': { name: 'Jasmine', img: 'JasmineBubble' },
   'sensory::Scent 💨':            { name: 'Lucy', img: 'LucyBubble' },
-  'sensory::Taste 🧂':            { name: 'Leo', img: 'LeoBubble' },
+  'sensory::Taste 🧂':            { name: 'Amir', img: 'AmirBubble' },
   'entertainment::Gaming 🎮':     { name: 'Hiro', img: 'HiroBubble' },
   'entertainment::Watching TV 📺':{ name: 'Malik', img: 'MalikBubble' },
-  'entertainment::Scrolling Social Media 📱': { name: 'Max', img: 'MaxBubble' },
+  'entertainment::Scrolling Social Media 📱': { name: 'Emma', img: 'EmmaBubble' },
   'entertainment::Reading 📖':    { name: 'Maya', img: 'MayaBubble' },
   'entertainment::Drawing 🎨':    { name: 'Jaden', img: 'JadenBubble' },
   'social::Inviting friends 👩':  { name: 'Jack', img: 'JackBubble' },
   'social::Time with acquaintance 🧑‍🤝‍🧑': { name: 'Mei', img: 'MeiBubble' },
-  'social::Meeting new people 🧑🏼': { name: 'Michelle', img: 'MichelleBubble' },
+  'social::Meeting new people 🧑🏼': { name: 'Akira', img: 'AkiraBubble' },
   'social::Time alone 👤':        { name: 'Olivia', img: 'OliviaBubble' },
   'social::Facetiming 📞': { name: 'Grace', img: 'GraceBubble' },
 };
@@ -557,8 +554,8 @@ categoryOrder.forEach(cat => {
 
     if (isParty) {
       const qtyPhrase = (amount === 1)
-        ? `1 ${stim.base_action}`
-        : `${amount} ${stim.unit}`;
+        ? `<b>1</b> ${stim.base_action}`
+        : `<b>${amount}</b> ${stim.unit}`;
       msg = `Suppose that ${qtyPhrase}. How would Jack feel?`;
     } else if (amount === 0) {
       // Default behavior for non-party stimuli when amount is 0
