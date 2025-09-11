@@ -34,7 +34,6 @@
 const subject_id = jsPsych.randomization.randomID(10);
 //const filename = `${subject_id}.csv`;
 const mturk_pilot_mode = false
-/*capture info from mturk/connect, except in test mode*/
 if(mturk_pilot_mode) { 
     var study_id = 'test';
     var session_id = 'test';
@@ -180,49 +179,49 @@ function attentionCheck(direction) {
 /* ================= START ================= */
 var duration = '10 minutes';
     var amount = '$2.50';
-    var consent = {
-        type: jsPsychHtmlButtonResponse,
-        stimulus: '<p><b>Consent Form</b></p> <div style="text-align:left; background-color:lightblue; padding:2vw; max-width:80vw;">' +
-            '<p style="text-align:left;"><b>Purpose:</b> The purpose of this study is to understand ' +
-            'how people think about actions of others.</p>' +
-            '<p style="text-align:left;"><b>Procedures:</b> In this study, you will read sentences, ' +
-            'see pictures, and use sliders to answer simple questions ' +
-            'about them. This study should take approximately ' + duration + '.</p>' +
-            '</p><p style="text-align:left;"><b>Participation:</b> Participation in this study is ' +
-            'voluntary. If you decide to join now, you can change your mind ' +
-            'later. ' +
-            '</p><p style="text-align:left;"><b>Payment:</b> You will be paid $15.00/hour ' +
-            'for participating in this study. Given the estimated duration of ' +
-            duration + ', your payment will amount to ' + amount + '.</p>' +
-            '<p style="text-align:left;"><b>Risks and benefits:</b> There are no risks associated ' +
-            'with participating in this study. There are no direct benefits ' +
-            'associated with participating in this study. </p><p style="text-align:left;"><b>Use of ' +
-            'data by study researchers:</b> The research team led by Shari ' +
-            'Liu at JHU will have access to your answers. ' +
-            '</p><p style="text-align:left;"><b>Publication of results:</b> The results of the research ' +
-            'may be presented at scientific meetings or published in scientific ' +
-            'journals. Your individual responses may be published. We will ' +
-            'never publish your name, the date that you participated, and any other ' +
-            'information that could be used to identify you. </p><p style="text-align:left;"><b>' +
-            'Researcher contact information:</b> This study is run by Dr. ' +
-            'Shari Liu at JHU. If you have any questions or concerns about ' +
-            'this study, or in the very unlikely event of a research-related ' +
-            'injury, please contact sliu199@jhu.edu. ' +
-            '</p><p style="text-align:left;"><b>Research rights information:</b> If you have questions about ' +
-            'your rights as a research participant or feel that you have not ' +
-            'been treated fairly, please call the Homewood Institutional Review ' +
-            'Board at Johns Hopkins University at (410) 516-6580. If you have ' +
-            'any questions or issues completing the survey, please email Shari ' +
-            'Liu at sliu199@jhu.edu. </p> </div>' +
-            '<p> Do you consent to participate? </p>',
-        choices: ['Yes', 'No'],
-        data: {trial_id: 'consent'},
-        on_finish: function(data) {
-        if (data.response === 1) {  // If 'No' is chosen 
-        jsPsych.abortExperiment('You did not consent to participate. The study will now end. Thank you for your time.');  
-        }
-        }
-    };
+var consent = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<p><b>Consent Form</b></p> <div style="text-align:left; background-color:lightblue; padding:2vw; max-width:80vw; max-height:70vh; overflow-y:auto;">' +
+        '<p style="text-align:left;"><b>Purpose:</b> The purpose of this study is to understand ' +
+        'how people think about actions of others.</p>' +
+        '<p style="text-align:left;"><b>Procedures:</b> In this study, you will read sentences, ' +
+        'see pictures, and use sliders to answer simple questions ' +
+        'about them. This study should take approximately ' + duration + '.</p>' +
+        '</p><p style="text-align:left;"><b>Participation:</b> Participation in this study is ' +
+        'voluntary. If you decide to join now, you can change your mind ' +
+        'later. ' +
+        '</p><p style="text-align:left;"><b>Payment:</b> You will be paid $15.00/hour ' +
+        'for participating in this study. Given the estimated duration of ' +
+        duration + ', your payment will amount to ' + amount + '.</p>' +
+        '<p style="text-align:left;"><b>Risks and benefits:</b> There are no risks associated ' +
+        'with participating in this study. There are no direct benefits ' +
+        'associated with participating in this study. </p><p style="text-align:left;"><b>Use of ' +
+        'data by study researchers:</b> The research team led by Shari ' +
+        'Liu at JHU will have access to your answers. ' +
+        '</p><p style="text-align:left;"><b>Publication of results:</b> The results of the research ' +
+        'may be presented at scientific meetings or published in scientific ' +
+        'journals. Your individual responses may be published. We will ' +
+        'never publish your name, the date that you participated, and any other ' +
+        'information that could be used to identify you. </p><p style="text-align:left;"><b>' +
+        'Researcher contact information:</b> This study is run by Dr. ' +
+        'Shari Liu at JHU. If you have any questions or concerns about ' +
+        'this study, or in the very unlikely event of a research-related ' +
+        'injury, please contact sliu199@jhu.edu. ' +
+        '</p><p style="text-align:left;"><b>Research rights information:</b> If you have questions about ' +
+        'your rights as a research participant or feel that you have not ' +
+        'been treated fairly, please call the Homewood Institutional Review ' +
+        'Board at Johns Hopkins University at (410) 516-6580. If you have ' +
+        'any questions or issues completing the survey, please email Shari ' +
+        'Liu at sliu199@jhu.edu. </p> </div>' +
+        '<p> Do you consent to participate? </p>',
+    choices: ['Yes', 'No'],
+    data: {trial_id: 'consent'},
+    on_finish: function(data) {
+    if (data.response === 1) {  // If 'No' is chosen 
+    jsPsych.abortExperiment('You did not consent to participate. The study will now end. Thank you for your time.');  
+    }
+    }
+};
 
 /* ================= INTRO ================= */
 const intro = {
@@ -240,7 +239,6 @@ const intro = {
 
 /* ================= TUTORIAL ================= */
 const demoScreens = [
-  // demo pages (auto-built)
   { kind: 'slider', html: `<p>People do a variety of activities, and their feelings can change after each activity.<br>Your job is to use the slider below to rate how a person's feeling would change after the activity.</p>`, pos: 50 },
   { kind: 'image',  html: `<p>If someone feels <b>much worse</b> than before, the slider should look like this.</p>`, pos: 0 },
   { kind: 'image',  html: `<p>If someone feels <b>a little worse</b> than before, the slider should look like this.</p>`, pos: 25 },
