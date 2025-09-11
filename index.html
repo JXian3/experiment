@@ -7,13 +7,11 @@
   <script src="./jspsych/plugin-html-slider-response.js"></script>
   <script src="./jspsych/plugin-html-button-response.js"></script>
   <script src="./jspsych/plugin-survey-html-form.js"></script>
-  <link href="./jspsych/jspsych.css" rel="stylesheet" />
   <script src="./jspsych/plugin-survey-text.js"></script>
-  <script src="jspsych/plugin-instructions.js"></script>
+  <script src="./jspsych/plugin-instructions.js"></script>
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
   <script src="./jspsych/plugin-preload.js"></script>
-   <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
-  </head>
+  <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="style.css">
   <style>
     .jspsych-html-slider-response {
@@ -23,26 +21,19 @@
 </head>
 <body>
 <script>
-  var jsPsych = initJsPsych({
-    override_safe_mode: true,
-    show_progress_bar: true,
-    on_finish: function() {
-              window.location = "https://connect.cloudresearch.com/participant/project/2CED66B84E/complete";
-              //jsPsych.data.displayData();
-            },
-  });
-
   document.addEventListener('DOMContentLoaded', function() {
       const jsPsych = initJsPsych({
-  });
+        override_safe_mode: true,
+        show_progress_bar: true,
+        on_finish: function() {
+          window.location = "https://connect.cloudresearch.com/participant/project/2CED66B84E/complete";
+        }
+      });
 
 /* ================= DATA ================= */
 const subject_id = jsPsych.randomization.randomID(10);
 //const filename = `${subject_id}.csv`;
-
-/*experiment variables*/
 const mturk_pilot_mode = false
-
 /*capture info from mturk/connect, except in test mode*/
 if(mturk_pilot_mode) { 
     var study_id = 'test';
@@ -55,17 +46,12 @@ if(mturk_pilot_mode) {
 }
 
 jsPsych.data.addProperties({
-  mturk_participant_id: "participant_id",
-  mturk_assignment_id: "assignment_id",
-  mturk_project_id: "project_id"
-})
+  mturk_participant_id: participant_id,
+  mturk_assignment_id: assignment_id,
+  mturk_project_id: project_id
+});
 
 const filename = `${participant_id}.csv`;
-
-var preload = {
-      type: jsPsychPreload,
-      auto_preload:true
-    };
 
 /* ================= STIMULI ================= */
 const categories = {
@@ -91,7 +77,7 @@ food:{stimuli:[
   entertainment:{stimuli:[
     {label:"Gaming 🎮",need:"X is bored over the weekend and wants to play video games for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮"},
     {label:"Watching TV 📺",need:"X is bored over the weekend and wants to watch TV shows for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched TV shows for", emoji:"📺"},
-    {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll his Instagram feed for exactly <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱"},
+    {label:"Scrolling Social Media 📱",need:"X is bored over the weekend and wants to scroll her Instagram feed for exactly <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱"},
     {label:"Reading 📖",need:"X is bored over the weekend and wants to read a book for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖"},
     {label:"Drawing 🎨",need:"X is bored over the weekend and decides to work on a new painting for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨"},]},
   
@@ -127,16 +113,6 @@ function dynamicFollowupPrompt() {
     return `Why did you think ${poss} feeling would become a bit worse after this?`;
   } else {
     return `Why did you think ${poss} feeling would become much worse after this?`;
-  }
-}
-
-function getEmojiExplanation(stim, cat) {
-  if (cat === 'food' || cat === 'sensory') {
-    const baseUnit = stim.base_action;
-    const postfix = stim.label.includes("perfume") ? '' : ` ${stim.past}`;
-    return `<p><i>${stim.emoji} = ${postfix} 1 ${baseUnit}</i></p>`;
-  } else {
-    return `<p><i>${stim.emoji} = ${stim.explanation}</i></p>`;
   }
 }
 
@@ -263,100 +239,99 @@ const intro = {
 };
 
 /* ================= TUTORIAL ================= */
-const tutorialItems = [
-  // tutorial pages
-  { html: `<p>People do a variety of activities, and their feelings can change after each activity.<br>Your job is to use the slider below to rate how a person's feeling would change after the activity.</p>`, pos: 50 },
-  { html: `<p>If someone feels <b>much worse</b> than before, the slider should look like this.</p>`, pos: 0 },
-  { html: `<p>If someone feels <b>a little worse</b> than before, the slider should look like this.</b>.</p>`, pos: 25 },
-  { html: `<p>If someone's feeling <b>does not change</b>, the slider should look like this.</p>`, pos: 50 },
-  { html: `<p>If someone feels <b>a little better</b> than before, the slider should look like this.</b>.</p>`, pos: 75 },
-  { html: `<p>If someone feels <b>much better</b> than before, the slider should look like this.</p>`, pos: 100 },
-  // comprehension check items
-  { text: 'much worse',      value: 0,   feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far left.' },
-  { text: 'a little worse',  value: 25,  feedback: 'Wrong. If someone is feeling a little worse, the slider should be just left of center.' },
-  { text: 'no change',       value: 50,  feedback: 'Wrong. If someone\'s feeling doesn\'t change, the slider should be just at the center.' },
-  { text: 'a little better', value: 75,  feedback: 'Wrong. f someone is feeling a little better, the slider should be just right of center.' },
-  { text: 'much better',     value: 100, feedback: 'Wrong. If someone is feeling much worse, the slider should be on the far right.' }
+const demoScreens = [
+  // demo pages (auto-built)
+  { kind: 'slider', html: `<p>People do a variety of activities, and their feelings can change after each activity.<br>Your job is to use the slider below to rate how a person's feeling would change after the activity.</p>`, pos: 50 },
+  { kind: 'image',  html: `<p>If someone feels <b>much worse</b> than before, the slider should look like this.</p>`, pos: 0 },
+  { kind: 'image',  html: `<p>If someone feels <b>a little worse</b> than before, the slider should look like this.</p>`, pos: 25 },
+  { kind: 'image',  html: `<p>If someone's feeling <b>does not change</b>, the slider should look like this.</p>`, pos: 50 },
+  { kind: 'image',  html: `<p>If someone feels <b>a little better</b> than before, the slider should look like this.</p>`, pos: 75 },
+  { kind: 'image',  html: `<p>If someone feels <b>much better</b> than before, the slider should look like this.</p>`, pos: 100 },
 ];
 
-const tutorial = tutorialItems.map((item, idx) => {
-  if (idx === 0 && item.html) {
-    return {
-      type: jsPsychHtmlSliderResponse,
-      stimulus: item.html + `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
-      labels: ["Much worse","A little worse","No change","A little better","Much better"],
-      min: 0, max: 100, slider_start: item.pos, require_movement: false,
-      data: { tutorial_page: idx + 1 }
-    };
-  }
+const checkLevels = [
+  { text: 'much worse',      value: 0  },
+  { text: 'a little worse',  value: 25 },
+  { text: 'no change',       value: 50 },
+  { text: 'a little better', value: 75 },
+  { text: 'much better',     value: 100 }
+];
 
-  if (item.html) {
-    return {
-      type: jsPsychHtmlButtonResponse,
-      stimulus: item.html + `<img src="img/${positionToImage(item.pos)}" class="feeling-scale" alt="scale image">`,
-      choices: ['Continue'],
-      data: { tutorial_page: idx + 1 }
-    };
-  }
-  // comprehension check
-  return {
-    type: jsPsychHtmlSliderResponse,
-    stimulus: (idx === 6 ? `<p><b>Now let's check if you understand how the slider works!</b></p>` : '') + `<p>If someone feels <b>${item.text}</b> than before, where should the slider go?</p>` +
-              `<img src="img/feelingScale.png" class="feeling-scale">`,
-    labels: ["Much worse","A little worse","No change","A little better","Much better"],
-    min: 0, max: 100,
-    slider_start: 50,
-    require_movement: true,
-    prompt: `<p style="text-align:center; margin-top:20px;">Please drag the slider to indicate your answer.</p>`,
-    data: { tutorial_page: idx + 1 },
-    on_finish: function(data) {
-      const correct = Math.abs(data.response - item.value) <= 20;
-      data.correct = correct;
+function buildTutorialSequence(){
+  const seq = [];
+
+  // 1) Demo screens
+  demoScreens.forEach((item, idx) => {
+    if (item.kind === 'slider') {
+      seq.push({
+        type: jsPsychHtmlSliderResponse,
+        stimulus: item.html + `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
+        labels: ["Much worse","A little worse","No change","A little better","Much better"],
+        min: 0, max: 100, slider_start: item.pos, require_movement: false,
+        data: { tutorial_page: idx + 1, tutorial_kind: 'demo-slider' }
+      });
+    } else {
+      seq.push({
+        type: jsPsychHtmlButtonResponse,
+        stimulus: item.html + `<img src="img/${positionToImage(item.pos)}" class="feeling-scale" alt="scale image">`,
+        choices: ['Continue'],
+        data: { tutorial_page: idx + 1, tutorial_kind: 'demo-image' }
+      });
     }
-  };
-});
+  });
 
-// feedback pages for wrong responses
-const feedbacks = tutorialItems.map((item, idx) => ({
-  timeline: [{
-    type: jsPsychHtmlSliderResponse,
-    stimulus: `<p style="color:red;"><b>Wrong.</b></p>
-               <p>If someone feels <b>${item.text}</b> than before, the slider should be <b>${sliderPosDesc(item.value)}</b>.</p>` +
-             `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
-    labels: ["Much worse","A little worse","No change","A little better","Much better"],
-    min: 0,
-    max: 100,
-    slider_start: item.value,
-    require_movement: false,
-  }],
-  conditional_function: function() {
-    const last = jsPsych.data.get().last(1).values()[0];
-    return !last.correct;
-  }
-}));
+  // 2) Comprehension checks with auto feedback
+  checkLevels.forEach((q, i) => {
+    // question
+    seq.push({
+      type: jsPsychHtmlSliderResponse,
+      stimulus: (i === 0
+        ? `<p><b>Now let's check if you understand how the slider works!</b></p>`
+        : ``) + `<p>If someone feels <b>${q.text}</b> than before, where should the slider go?</p>` +
+        `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
+      labels: ["Much worse","A little worse","No change","A little better","Much better"],
+      min: 0, max: 100, slider_start: 50, require_movement: true,
+      data: { tutorial_check: true, check_label: q.text, check_value: q.value },
+      on_finish: function(data) {
+        data.correct = Math.abs(data.response - q.value) <= 20;
+      }
+    });
 
-// feedback for correct responses (confirmation page)
-const correctFeedback = {
-  timeline: [{
-    type: jsPsychHtmlButtonResponse,
-    stimulus: `<p style="color:green; font-weight:bold;">✅ Correct!</p>`,
-    choices: ['Continue']
-  }],
-  conditional_function: function() {
-    const last = jsPsych.data.get().last(1).values()[0];
-    return last.correct;
-  }
-};
+    // conditional WRONG feedback
+    seq.push({
+      timeline: [{
+        type: jsPsychHtmlSliderResponse,
+        stimulus:
+          `<p style="color:red;"><b>Wrong.</b></p>
+           <p>If someone feels <b>${q.text}</b> than before, the slider should be <b>${sliderPosDesc(q.value)}</b>.</p>` +
+          `<img src="img/feelingScale.png" class="feeling-scale" alt="scale">`,
+        labels: ["Much worse","A little worse","No change","A little better","Much better"],
+        min: 0, max: 100, slider_start: q.value, require_movement: false
+      }],
+      conditional_function: function() {
+        const last = jsPsych.data.get().last(1).values()[0];
+        return !last.correct;
+      }
+    });
 
-// merge tutorial and feedbacks into one sequence
-const tutorialSequence = [];
-tutorial.forEach((trial, i) => {
-  tutorialSequence.push(trial);
-  if (!tutorialItems[i].noSlider && !tutorialItems[i].html) {
-    tutorialSequence.push(feedbacks[i]);
-    tutorialSequence.push(correctFeedback);
-  }
-});
+    // conditional CORRECT confirmation
+    seq.push({
+      timeline: [{
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `<p style="color:green; font-weight:bold;">✅ Correct!</p>`,
+        choices: ['Continue']
+      }],
+      conditional_function: function() {
+        const last = jsPsych.data.get().last(1).values()[0];
+        return last.correct;
+      }
+    });
+  });
+
+  return seq;
+}
+
+const tutorialSequence = buildTutorialSequence();
 
 /* ================= TRANSITION ================= */
 var transition_expt1 = {
@@ -471,7 +446,6 @@ var debrief = {
 /* ================= TIMELINE ================= */
 //const timeline = [preload, consent, intro, ...tutorialSequence, transition_expt1];
 const timeline = [transition_expt1];
-let attentionIndex = 0;
 const childMap = {
   'food::Cookie 🍪':              { name: 'Adam', img: 'AdamBubble' },
   'food::Ice cream 🍦':           { name: 'Nia', img: 'NiaBubble' },
@@ -495,34 +469,45 @@ const childMap = {
   'social::Facetiming 📞': { name: 'Grace', img: 'GraceBubble' },
 };
 
+// helpers for string-building logic
+function labelStartsWith(s, head){
+  return (s?.label || '').trim().startsWith(head);
+}
+
+function formatQty(amount, stim){
+  if (amount === 1) return `<b>1</b> ${stim.base_action}`;
+  return `<b>${amount}</b> ${stim.unit}`;
+}
+
+function buildMessage(name, stim, amount, isParty){
+  if (isParty) {
+    return `Suppose that ${formatQty(amount, stim)}. How would Jack feel?`;
+  }
+  if (amount === 0) {
+    return `<br> <br> How does ${name} feel now?`;
+  }
+  return `Suppose that ${name} ${stim.past} ${formatQty(amount, stim)}. How would ${name} feel?`;
+}
+
 // Randomize the order of conditions
 const categoryOrder = jsPsych.randomization.shuffle(Object.keys(categories));
 categoryOrder.forEach(cat => {
   const grp = categories[cat];
-  const pronoun = (cat === 'food' || cat === 'sensory') ? 'she' : 'he';
 
   let stimuliList = grp.stimuli;
   if (cat === 'sensory') {
-    const labelStartsWith = (s, head) => (s.label || '').trim().startsWith(head);
     const soundItems = grp.stimuli.filter(s => labelStartsWith(s, 'Sound'));
     const tempItems  = grp.stimuli.filter(s => labelStartsWith(s, 'Temperature'));
     const lightItems = grp.stimuli.filter(s => labelStartsWith(s, 'Light'));
-
-    const otherItems = grp.stimuli.filter(s => {
-      const lbl = (s.label || '').trim();
-      return !(lbl.startsWith('Sound') || lbl.startsWith('Temperature') || lbl.startsWith('Light'));
-    });
-
+    const otherItems = grp.stimuli.filter(s => !(
+      labelStartsWith(s, 'Sound') || labelStartsWith(s, 'Temperature') || labelStartsWith(s, 'Light')
+    ));
     const pickOne = arr => arr.length ? arr[jsPsych.randomization.randomInt(0, arr.length - 1)] : null;
-    const chosenSound = pickOne(soundItems);
-    const chosenTemp  = pickOne(tempItems);
-    const chosenLight = pickOne(lightItems);
-
     stimuliList = [
       ...otherItems,
-      ...[chosenLight].filter(Boolean),
-      ...[chosenSound].filter(Boolean),
-      ...[chosenTemp].filter(Boolean)
+      ...[pickOne(lightItems)].filter(Boolean),
+      ...[pickOne(soundItems)].filter(Boolean),
+      ...[pickOne(tempItems)].filter(Boolean)
     ];
   }
 
@@ -540,32 +525,11 @@ categoryOrder.forEach(cat => {
       data: { type: 'need_page', category: cat, stimulus_label: stim.label }
     });
 
-    const amount = Math.floor(Math.random() * 9); 
-    const need = needText; 
-
-    // Build standardized prompt text
-    let msg;
-    const amountStr = (amount === 1)
-      ? `<b>${amount}</b> ${stim.base_action}`
-      : `<b>${amount}</b> ${stim.unit}`;
-    let visualNeed = `<p class="need-text">${need}</p>`;
-
+    const amount = Math.floor(Math.random() * 9);
+    const need = needText;
     const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
-
-    if (isParty) {
-      const qtyPhrase = (amount === 1)
-        ? `<b>1</b> ${stim.base_action}`
-        : `<b>${amount}</b> ${stim.unit}`;
-      msg = `Suppose that ${qtyPhrase}. How would Jack feel?`;
-    } else if (amount === 0) {
-      // Default behavior for non-party stimuli when amount is 0
-      msg = `<br> <br> How does ${name} feel now?`;
-    } else {
-      // Default behavior for non-party stimuli when amount > 0
-      msg = `Suppose that ${name} ${stim.past} ${amountStr}. How would ${name} feel?`;
-    }
-
-    const visual = visualNeed + buildVisual(amount, stim.emoji, cat, img, name);
+    const msg = buildMessage(name, stim, amount, isParty);
+    const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
 
     timeline.push(
       sliderTrial({
@@ -589,7 +553,6 @@ categoryOrder.forEach(cat => {
     stimulus: `<div class="intro-screen"><h2>Thank you for participating!</h2></div>`,
     choices: ['Finish'],
   };
-  // Insert feedback_demographics just before thankYou
   timeline.push(debrief);
   timeline.push(feedback_demographics);
   timeline.push(save_data)
