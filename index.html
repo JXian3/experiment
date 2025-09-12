@@ -486,10 +486,28 @@ function buildMessage(name, stim, amount, isParty){
   return `Suppose that ${name} ${stim.past} ${formatQty(amount, stim)}. How would ${name} feel?`;
 }
 
-// Present ALL stimuli in a completely random order
+// Present all stimuli in a completely random order
 const allStimuli = [];
 Object.keys(categories).forEach(cat => {
-  categories[cat].stimuli.forEach(stim => {
+  let list = categories[cat].stimuli;
+
+  if (cat === 'sensory') {
+    const items = categories[cat].stimuli || [];
+    const group = head => items.filter(s => labelStartsWith(s, head));
+    const isPairedHead = s => labelStartsWith(s, 'Light') || labelStartsWith(s, 'Sound') || labelStartsWith(s, 'Temperature');
+
+    const others = items.filter(s => !isPairedHead(s));
+    const pickOne = arr => (arr.length ? arr[jsPsych.randomization.randomInt(0, arr.length - 1)] : null);
+
+    const chosen = [];
+    const light = pickOne(group('Light')); if (light) chosen.push(light);
+    const sound = pickOne(group('Sound')); if (sound) chosen.push(sound);
+    const temp  = pickOne(group('Temperature')); if (temp) chosen.push(temp);
+
+    list = [...others, ...chosen];
+  }
+
+  list.forEach(stim => {
     allStimuli.push({ cat, stim });
   });
 });
