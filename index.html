@@ -486,7 +486,7 @@ function buildMessage(name, stim, amount, isParty){
   return `Suppose that ${name} ${stim.past} ${formatQty(amount, stim)}. How would ${name} feel?`;
 }
 
-// Present ALL stimuli in a completely random order (across categories)
+// Present ALL stimuli in a completely random order
 const allStimuli = [];
 Object.keys(categories).forEach(cat => {
   categories[cat].stimuli.forEach(stim => {
