@@ -486,62 +486,51 @@ function buildMessage(name, stim, amount, isParty){
   return `Suppose that ${name} ${stim.past} ${formatQty(amount, stim)}. How would ${name} feel?`;
 }
 
-// Randomize the order of conditions
-const categoryOrder = jsPsych.randomization.shuffle(Object.keys(categories));
-categoryOrder.forEach(cat => {
-  const grp = categories[cat];
-
-  let stimuliList = grp.stimuli;
-  if (cat === 'sensory') {
-    const soundItems = grp.stimuli.filter(s => labelStartsWith(s, 'Sound'));
-    const tempItems  = grp.stimuli.filter(s => labelStartsWith(s, 'Temperature'));
-    const lightItems = grp.stimuli.filter(s => labelStartsWith(s, 'Light'));
-    const otherItems = grp.stimuli.filter(s => !(
-      labelStartsWith(s, 'Sound') || labelStartsWith(s, 'Temperature') || labelStartsWith(s, 'Light')
-    ));
-    const pickOne = arr => arr.length ? arr[jsPsych.randomization.randomInt(0, arr.length - 1)] : null;
-    stimuliList = [
-      ...otherItems,
-      ...[pickOne(lightItems)].filter(Boolean),
-      ...[pickOne(soundItems)].filter(Boolean),
-      ...[pickOne(tempItems)].filter(Boolean)
-    ];
-  }
-  stimuliList = jsPsych.randomization.shuffle(stimuliList);
-  
-  stimuliList.forEach(stim => {
-    const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
-    let child = childMap[key];
-
-    const { name, img } = child;
-
-    const needText = stim.need.replace(/X/g, name).replace(/\n/g, '<br>');
-    timeline.push({
-      type: jsPsychHtmlButtonResponse,
-      stimulus: `<div class="visual-wrapper">\n                 <p>${needText}</p>\n                 <div class="child-wrapper">\n                 <div class="emoji-bubble need-page ">${stim.emoji}</div>\n                 <img src="img/${img}.png" alt="${name}" class="child-image">\n                 <div>\n                 <img src="img/grid4.png" class="grid-image" alt="empty grid">\n               </div>`,
-      choices: ['Continue'],
-      data: { type: 'need_page', category: cat, stimulus_label: stim.label }
-    });
-    const amount = Math.floor(Math.random() * 9);
-    const need = needText;
-    const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
-    const msg = buildMessage(name, stim, amount, isParty);
-    const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
-
-    timeline.push(
-      sliderTrial({
-        visual,
-        need,
-        msg,
-        cat,
-        label: stim.label,
-        amt: amount,
-        n: 1,
-        poss: possessiveFor(name),
-        childName: name
-      })
-    );
+// Present ALL stimuli in a completely random order (across categories)
+const allStimuli = [];
+Object.keys(categories).forEach(cat => {
+  categories[cat].stimuli.forEach(stim => {
+    allStimuli.push({ cat, stim });
   });
+});
+
+const shuffledStimuli = jsPsych.randomization.shuffle(allStimuli);
+
+shuffledStimuli.forEach(({ cat, stim }) => {
+  const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
+  const child = childMap[key];
+  const { name, img } = child;
+
+  const needText = (stim.need || '').replace(/X/g, name).replace(/\n/g, '<br>');
+
+  // Need page
+  timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="visual-wrapper">\n                 <p>${needText}</p>\n                 <div class="child-wrapper">\n                 <div class="emoji-bubble need-page ">${stim.emoji}</div>\n                 <img src="img/${img}.png" alt="${name}" class="child-image">\n                 <div>\n                 <img src="img/grid4.png" class="grid-image" alt="empty grid">\n               </div>`,
+    choices: ['Continue'],
+    data: { type: 'need_page', category: cat, stimulus_label: stim.label }
+  });
+
+  // Random amount 0-8
+  const amount = Math.floor(Math.random() * 9);
+  const need = needText;
+  const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
+  const msg = buildMessage(name, stim, amount, isParty);
+  const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
+
+  timeline.push(
+    sliderTrial({
+      visual,
+      need,
+      msg,
+      cat,
+      label: stim.label,
+      amt: amount,
+      n: 1,
+      poss: possessiveFor(name),
+      childName: name
+    })
+  );
 });
   
   // ===== Thank-you and data submission =====
