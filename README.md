@@ -1,1 +1,1 @@
-Marginal Utility Experiment
+Experiment
