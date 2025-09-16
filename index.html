@@ -481,7 +481,7 @@ function formatQty(amount, stim){
 
 function buildMessage(name, stim, amount, isParty){
   if (amount === 0) {
-    return `<br> <br> How does ${name} feel now?`;
+    return `<br> <br> ${stim.null} How would ${name} feel?`;
   }
   if (isParty) {
     return `Suppose that ${formatQty(amount, stim)}. How would Jack feel?`;
