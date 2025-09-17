@@ -106,7 +106,6 @@ body{font-family:sans-serif;}
   align-items: center;
   height: 100vh;                 /* fill but not exceed the viewport */
   padding: 0 !important;
-  overflow: hidden;              /* prevent internal scrolling */
 }
 
 /* Slider‑instruction prompt */
