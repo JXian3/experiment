@@ -57,38 +57,47 @@ const filename = `${participant_id}.csv`;
 const categories = {
 
 food:{stimuli:[
-    {label:"Cookie 🍪",need:"Adam feels hungry and wants to eat exactly <b>4</b> cookies.", base_action:"cookie",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪", null:"Suppose that Adam did not get to eat any cookies. "},
-    {label:"Ice cream 🍦",need:"Nia feels hungry and wants to eat exactly <b>4</b> scoops of ice cream.",base_action:"scoop of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦", null:"Suppose that Nia did not get to eat any ice creams."},
-    {label:"Soda 🥤",need:"Zuri feels thirsty and wants to drink exactly <b>4</b> cups of water.",base_action:"cup of water",unit:"cups of water",verb:"drinks", past: "drank", emoji:"🥤", null:"Suppose that Zuri did not get to drink any water. "},
-    {label:"Candy 🍬",need:"Chen feels hungry and wants to eat exactly <b>4</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬", null:"Suppose that Chen did not get to eat any candies."},
-    {label:"Healthy fruits 🍊",need:"Eric feels hungry and wants to eat exactly <b>4</b> oranges.",base_action:"orange",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊", null:"Suppose that Eric did not get to eat any oranges."},
+    {label:"Cookie 🍪",need:"Adam feels hungry and wants to eat <b>4</b> cookies.", base_action:"cookie",unit:"cookies",verb:"eats", past: "ate", emoji:"🍪", null:"Suppose that Adam did not get to eat any cookies. "},
+    {label:"Ice cream 🍦",need:"Nia feels hungry and wants to eat <b>4</b> scoops of ice cream.",base_action:"scoop of ice cream",unit:"scoops of ice cream",verb:"eats", past: "ate", emoji:"🍦", null:"Suppose that Nia did not get to eat any ice creams."},
+    {label:"Soda 🥤",need:"Zuri feels thirsty and wants to drink <b>4</b> cups of water.",base_action:"cup of water",unit:"cups of water",verb:"drinks", past: "drank", emoji:"🥤", null:"Suppose that Zuri did not get to drink any water. "},
+    {label:"Candy 🍬",need:"Chen feels hungry and wants to eat <b>4</b> candies.",base_action:"candy",unit:"candies",verb:"eats", past: "ate", emoji:"🍬", null:"Suppose that Chen did not get to eat any candies."},
+    {label:"Healthy fruits 🍊",need:"Eric feels hungry and wants to eat <b>4</b> oranges.",base_action:"orange",unit:"oranges",verb:"eats", past: "ate",emoji:"🍊", null:"Suppose that Eric did not get to eat any oranges."},
     ]},
 
   sensory:{stimuli:[
-    {label:"Light 💡",need:"Ethan thinks it's too dark in his room, and he wants to make the light brighter by turning it up exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns up", past: "turned the light up by",emoji:"💡", null:"Suppose that Ethan did not get to turn the light up."},
-    {label:"Light 💡",need:"Ethan thinks it's too bright in his room, and he wants to make the light dimmer by turning it down exactly <b>4</b> times.",base_action:"time",unit:"times",verb:"turns down", past: "turned the light down by",emoji:"💡", null:"Suppose that Ethan did not get to turn the light down."},
-    {label:"Sound 🔊",need:"The music is too soft at Han's party and he wants to turn up the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns up the volume", past: "turned up the volume by", emoji:"🔊", null:"Suppose that Han did not get to turn the volume up."},
-    {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by exactly <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊", null:"Suppose that Han did not get to turn the volume down."},
-    {label:"Temperature 🌡️",need:"Jasmine's apartment is too cold, and she wants to turn up the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️", null:"Suppose that Jasmine did not get to turn the thermostat up."},
-    {label:"Temperature 🌡️",need:"Jasmine's apartment is too hot, and she wants to turn down the thermostat by exactly <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️", null:"Suppose that Jasmine did not get to turn the thermostat down."},
-    {label:"Scent 💨",need:"Lucy is preparing for a date and she's worried that she doesn't smell good enough. <br> She wants to put on exactly <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨", null:"Suppose that Lucy did not get to put on any perfume."},
-    {label:"Taste 🧂",need:"Amir is eating dinner and thinks his food tastes bland. He wants to add exactly <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂",  null:"Suppose that Amir did not get to add any spices."}]},
+    {label:"Light 💡",need:"Ethan thinks it's too dark in his room, and he wants to make the light brighter by turning it up <b>4</b> times.",base_action:"time",unit:"times",verb:"turns up", past: "turned the light up by",emoji:"💡", null:"Suppose that Ethan did not get to turn the light up."},
+    {label:"Light 💡",need:"Ethan thinks it's too bright in his room, and he wants to make the light dimmer by turning it down <b>4</b> times.",base_action:"time",unit:"times",verb:"turns down", past: "turned the light down by",emoji:"💡", null:"Suppose that Ethan did not get to turn the light down."},
+    {label:"Sound 🔊",need:"The music is too soft at Han's party and he wants to turn up the volume by <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns up the volume", past: "turned up the volume by", emoji:"🔊", null:"Suppose that Han did not get to turn the volume up."},
+    {label:"Sound 🔊",need:"The music is too loud at Han's party and he wants to turn down the volume by <b>4</b> levels.",base_action:"level",unit:"levels",verb:"turns down the sound", past: "turned down the sound by", emoji:"🔊", null:"Suppose that Han did not get to turn the volume down."},
+    {label:"Temperature 🌡️",need:"Jasmine's apartment is too cold, and she wants to turn up the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns up the thermostat", past: "turned up the thermostat by", emoji:"🌡️", null:"Suppose that Jasmine did not get to turn the thermostat up."},
+    {label:"Temperature 🌡️",need:"Jasmine's apartment is too hot, and she wants to turn down the thermostat by <b>4</b> clicks.",base_action:"click",unit:"clicks",verb:"turns down the thermostat", past: "turned down the thermostat by", emoji:"🌡️", null:"Suppose that Jasmine did not get to turn the thermostat down."},
+    {label:"Scent 💨",need:"Lucy is preparing for a date and she's worried that she doesn't smell good enough. <br> She wants to put on <b>4</b> sprays of her new perfume.",base_action:"spray of perfume",unit:"sprays of perfume",verb:"puts on", past: "put on", emoji:"💨", null:"Suppose that Lucy did not get to put on any perfume."},
+    {label:"Taste 🧂",need:"Amir is eating dinner and thinks his food tastes bland. He wants to add <b>4</b> dashes of spices to it",base_action:"dash of spice, and tasted the food", past: "added", unit:"dashes of spices, and tasted the food",verb:"adds",emoji:"🧂",  null:"Suppose that Amir did not get to add any spices."}]},
  
   entertainment:{stimuli:[
-    {label:"Gaming 🎮",need:"Hiro is bored over the weekend and wants to play video games for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮", null:"Suppose that Hiro did not get to play video games."},
-    {label:"Watching TV 📺",need:"Malik is bored over the weekend and wants to watch TV shows for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched TV shows for", emoji:"📺", null:"Suppose that Malik did not get to watch TV."},
-    {label:"Scrolling Social Media 📱",need:"Emma is bored over the weekend and wants to scroll her Instagram feed for exactly <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱", null:"Suppose that Emma did not get to scroll her Instagram feed."},
-    {label:"Reading 📖",need:"Maya is bored over the weekend and wants to read a book for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", null:"Suppose that Maya did not get to read books."},
-    {label:"Drawing 🎨",need:"Jaden is bored over the weekend and wants to work on a new painting for exactly <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨", null:"Suppose that Jaden did not get to work on the painting."},]},
+    {label:"Gaming 🎮",need:"Hiro is bored over the weekend and wants to play video games for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"plays games for", past: "played games for", emoji:"🎮", null:"Suppose that Hiro did not get to play video games."},
+    {label:"Watching TV 📺",need:"Malik is bored over the weekend and wants to watch TV shows for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"watches TV for", past: "watched TV shows for", emoji:"📺", null:"Suppose that Malik did not get to watch TV."},
+    {label:"Scrolling Social Media 📱",need:"Emma is bored over the weekend and wants to scroll her Instagram feed for <b>4</b> hours.",base_action:"hour",unit:"hours", past: "scrolled for", verb:"scrolls Instagram for",emoji:"📱", null:"Suppose that Emma did not get to scroll her Instagram feed."},
+    {label:"Reading 📖",need:"Maya is bored over the weekend and wants to read a book for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"reads books for", past: "read for", emoji:"📖", null:"Suppose that Maya did not get to read books."},
+    {label:"Drawing 🎨",need:"Jaden is bored over the weekend and wants to work on a new painting for <b>4</b> hours.",base_action:"hour",unit:"hours",verb:"draws for", past: "drew for", emoji:"🎨", null:"Suppose that Jaden did not get to work on the painting."},]},
   
   social: {
   stimuli: [
-    { label: "Inviting friends 👩", need: "Jack feels lonely, so he throws a party and sends invitations to his friends. <br> His apartment can comfortably host exactly <b>4</b> people.", base_action: "friend showed up at Jack's apartment", verb: "has", past: "had", unit: "friends showed up at Jack's apartment", emoji: "👩", null:"Suppose that no one showed up at Jack's party."},
-    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "Mei feels lonely and wants to hang out with acquaintances. <br> She met a few people through a meet-and-greet and would like to spend exactly <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", null:"Suppose that Mei did not get to spend any time with acquintances."},
-    { label: "Meeting new people 🧑🏼", need: "Akira is new in town and wants to expand her social circle. <br> She is at a meet-and-greet with the goal of meeting exactly <b>4</b> new people, whom she wants to introduce herself to and talk with. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼", null:"Suppose that Akira did not get to meet and talk with any new people."},
-    { label: "Time alone 👤", need: "Olivia had a long, tiring week and wants to spend exactly <b>4</b> hours of her Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤",  null:"Suppose that Olivia did not get to spend any time alone"},
-    { label: "Facetiming 📞", need: "Grace feels lonely and wants to FaceTime her friends for exactly <b>4</b> hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "FaceTimed her friends for", emoji: "📞",  null:"Suppose that Grace did not get to FaceTime her friends."},]}
+    { label: "Inviting friends 👩", need: "Jack feels lonely, so he throws a party and sends invitations to his friends. <br> His apartment can comfortably host <b>4</b> people.", base_action: "friend showed up at Jack's apartment", verb: "has", past: "had", unit: "friends showed up at Jack's apartment", emoji: "👩", null:"Suppose that no one showed up at Jack's party."},
+    { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "Mei feels lonely and wants to hang out with acquaintances. <br> She met a few people through a meet-and-greet and would like to spend <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", null:"Suppose that Mei did not get to spend any time with acquintances."},
+    { label: "Meeting new people 🧑🏼", need: "Akira is new in town and wants to expand her social circle. <br> She is at a meet-and-greet with the goal of meeting <b>4</b> new people, whom she wants to introduce herself to and talk with. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼", null:"Suppose that Akira did not get to meet and talk with any new people."},
+    { label: "Time alone 👤", need: "Olivia had a long, tiring week and wants to spend <b>4</b> hours of her Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤",  null:"Suppose that Olivia did not get to spend any time alone"},
+    { label: "Facetiming 📞", need: "Grace feels lonely and wants to FaceTime her friends for <b>4</b> hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "FaceTimed her friends for", emoji: "📞",  null:"Suppose that Grace did not get to FaceTime her friends."},]}
 };
+
+// Randomize the optimum (3 or 4) for every stimulus
+Object.keys(categories).forEach(cat => {
+  categories[cat].stimuli.forEach(stim => {
+    const opt = jsPsych.randomization.sampleWithoutReplacement([3, 4], 1)[0];
+    stim.need = stim.need.replace(/<b>4<\/b>/g, `<b>${opt}</b>`);
+    stim.optimum = opt;
+  });
+});
 
 function possessiveFor(name){
   const female = new Set(['Akira','Nia','Mei','Zuri','Olivia','Akira','Lucy','Jasmine','Maya','Grace']);
@@ -104,15 +113,15 @@ function dynamicFollowupPrompt() {
   const poss = last.possessive || possessiveFor(last.childName);
 
   if (last_response >= 75) {
-    return `Why did you think ${poss} feeling would become much better after this?`;
+    return `Why did you think ${poss} will feel very good?`;
   } else if (last_response >= 55) {
-    return `Why did you think ${poss} feeling would become a bit better after this?`;
+    return `Why did you think ${poss} will feel good?`;
   } else if (last_response >= 45) {
-    return `Why did you think ${poss} feeling would not change much after this?`;
+    return `Why did you think ${poss} will feel bad?`;
   } else if (last_response >= 25) {
-    return `Why did you think ${poss} feeling would become a bit worse after this?`;
+    return `Why did you think ${poss} will feel very bad?`;
   } else {
-    return `Why did you think ${poss} feeling would become much worse after this?`;
+    return `Why did you think ${poss} will feel neutral?`;
   }
 }
 
@@ -313,7 +322,6 @@ function buildTutorialSequence(){
       }
     });
 
-    // conditional CORRECT confirmation
     seq.push({
       timeline: [{
         type: jsPsychHtmlButtonResponse,
@@ -518,6 +526,8 @@ Object.keys(categories).forEach(cat => {
 
 const shuffledStimuli = jsPsych.randomization.shuffle(allStimuli);
 
+// --- Build main trials and store separately before inserting attention checks ---
+const mainTrials = [];
 shuffledStimuli.forEach(({ cat, stim }) => {
   const key = `${cat}::${String(stim.label || '').replace(/\s+/g,' ').trim()}`;
   const child = childMap[key];
@@ -526,7 +536,7 @@ shuffledStimuli.forEach(({ cat, stim }) => {
   const needText = (stim.need || '').replace(/X/g, name).replace(/\n/g, '<br>');
 
   // Need page
-  timeline.push({
+  mainTrials.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="visual-wrapper">\n                 <p>${needText}</p>\n                 <div class="child-wrapper">\n                 <div class="emoji-bubble need-page ">${stim.emoji}</div>\n                 <img src="img/${img}.png" alt="${name}" class="child-image">\n                 <div>\n                 <img src="img/grid4.png" class="grid-image" alt="empty grid">\n               </div>`,
     choices: ['Continue'],
@@ -540,7 +550,7 @@ shuffledStimuli.forEach(({ cat, stim }) => {
   const msg = buildMessage(name, stim, amount, isParty);
   const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
 
-  timeline.push(
+  mainTrials.push(
     sliderTrial({
       visual,
       need,
@@ -554,6 +564,18 @@ shuffledStimuli.forEach(({ cat, stim }) => {
     })
   );
 });
+
+const attentionChecks = [
+  attentionCheck('left'),
+  attentionCheck('right')
+];
+const totalMain = mainTrials.length;
+const attentionIndices = jsPsych.randomization.sampleWithoutReplacement([...Array(totalMain).keys()], 2).sort((a,b) => a-b);
+attentionIndices.reverse().forEach((idx, i) => {
+  mainTrials.splice(idx, 0, attentionChecks[i]);
+});
+
+mainTrials.forEach(t => timeline.push(t));
   
   // ===== Thank-you and data submission =====
   const thankYou = {
