@@ -565,13 +565,26 @@ shuffledStimuli.forEach(({ cat, stim }) => {
   );
 });
 
-const attentionChecks = [
-  attentionCheck('left'),
-  attentionCheck('right')
-];
+// Create randomized attention checks
+const directions = jsPsych.randomization.shuffle(['left', 'right']);
+const attentionChecks = directions.map(d => attentionCheck(d));
+
 const totalMain = mainTrials.length;
-const attentionIndices = jsPsych.randomization.sampleWithoutReplacement([...Array(totalMain).keys()], 2).sort((a,b) => a-b);
-attentionIndices.reverse().forEach((idx, i) => {
+
+// Ensure that attention checks only appear after prompt
+const validIndices = [];
+for (let i = 0; i < totalMain; i++) {
+  const trial = mainTrials[i];
+  if (trial.type === jsPsychHtmlSliderResponse) {
+    validIndices.push(i + 1);
+  }
+}
+
+const attentionIndices = jsPsych.randomization
+  .sampleWithoutReplacement(validIndices, attentionChecks.length)
+  .sort((a, b) => b - a);
+  
+attentionIndices.forEach((idx, i) => {
   mainTrials.splice(idx, 0, attentionChecks[i]);
 });
 
