@@ -164,7 +164,7 @@ function sliderTrial({ visual, need, msg, cat, label, amt, n, poss, childName })
     stimulus: visual + `<p>${msg}</p>` +
               `<img src=\"img/feelingScale2.png\" class=\"feeling-scale\" alt=\"scale\">`,
     labels: ["Very Bad","Bad","Neutral","Good","Very Good"],
-    min: 0, max: 100, slider_start: 50, require_movement: true,
+    min: 0, max: 100, slider_start: 50, require_movement: false,
     prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:15px;">Drag the slider to indicate your answer.</p>`,
     data: { category: cat, stimulus_label: label, trial_number: n, amount: amt, possessive: poss, childName }
   };
@@ -583,7 +583,7 @@ for (let i = 0; i < totalMain; i++) {
 const attentionIndices = jsPsych.randomization
   .sampleWithoutReplacement(validIndices, attentionChecks.length)
   .sort((a, b) => b - a);
-  
+
 attentionIndices.forEach((idx, i) => {
   mainTrials.splice(idx, 0, attentionChecks[i]);
 });
