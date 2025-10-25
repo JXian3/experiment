@@ -122,15 +122,15 @@ function dynamicFollowupPrompt() {
   const name = last.childName || "the child";
 
   if (response >= 75) {
-    return `Why did you think ${name} would feel very good?`;
+    return `Why do you think ${name} would feel very good?`;
   } else if (response >= 55) {
-    return `Why did you think ${name} would feel good?`;
+    return `Why do you think ${name} would feel good?`;
   } else if (response >= 45) {
-    return `Why did you think ${name} would feel neutral?`;
+    return `Why do you think ${name} would feel neutral?`;
   } else if (response >= 25) {
-    return `Why did you think ${name} would feel bad?`;
+    return `Why do you think ${name} would feel bad?`;
   } else {
-    return `Why did you think ${name} would feel very bad?`;
+    return `Why do you think ${name} would feel very bad?`;
   }
 }
 
