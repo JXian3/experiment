@@ -107,21 +107,30 @@ function possessiveFor(name){
   return 'their';
 }
 
-function dynamicFollowupPrompt() {
-  const last = jsPsych.data.get().last(1).values()[0] || {};
-  const last_response = last.response;
-  const poss = last.possessive || possessiveFor(last.childName);
+function subjectPronounFor(name) {
+  const female = new Set(['Akira','Nia','Mei','Zuri','Olivia','Lucy','Jasmine','Maya','Grace']);
+  const male   = new Set(['Hiro','Adam','Eric','Han','Ethan','Amir','Chen','Jack','Jaden','Malik']);
+  if (female.has(name)) return 'she';
+  if (male.has(name)) return 'he';
+  return 'they';
+}
 
-  if (last_response >= 75) {
-    return `Why did you think ${poss} will feel very good?`;
-  } else if (last_response >= 55) {
-    return `Why did you think ${poss} will feel good?`;
-  } else if (last_response >= 45) {
-    return `Why did you think ${poss} will feel bad?`;
-  } else if (last_response >= 25) {
-    return `Why did you think ${poss} will feel very bad?`;
+function dynamicFollowupPrompt() {
+  // Get the most recent slider-response trial
+  const last = jsPsych.data.get().last(1).values()[0] || {};
+  const response = Number(last.response ?? 50);
+  const name = last.childName || "the child";
+
+  if (response >= 75) {
+    return `Why did you think ${name} would feel very good?`;
+  } else if (response >= 55) {
+    return `Why did you think ${name} would feel good?`;
+  } else if (response >= 45) {
+    return `Why did you think ${name} would feel neutral?`;
+  } else if (response >= 25) {
+    return `Why did you think ${name} would feel bad?`;
   } else {
-    return `Why did you think ${poss} will feel neutral?`;
+    return `Why did you think ${name} would feel very bad?`;
   }
 }
 
@@ -563,6 +572,40 @@ shuffledStimuli.forEach(({ cat, stim }) => {
       childName: name
     })
   );
+});
+// Identify all slider trials (eligible for follow-up)
+const sliderIndices = [];
+for (let i = 0; i < mainTrials.length; i++) {
+  if (mainTrials[i].type === jsPsychHtmlSliderResponse) {
+    sliderIndices.push(i);
+  }
+}
+
+// Randomly pick 2 slider trials to follow up after
+const followupIndices = jsPsych.randomization
+  .sampleWithoutReplacement(sliderIndices, 2)
+  .sort((a, b) => b - a);
+
+// Define a follow-up trial that appears after a response
+function makeFollowupTrial() {
+  return {
+    type: jsPsychSurveyText,
+    questions: [
+      {
+        prompt: function() { return dynamicFollowupPrompt(); },
+        name: 'reason',
+        rows: 3,
+        columns: 50
+      }
+    ],
+    data: { followup: true }
+  };
+}
+
+// Insert the follow-up trial immediately after the chosen slider trials
+followupIndices.forEach(idx => {
+  // Ensure it only happens after a completed slider
+  mainTrials.splice(idx + 1, 0, makeFollowupTrial());
 });
 
 // Create randomized attention checks
