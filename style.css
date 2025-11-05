@@ -59,7 +59,7 @@ body{font-family:sans-serif;}
 .child-image {
   display: block;
   margin: 0 auto 6px;
-  height: 200px;          
+  height: 300px;          
   position: relative;
   z-index: 1;
 }
@@ -124,4 +124,51 @@ body{font-family:sans-serif;}
   margin-top: -80px;
   margin-bottom: 40px;
   text-align: center;
+}
+
+.original-slider-ticks input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+}
+
+/* ---- WebKit (Chrome, Safari) ---- */
+.original-slider-ticks input.jspsych-slider::-webkit-slider-runnable-track {
+
+  /* 1) only the gradients here */
+  background-image:
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444);
+
+  /* 2) five no-repeats */
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  /* 3) five positions at 0%,25%,50%,75%,100% centered vertically */
+  background-position:
+    25%  50%,
+    50%  50%,
+    75%  50%;
+
+  /* 4) each line is 1px×10px */
+  background-size:
+    1px 10px,
+    1px 10px,
+    1px 10px;
+}
+
+/*Firefox*/
+.original-slider-ticks input.jspsych-slider::-moz-range-track {
+  background-image:
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position:
+    25%  50%,
+    50%  50%,
+    75%  50%;
+  background-size:
+    1px 10px,
+    1px 10px,
+    1px 10px;
 }
