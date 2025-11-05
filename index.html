@@ -17,6 +17,29 @@
     .jspsych-html-slider-response {
       margin-top: -100px !important;
     }
+    /* Visually crop the last ~23% of the 4-cell grid when optimum is 3 */
+    .grid-image.crop3 {
+      -webkit-mask-image: linear-gradient(to right, #000 77%, transparent 77%);
+      mask-image: linear-gradient(to right, #000 77%, transparent 77%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+
+    /* Nudge the emoji inside the bubble slightly to the right without moving the bubble */
+    .emoji-bubble .emoji-char {
+      display: inline-block;
+      transform: translateX(4px);
+    }
+
+    /* When optimum is 3, shift the emoji track  */
+    .emoji-track {
+      overflow: visible; 
+    }
+    .emoji-track.shift3 {
+      transform: translateX(1%);
+    }
   </style>
 </head>
 <body>
@@ -154,19 +177,25 @@ function dynamicFollowupPrompt() {
   };
 }
 
-function buildVisual(nEmoji, emoji, cat, childImg, childName, isBonus = false){
+function buildVisual(nEmoji, emoji, cat, childImg, childName, optimum = 4, isBonus = false){
   const gridSrc = 'img/grid4.png';
+  const cropClass = (optimum === 3) ? 'crop3' : '';
   return `
     <div class="visual-wrapper ${cat}">
-      <div class="emoji-bubble">${emoji}</div>
+      <div class="emoji-bubble"><span class="emoji-char">${emoji}</span></div>
       <img src="img/${childImg}.png" alt="${childName}" class="child-image">
-      <img src="${gridSrc}" class="grid-image" alt="grid">
-      <div class="emoji-track">
+      <img src="${gridSrc}" class="grid-image ${cropClass}" alt="grid">
+      <div class="emoji-track ${optimum === 3 ? 'shift3' : ''}">
         ${Array.from({ length: nEmoji }).map(() => `<span>${emoji}</span>`).join('')}
       </div>
     </div>`;
 }
 
+// --- helper to map slider positions to tutorial images ---
+function renderGrid(optimum){
+  const cropClass = (optimum === 3) ? 'crop3' : '';
+  return `<img src="img/grid4.png" class="grid-image ${cropClass}" alt="empty grid">`;
+}
 // --- helper to map slider positions to tutorial images ---
 function positionToImage(pos){
   const map = {
@@ -567,7 +596,7 @@ shuffledStimuli.forEach(({ cat, stim }) => {
   // Need page
   mainTrials.push({
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<div class="visual-wrapper">\n                 <p>${needText}</p>\n                 <div class="child-wrapper">\n                 <div class="emoji-bubble need-page ">${stim.emoji}</div>\n                 <img src="img/${img}.png" alt="${name}" class="child-image">\n                 <div>\n                 <img src="img/grid4.png" class="grid-image" alt="empty grid">\n               </div>`,
+    stimulus: `<div class="visual-wrapper">\n                 <p>${needText}</p>\n                 <div class="child-wrapper">\n                 <div class="emoji-bubble need-page "><span class="emoji-char">${stim.emoji}</span></div>\n                 <img src="img/${img}.png" alt="${name}" class="child-image">\n                 <div>\n                 ${renderGrid(stim.optimum)}\n               </div>`,
     choices: ['Continue'],
     data: { type: 'need_page', category: cat, stimulus_label: stim.label }
   });
@@ -577,7 +606,7 @@ shuffledStimuli.forEach(({ cat, stim }) => {
   const need = needText;
   const isParty = (cat === 'social') && /^Inviting friends/.test(stim.label || '');
   const msg = buildMessage(name, stim, amount, isParty);
-  const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name);
+  const visual = `<p class="need-text">${need}</p>` + buildVisual(amount, stim.emoji, cat, img, name, stim.optimum);
 
   mainTrials.push(
     sliderTrial({
