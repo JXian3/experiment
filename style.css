@@ -59,14 +59,14 @@ body{font-family:sans-serif;}
 .child-image {
   display: block;
   margin: 0 auto 6px;
-  height: 300px;          
+  height: 200px;          
   position: relative;
   z-index: 1;
 }
 
 .emoji-bubble {
   position: absolute;
-  top: 22px;            
+  top: 15px;            
   right: 180px;  
   font-size: 32px;
   z-index: 3;
@@ -78,7 +78,7 @@ body{font-family:sans-serif;}
 }
 
 .emoji-bubble.need-page {
-  top: 23px;
+  top: 15px;
   left: 195px;
 }
 
