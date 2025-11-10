@@ -109,7 +109,7 @@ food:{stimuli:[
     { label: "Inviting friends 👩", need: "Jack feels lonely, so he throws a party and sends invitations to his friends. <br> His apartment can comfortably host <b>4</b> people.", base_action: "friend showed up at Jack's apartment", verb: "has", past: "had", unit: "friends showed up at Jack's apartment", emoji: "👩", null:"Suppose that no one showed up at Jack's party."},
     { label: "Time with acquaintance 🧑‍🤝‍🧑", need: "Mei feels lonely and wants to hang out with acquaintances. <br> She met a few people through a meet-and-greet and would like to spend <b>4</b> hours with them again.", base_action: "hour with acquintances", verb: "spends", past: "spent", unit: "hours with acquaintances", emoji: "🧑‍🤝‍🧑", null:"Suppose that Mei did not get to spend any time with acquintances."},
     { label: "Meeting new people 🧑🏼", need: "Akira is new in town and wants to expand her social circle. <br> She is at a meet-and-greet with the goal of meeting <b>4</b> new people, whom she wants to introduce herself to and talk with. ", base_action: "new person", unit: "new people", verb: "meets",  past: "met", emoji: "🧑🏼", null:"Suppose that Akira did not get to meet and talk with any new people."},
-    { label: "Time alone 👤", need: "Olivia had a long, tiring week and wants to spend <b>4</b> hours of her Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤",  null:"Suppose that Olivia did not get to spend any time alone"},
+    { label: "Time alone 👤", need: "Olivia had a long, tiring week and wants to spend <b>4</b> hours of her Saturday alone.", base_action: "hour alone", unit: "hours alone", verb: "spends", past: "spent", emoji: "👤",  null:"Suppose that Olivia did not get to spend any time alone."},
     { label: "Facetiming 📞", need: "Grace feels lonely and wants to FaceTime her friends for <b>4</b> hours.", base_action: "hour", unit: "hours", verb: "facetimes", past: "FaceTimed her friends for", emoji: "📞",  null:"Suppose that Grace did not get to FaceTime her friends."},]}
 };
 
@@ -245,8 +245,8 @@ function attentionCheck(direction) {
 }
 
 /* ================= START ================= */
-var duration = '5 minutes';
-    var amount = '$1.25';
+var duration = '6 minutes';
+var amount = '$1.5';
 var consent = {
     type: jsPsychHtmlButtonResponse,
     stimulus: '<p><b>Consent Form</b></p> <div style="text-align:left; background-color:lightblue; padding:2vw; max-width:80vw; max-height:60vh; overflow-y:auto;">' +
