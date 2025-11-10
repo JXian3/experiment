@@ -236,7 +236,7 @@ function attentionCheck(direction) {
     type: jsPsychHtmlSliderResponse,
     stimulus: `<p>${txt}</p>` +
               `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
-    labels: ["Much worse","A little worse","No change","A little better","Much better"],
+    labels: ["Very Bad","Bad","Neutral","Good","Very Good"],
     min: 0, max: 100, slider_start: 50, require_movement: true,
     prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
     data: { attention_check: true, correct_direction: direction },
